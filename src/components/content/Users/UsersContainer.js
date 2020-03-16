@@ -3,6 +3,7 @@ import {connect} from "react-redux";
 import {setCurrentPage, setToggleFetching, setTotalCount, setUsers} from "../../../redux/users-reducer";
 import Users from "./Users";
 import * as axios from "axios";
+import spinner from '../../../assets/img/Spinner.svg'
 
 
 class UsersContainer extends React.Component {
@@ -10,15 +11,16 @@ class UsersContainer extends React.Component {
     componentDidMount() {
         this.props.setToggleFetching(true);
         axios.get('http://185.255.135.104:9000/api/users/users-all').then(response => {
-            this.props.setUsers(response.data.items);
-            this.props.setTotalCount(response.data.totalCount);
+            this.props.setUsers(response.data);
             this.props.setToggleFetching(false);
         })
     }
 
     render() {
-        return (
-            <Users users={this.props.users}/>
+        return (<>
+                {this.props.isFetching ? <img src={spinner}/> : null}
+                <Users users={this.props.users}/>
+            </>
         )
     }
 }
