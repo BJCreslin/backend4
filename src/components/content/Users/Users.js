@@ -1,5 +1,14 @@
 import React from 'react';
 import css from './users.module.css';
+import freeLogo from '../../../assets/img/free.gif';
+import busyLogo from '../../../assets/img/busy.gif'
+import academicLeaveLogo from '../../../assets/img/academic.gif'
+
+let busyLogoChoice = (status) => {
+    if (status.toUpperCase() === "BUSY") return busyLogo;
+    if (status.toUpperCase() === "FREE") return freeLogo;
+    if (status.toUpperCase() === "ACADEMIC_LEAVE") return academicLeaveLogo;
+};
 
 const Users = (props) => {
     debugger
@@ -14,7 +23,7 @@ const Users = (props) => {
                     <th scope="col ">Hours in week</th>
                     <th scope="col ">Create Date</th>
                     <th scope="col ">Update Date</th>
-                    <th scope="col ">status</th>
+                    <th scope="col ">Status</th>
                 </tr>
                 </thead>
                 <tbody>
@@ -27,7 +36,7 @@ const Users = (props) => {
                             <td>{user.hours}</td>
                             <td>{user.createDate}</td>
                             <td>{user.updateDate}</td>
-                            <td>{user.status}</td>
+                            <td><img src={busyLogoChoice(user.status)}/></td>
                         </tr>
                     )
                 })}

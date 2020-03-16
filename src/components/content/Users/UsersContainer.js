@@ -5,12 +5,14 @@ import Users from "./Users";
 import * as axios from "axios";
 import spinner from '../../../assets/img/Spinner.svg'
 
+const endPointURL = 'http://185.255.135.104:8082/api/users/users-all';
 
 class UsersContainer extends React.Component {
 
     componentDidMount() {
         this.props.setToggleFetching(true);
-        axios.get('http://185.255.135.104:9000/api/users/users-all').then(response => {
+        axios.get(endPointURL).then(response => {
+            console.log(response);
             this.props.setUsers(response.data);
             this.props.setToggleFetching(false);
         })
