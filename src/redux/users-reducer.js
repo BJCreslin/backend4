@@ -17,6 +17,14 @@ let usersReducer = (state = initialState, action) => {
 
     switch (action.type) {
         case SET_USERS: {
+
+            let usersWithNormalDate=action.users.map(user=>{
+                user.createDate=new Date(user.createDate).toLocaleDateString();
+                user.updateDate=new Date(user.updateDate).toLocaleDateString();
+                return{
+                    user
+                }
+            });
             return {
                 ...state,
                 users: action.users
