@@ -1,17 +1,18 @@
 import React from "react";
-import {Container} from "react-bootstrap";
+import {Container, Row} from "react-bootstrap";
 import {Route} from "react-router-dom";
 import Home from "./Home/Home";
 import UsersContainer from "./Users/UsersContainer";
+import Login from "../Login/Login";
 
 const Content = () => {
     return (
         <div>
-            <Container>
+            <Row>
                 <Route path="/users" render={() => <UsersContainer/>}/>
                 <Route exact path="/" render={() => <Home/>}/>
-            </Container>
-
+                <Route exact path="/login" render={() => <Login/>}/>
+            </Row>
         </div>
     )
 };

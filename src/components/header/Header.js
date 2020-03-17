@@ -43,7 +43,10 @@ const Header = () => {
                                         <a className="nav-link" href="#">Messages</a>
                                     </li>
                                     <li className="nav-item">
-                                        <a className="nav-link" href="#">About</a>
+                                        <Link to="/login"  className={css.linkTo}>
+                                            Login
+                                        </Link>
+                                        {/*<a className="nav-link" href="#">About</a>*/}
                                     </li>
                                 </ul>
                                 <form className="form-inline my-2 my-lg-0">

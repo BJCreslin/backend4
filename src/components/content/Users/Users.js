@@ -2,12 +2,14 @@ import React from 'react';
 import css from './users.module.css';
 import freeLogo from '../../../assets/img/free.gif';
 import busyLogo from '../../../assets/img/busy.gif'
-import academicLeaveLogo from '../../../assets/img/academic.gif'
+import academicLeaveLogo from '../../../assets/img/academic.gif';
+import temporalyInactiveLogo from '../../../assets/img/inactive.gif';
 
 let busyLogoChoice = (status) => {
     if (status.toUpperCase() === "BUSY") return busyLogo;
-    if (status.toUpperCase() === "FREE") return freeLogo;
+    if (status.toUpperCase() === "WAITING_FOR_A_TASK") return freeLogo;
     if (status.toUpperCase() === "ACADEMIC_LEAVE") return academicLeaveLogo;
+    if (status.toUpperCase() === "TEMPORARILY_INACTIVE") return academicLeaveLogo;
 };
 
 const Users = (props) => {
