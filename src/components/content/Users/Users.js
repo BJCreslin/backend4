@@ -36,7 +36,7 @@ const Users = (props) => {
                             <td>{user.hours}</td>
                             <td>{user.createDate}</td>
                             <td>{user.updateDate}</td>
-                            <td><img src={busyLogoChoice(user.status)}/></td>
+                            <td><img className={css.statusLogo} src={busyLogoChoice(user.status)}/></td>
                         </tr>
                     )
                 })}
