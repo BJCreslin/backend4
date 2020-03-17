@@ -9,7 +9,7 @@ const Login = (props) => {
                  <Row xs="2">
                  <Col></Col>
                  <Col>
-                        Login
+                     <h2 className={css.formHeader}>Login</h2>
                         <form className={css.formDesign}>
                             <div>
                                 <input type={"email"} placeholder={"Login"}/>
