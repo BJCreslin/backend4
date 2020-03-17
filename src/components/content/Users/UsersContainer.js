@@ -24,14 +24,8 @@ class UsersContainer extends React.Component {
 
     render() {
         return (<>
-
-
-
-                            {this.props.isFetching ? <img src={spinner}/> : null}
-                            <Users users={this.props.users}/>
-
-
-
+                {this.props.isFetching ? <img src={spinner}/> : null}
+                <Users users={this.props.users}/>
             </>
         )
     }
