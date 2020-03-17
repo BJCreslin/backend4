@@ -4,12 +4,11 @@ import css from './login.module.css';
 
 const Login = (props) => {
     return (
-        <div className="center-block">
-
-
-                    <Col> 1ffffff
-                    </Col>
-                    <Col>
+        <span>
+             <Container className="themed-container" fluid={true} className={css.formDesign}>
+                 <Row xs="2">
+                 <Col></Col>
+                 <Col>
                         Login
                         <form className={css.formDesign}>
                             <div>
@@ -25,15 +24,15 @@ const Login = (props) => {
                             </div>
 
                             <div>
-                                <button > OK</button>
+                                <button> OK</button>
                             </div>
                         </form>
+                 </Col>
+                 <Col></Col>
+                 </Row>
+             </Container>
 
-                    </Col>
-
-
-
-        </div>
+        </span>
     )
 
 };
