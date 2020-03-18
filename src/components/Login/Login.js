@@ -43,7 +43,7 @@ const Login = (props) => {
             "login": formData.login,
             "password": formData.password
         }).then(response => {
-            set crededential=response.data;
+        //    set crededential=response.data;
             return (console.log(response.data))
         })
     };

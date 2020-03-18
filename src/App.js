@@ -4,6 +4,7 @@ import Header from "./components/header/Header";
 import {Col, Container, Row} from "react-bootstrap";
 import Content from "./components/content/Content";
 import css from './app.module.css';
+import HeaderContainer from "./components/header/HeaderContainer";
 
 function App() {
     return (
@@ -11,7 +12,7 @@ function App() {
             <Container fluid={true}>
                 <Row>
                     <Col>
-                        <Header/>
+                        <HeaderContainer/>
                     </Col>
                 </Row>
 

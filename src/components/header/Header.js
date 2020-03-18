@@ -4,15 +4,15 @@ import logo from '../../assets/img/bblogo.jpg';
 import css from './header.module.css';
 import {Link} from "react-router-dom";
 
-const Header = () => {
+
+
+const Header = (props) => {
     return (<div>
             <Container fluid>
                 <Row>
                     <Col xs={1}>
                         <img src={logo} alt="Logo" className={css.logoImage}/>
                     </Col>
-
-
                     <Col>
                         <nav className="navbar navbar-expand-lg navbar-dark bg-dark">
                             <span className="navbar-brand">
@@ -28,8 +28,8 @@ const Header = () => {
                                 <ul className="navbar-nav mr-auto">
                                     <li className="nav-item active">
                                         <a className="nav-link">
-                                            <Link to="/users"  className={css.linkTo}>
-                                            Students
+                                            <Link to="/users" className={css.linkTo}>
+                                                Students
                                             </Link>
                                             <span className="sr-only">(current)</span></a>
                                     </li>
@@ -42,21 +42,20 @@ const Header = () => {
                                     <li className="nav-item">
                                         <a className="nav-link" href="#">Messages</a>
                                     </li>
-                                    <li className="nav-item">
-                                        <Link to="/login"  className={css.linkTo}>
-                                            Login
-                                        </Link>
-                                        {/*<a className="nav-link" href="#">About</a>*/}
-                                    </li>
+
                                 </ul>
-                                <form className="form-inline my-2 my-lg-0">
-                                    <input className="form-control mr-sm-2" type="text" placeholder="Search"/>
-                                    <button className="btn btn-secondary my-2 my-sm-0" type="submit">Search</button>
-                                </form>
+
                             </div>
                         </nav>
-
-
+                    </Col>
+                    <Col>
+                        <div className={css.loginBlock}>
+                            {props.isAuthenticated?
+                                props.userEmail:
+                            <Link to="/login" className="bg-dark navbar-dark border">
+                                <h1> Login</h1>
+                            </Link>}
+                        </div>
                     </Col>
                 </Row>
             </Container>

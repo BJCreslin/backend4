@@ -13,7 +13,6 @@ let busyLogoChoice = (status) => {
 };
 
 const Users = (props) => {
-    debugger
     return (<div className={css.thead}>
 
             <table className="table table-hover table-bordered table-striped table-responsive">
