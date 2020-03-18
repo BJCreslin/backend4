@@ -3,6 +3,9 @@ import {Col, Container, Row} from "react-bootstrap";
 import css from './login.module.css';
 import {Field, reduxForm} from "redux-form";
 import * as axios from "axios";
+import {connect} from "react-redux";
+import {setCurrentPage, setToggleFetching, setTotalCount, setUsers} from "../../redux/users-reducer";
+import {setCredential} from "../../redux/login-redux";
 
 const loginEndPointURL = 'http://185.255.135.104:9000/api/auth/login';
 
@@ -40,6 +43,7 @@ const Login = (props) => {
             "login": formData.login,
             "password": formData.password
         }).then(response => {
+            set crededential=response.data;
             return (console.log(response.data))
         })
     };
@@ -60,5 +64,15 @@ const Login = (props) => {
     )
 
 };
+const mapStateToProps = (state) => {
+    return {
+        credential: state.login.credential
+    }
+};
+let mpDispatchToProps = {
+    setCredential
 
-export default Login;
+};
+
+
+export default connect(mapStateToProps, mpDispatchToProps)(Login);
