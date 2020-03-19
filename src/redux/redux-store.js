@@ -9,9 +9,9 @@ let reducers = combineReducers(
         usersPage: usersReducer,
         form: formReducer,
         login: loginReducer,
-        auth: authReducer
     });
 
 let store = createStore(reducers);
+window.store = store;
 
 export default store;

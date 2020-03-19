@@ -4,8 +4,7 @@ import css from './login.module.css';
 import {Field, reduxForm} from "redux-form";
 import * as axios from "axios";
 import {connect} from "react-redux";
-import {setCurrentPage, setToggleFetching, setTotalCount, setUsers} from "../../redux/users-reducer";
-import {setCredential} from "../../redux/login-redux";
+import loginReducer, {setCredential, setSuccessLogin, setWrongCredential} from "../../redux/login-redux";
 
 const loginEndPointURL = 'http://185.255.135.104:9000/api/auth/login';
 
@@ -43,8 +42,12 @@ const Login = (props) => {
             "login": formData.login,
             "password": formData.password
         }).then(response => {
-        //    set crededential=response.data;
-            return (console.log(response.data))
+            setCredential(response.data);
+            if (!response.data.sessionId) {
+                setSuccessLogin();
+            } else {
+                setWrongCredential();
+            }
         })
     };
     return (
@@ -53,6 +56,7 @@ const Login = (props) => {
                  <Row xs="2">
                  <Col></Col>
                  <Col>
+                     {props.credentialStatus?<h2>Invalid loginname or password</h2>:""}
                      <h2 className={css.formHeader}>Login</h2>
                        <LoginReduxForm onSubmit={onSubmit}/>
                  </Col>
@@ -66,12 +70,14 @@ const Login = (props) => {
 };
 const mapStateToProps = (state) => {
     return {
-        credential: state.login.credential
+        credential: state.login.credential,
+        credentialStatus: state.login.credentialStatus
     }
 };
 let mpDispatchToProps = {
-    setCredential
-
+    setCredential,
+    setWrongCredential,
+    setSuccessLogin
 };
 
 

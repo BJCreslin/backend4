@@ -1,5 +1,6 @@
-const SET_CREDENTIAL = "SET_CREDENTIAL";
+const SET_SUBMIT_SUCCEEDED = "SET_SUBMIT_SUCCEEDED";
 const SET_WRONG_CREDENTIAL = "SET_WRONG_CREDENTIAL";
+const SET_SUCCESS_LOGIN = "SET_SUCCESS_LOGIN";
 
 const InitialState = {
     credential: {
@@ -7,13 +8,15 @@ const InitialState = {
         startTime: 0,
         validTime: 0
     },
-    textCredentialStatus: false
+    credentialStatus: false
 };
 
 
 let loginReducer = (state = InitialState, action) => {
+    console.log("zgf" + action.type+"  "+action.credential);
     switch (action.type) {
-        case SET_CREDENTIAL:
+        case SET_SUBMIT_SUCCEEDED:
+            console.log("ggg " + action.credential.sessionId)
             return {
                 ...state,
                 credential: action.credential
@@ -21,15 +24,22 @@ let loginReducer = (state = InitialState, action) => {
         case SET_WRONG_CREDENTIAL:
             return {
                 ...state,
-                textCredentialStatus: false
+                credentialStatus: false
             };
+        case SET_SUCCESS_LOGIN:
+            return {
+                ...state,
+                credentialStatus: true
+            };
+
         default: {
             return state;
         }
     }
 };
 
-export const setCredential = (credential) => ({type: SET_CREDENTIAL, credential: credential});
+export const setCredential = (credential) => ({type: SET_SUBMIT_SUCCEEDED, credential: credential});
 export const setWrongCredential = () => ({type: SET_WRONG_CREDENTIAL});
+export const setSuccessLogin = () => ({type: SET_SUCCESS_LOGIN});
 
 export default loginReducer;
