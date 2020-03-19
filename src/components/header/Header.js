@@ -49,7 +49,7 @@ const Header = (props) => {
                     </Col>
                     <Col>
                         <div className={css.loginBlock}>
-                            {props.isAuthenticated?
+                            {props.credentialStatus?
                                 props.userEmail:
                             <Link to="/login" className="bg-dark navbar-dark border">
                                 <h1> Login</h1>

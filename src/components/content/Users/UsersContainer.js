@@ -5,21 +5,14 @@ import Users from "./Users";
 import * as axios from "axios";
 import spinner from '../../../assets/img/Spinner.svg'
 import {Col, Container, Row} from "react-bootstrap";
+import {usersApi} from "../../../api/api";
 
-const endPointURL = 'http://185.255.135.104:9000/api/users/users-all';
-const countEndPointURL = 'http://185.255.135.104:9000/api/users/count';
+
 
 class UsersContainer extends React.Component {
 
     componentDidMount() {
-        this.props.setToggleFetching(true);
-        axios.get(endPointURL).then(response => {
-            this.props.setUsers(response.data);
-            this.props.setToggleFetching(false);
-        });
-        axios.get(countEndPointURL).then(response => {
-            this.props.setTotalCount(response.data);
-        })
+        usersApi.getUsers();
     }
 
     render() {

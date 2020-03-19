@@ -2,11 +2,11 @@ import React from 'react';
 import {Col, Container, Row} from "react-bootstrap";
 import css from './login.module.css';
 import {Field, reduxForm} from "redux-form";
-import * as axios from "axios";
 import {connect} from "react-redux";
-import loginReducer, {setCredential, setSuccessLogin, setWrongCredential} from "../../redux/login-redux";
+import {setCredential, setSuccessLogin, setUserEmail, setWrongCredential} from "../../redux/login-redux";
+import {doLogin} from "../../api/api";
 
-const loginEndPointURL = 'http://185.255.135.104:9000/api/auth/login';
+
 
 
 const LoginForm = (props) => {
@@ -38,17 +38,7 @@ const LoginReduxForm = reduxForm({
 
 const Login = (props) => {
     let onSubmit = (formData) => {
-        axios.post(loginEndPointURL, {
-            "login": formData.login,
-            "password": formData.password
-        }).then(response => {
-            setCredential(response.data);
-            if (!response.data.sessionId) {
-                setSuccessLogin();
-            } else {
-                setWrongCredential();
-            }
-        })
+        doLogin(formData)
     };
     return (
         <span>
@@ -56,7 +46,7 @@ const Login = (props) => {
                  <Row xs="2">
                  <Col></Col>
                  <Col>
-                     {props.credentialStatus?<h2>Invalid loginname or password</h2>:""}
+                     {props.credentialStatus ? <h2>Invalid loginname or password</h2> : ""}
                      <h2 className={css.formHeader}>Login</h2>
                        <LoginReduxForm onSubmit={onSubmit}/>
                  </Col>
@@ -71,13 +61,15 @@ const Login = (props) => {
 const mapStateToProps = (state) => {
     return {
         credential: state.login.credential,
-        credentialStatus: state.login.credentialStatus
+        credentialStatus: state.login.credentialStatus,
+        email: state.login.email
     }
 };
 let mpDispatchToProps = {
     setCredential,
     setWrongCredential,
-    setSuccessLogin
+    setSuccessLogin,
+    setUserEmail
 };
 
 
