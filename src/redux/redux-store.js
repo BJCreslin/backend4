@@ -5,13 +5,15 @@ import loginReducer from "./login-reducer";
 import authReducer from "./auth-reducer";
 import thunkMiddleware from "redux-thunk";
 import projectsReducer from "./projects-reducer";
+import tasksReducer from "./tasks-reducer";
 
 let reducers = combineReducers(
     {
         usersPage: usersReducer,
         form: formReducer,
         login: loginReducer,
-        projectsPage: projectsReducer
+        projectsPage: projectsReducer,
+        tasksPage: tasksReducer
     });
 
 let store = createStore(reducers,

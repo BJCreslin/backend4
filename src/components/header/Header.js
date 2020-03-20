@@ -34,13 +34,17 @@ const Header = (props) => {
                                     </li>
                                     <li className="nav-item">
                                         <a className="nav-link">
-                                        <Link to="/projects" className={css.linkTo}>
-                                            Projects
-                                        </Link>
-                                    </a>
+                                            <Link to="/projects" className={css.linkTo}>
+                                                Projects
+                                            </Link>
+                                        </a>
                                     </li>
                                     <li className="nav-item">
-                                        <a className="nav-link" href="#">Tasks</a>
+                                        <a className="nav-link">
+                                            <Link to="/tasks" className={css.linkTo}>
+                                                Tasks
+                                            </Link>
+                                        </a>
                                     </li>
                                     <li className="nav-item">
                                         <a className="nav-link" href="#">Messages</a>
@@ -53,11 +57,11 @@ const Header = (props) => {
                     </Col>
                     <Col>
                         <div className={css.loginBlock}>
-                            {props.credentialStatus?
-                                props.userEmail:
-                            <Link to="/login" className="bg-dark navbar-dark border">
-                                <h1> Login</h1>
-                            </Link>}
+                            {props.credentialStatus ?
+                                props.userEmail :
+                                <Link to="/login" className="bg-dark navbar-dark border">
+                                    <h1> Login</h1>
+                                </Link>}
                         </div>
                     </Col>
                 </Row>

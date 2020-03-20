@@ -10,6 +10,7 @@ const loginEndPointURL = 'http://185.255.135.104:9000/api/auth/login';
 const allUsersEndPointURL = 'http://185.255.135.104:9000/api/users/users-all';
 const countEndPointURL = 'http://185.255.135.104:9000/api/users/count';
 const allprojectsEndPointURL = 'http://185.255.135.104:9000/api/projects/projects-all';
+const getTasksEndPointURL = 'http://185.255.135.104:9000/api/tasks/page/';
 
 
 const setSessionId = (sessionId) => {
@@ -45,9 +46,21 @@ export const ProjectsAPI = {
 
     getAllProjects(sessionId) {
         return axios.get(allprojectsEndPointURL, {headers: {sessionId: sessionId}}).then(response => {
-            console.log("data "+response.data);
             return response.data;
         });
     }
-
 };
+
+// /{page}/{size}
+
+export const TasksAPI = {
+    getTasks(sessionId, page, size) {
+        return axios.get(getTasksEndPointURL + page + "/" + size, {headers: {sessionId: sessionId}}).then(response => {
+            console.log("data " + response.data);
+            return response.data;
+        });
+    }
+};
+
+
+

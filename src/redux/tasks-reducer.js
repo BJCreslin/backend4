@@ -1,27 +1,27 @@
-import {ProjectsAPI} from '../api/api';
+import {TasksAPI} from "../api/api";
 
-const SET_PROJECTS = "SET_PROJECTS";
+const SET_TASKS = "SET_TASKS";
 const SET_TOTAL_COUNT = "SET_TOTAL_COUNT";
 const SET_CURRENT_PAGE = "SET_CURRENT_PAGE";
 const TOGGLE_IS_FETCHING = "TOGGLE_IS_FETCHING";
 
 
 const initialState = {
-    projects: [],
+    tasks: [],
     numberForPage: 10,
     currentPage: 1,
     totalCount: 0,
     isFetching: false,
 };
 
-let projectsReducer = (state = initialState, action) => {
+let tasksReducer = (state = initialState, action) => {
 
         switch (action.type) {
-            case SET_PROJECTS: {
+            case SET_TASKS: {
 
                 return {
                     ...state,
-                    projects: action.projects
+                    tasks: action.tasks
                 }
             }
             case
@@ -52,19 +52,19 @@ let projectsReducer = (state = initialState, action) => {
     }
 ;
 
-export const setProjects = (projects) => ({type: SET_PROJECTS, projects});
+export const setTasks = (tasks) => ({type: SET_TASKS, tasks});
 
 export const setToggleFetching = (isFetching) => ({type: TOGGLE_IS_FETCHING, isFetching});
 
-export const getProjectsThunkCreator = (sessionId) => {
+export const getTasksThunkCreator = (sessionId, currentPage, numberForPage) => {
     return (dispatch) => {
         dispatch(setToggleFetching(true));
-        ProjectsAPI.getAllProjects(sessionId).then(data => {
+        TasksAPI.getTasks(sessionId, currentPage, numberForPage).then(data => {
             dispatch(setToggleFetching(false));
-            dispatch(setProjects(data));
+            dispatch(setTasks(data));
 
         });
     }
 };
 
-export default projectsReducer;
+export default tasksReducer;
