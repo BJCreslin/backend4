@@ -19,7 +19,8 @@ class HeaderContainer extends React.Component {
 
 const mapStateToProps = (state) => ({
     credential: state.login.credential,
-    credentialStatus: state.login.credentialStatus
+    credentialStatus: state.login.credentialStatus,
+    userEmail: state.login.userEmail
 });
 
 const mapDispatchToProps = {

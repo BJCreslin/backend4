@@ -3,14 +3,27 @@ import {Route} from "react-router-dom";
 import Home from "./Home/Home";
 import UsersContainer from "./Users/UsersContainer";
 import Login from "../Login/Login";
+import {connect} from "react-redux";
+import ProjectsContainer from "./Projects/ProjectsContainer";
 
-const Content = () => {
-    return (
-        <>
-            <Route path="/users" render={() => <UsersContainer/>}/>
-            <Route exact path="/" render={() => <Home/>}/>
-            <Route exact path="/login" render={() => <Login/>}/>
-        </>
-    )
+class Content extends React.Component {
+    render() {
+        return (
+            <>
+                <Route path="/users" render={() => this.props.credentialStatus ? <UsersContainer/> : <Login/>}/>
+                <Route path="/projects" render={() => this.props.credentialStatus ? <ProjectsContainer/> : <Login/>}/>
+                <Route exact path="/" render={() => <Home/>}/>
+                <Route exact path="/login" render={() => this.props.credentialStatus ? <Home/> : <Login/>}/>
+            </>
+        )
+    };
+}
+
+const mapStateToProps = (state) => {
+    return {
+        credentialStatus: state.login.credentialStatus
+    }
 };
-export default Content;
+
+
+export default connect(mapStateToProps, {})(Content);

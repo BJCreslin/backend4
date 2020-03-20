@@ -15,11 +15,7 @@ function App() {
                         <HeaderContainer/>
                     </Col>
                 </Row>
-
-
                     <Content/>
-
-
             </Container>
         </div>
     );
