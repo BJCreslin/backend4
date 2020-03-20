@@ -1,3 +1,5 @@
+import {loginAPI} from "../api/api";
+
 const SET_SUBMIT_SUCCEEDED = "SET_SUBMIT_SUCCEEDED";
 const SET_WRONG_CREDENTIAL = "SET_WRONG_CREDENTIAL";
 const SET_SUCCESS_LOGIN = "SET_SUCCESS_LOGIN";
@@ -15,10 +17,9 @@ const InitialState = {
 
 
 let loginReducer = (state = InitialState, action) => {
-    console.log("zgf" + action.type + "  " + action.credential);
     switch (action.type) {
         case SET_SUBMIT_SUCCEEDED:
-            console.log("ggg " + action.credential.sessionId);
+
             return {
                 ...state,
                 credential: action.credential
@@ -34,10 +35,10 @@ let loginReducer = (state = InitialState, action) => {
                 credentialStatus: true
             };
         case SET_USER_EMAIL:
-                return {
-                    ...state,
-                    userEmail: action.email
-                };
+            return {
+                ...state,
+                userEmail: action.email
+            };
 
         default: {
             return state;
@@ -48,6 +49,16 @@ let loginReducer = (state = InitialState, action) => {
 export const setCredential = (credential) => ({type: SET_SUBMIT_SUCCEEDED, credential: credential});
 export const setWrongCredential = () => ({type: SET_WRONG_CREDENTIAL});
 export const setSuccessLogin = () => ({type: SET_SUCCESS_LOGIN});
-export const setUserEmail = (email) => ({type: SET_USER_EMAIL,email: email});
+export const setUserEmail = (email) => ({type: SET_USER_EMAIL, email: email});
+
+export const loginThunkCreator = (formData) => {
+    return (dispatch) => {
+        loginAPI.doLogin(formData).then(data => {
+            dispatch(setCredential(data));
+            dispatch(setSuccessLogin());
+            dispatch(setUserEmail(formData.login));
+        })
+    }
+};
 
 export default loginReducer;

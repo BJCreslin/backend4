@@ -1,7 +1,7 @@
 import React from 'react';
 import Header from "./Header";
 import {connect} from "react-redux";
-import {setCredential, setSuccessLogin, setWrongCredential} from "../../redux/login-redux";
+import {setCredential, setSuccessLogin, setWrongCredential} from "../../redux/login-reducer";
 
 const authLoginEndPoint = "http://185.255.135.104:9000/api/auth/";
 

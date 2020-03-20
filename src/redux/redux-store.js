@@ -1,9 +1,9 @@
 import {applyMiddleware, combineReducers, createStore,compose} from "redux";
 import usersReducer from "./users-reducer";
 import {reducer as formReducer} from 'redux-form'
-import loginReducer from "./login-redux";
+import loginReducer from "./login-reducer";
 import authReducer from "./auth-reducer";
-import thunk from "redux-thunk";
+import thunkMiddleware from "redux-thunk";
 
 let reducers = combineReducers(
     {
@@ -13,7 +13,7 @@ let reducers = combineReducers(
     });
 
 let store = createStore(reducers,
-    compose(applyMiddleware(thunk),
+    compose(applyMiddleware(thunkMiddleware),
     window.__REDUX_DEVTOOLS_EXTENSION__ && window.__REDUX_DEVTOOLS_EXTENSION__()
 ));
 window.store = store;

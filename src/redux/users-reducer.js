@@ -1,3 +1,5 @@
+import {usersApi} from '../api/api';
+
 const SET_USERS = "SET_USERS";
 const SET_TOTAL_COUNT = "SET_TOTAL_COUNT";
 const SET_CURRENT_PAGE = "SET_CURRENT_PAGE";
@@ -17,7 +19,6 @@ let usersReducer = (state = initialState, action) => {
 
     switch (action.type) {
         case SET_USERS: {
-
             action.users.map(user => {
                 user.createDate = new Date(user.createDate).toLocaleDateString();
                 user.updateDate = new Date(user.updateDate).toLocaleDateString();
@@ -55,12 +56,19 @@ let usersReducer = (state = initialState, action) => {
 };
 
 export const setUsers = (users) => ({type: SET_USERS, users: users});
-export const setTotalCount = (totalCount) => ({type: SET_TOTAL_COUNT, totalCount: totalCount});
+export const setTotalUsersCount = (totalCount) => ({type: SET_TOTAL_COUNT, totalCount: totalCount});
 export const setCurrentPage = (currentPage) => ({type: SET_CURRENT_PAGE, currentPage: currentPage});
 export const setToggleFetching = (isFetching) => ({type: TOGGLE_IS_FETCHING, isFetching});
 
-export const getUsers=(dispatch)=>{
+export const getUsersThunkCreator = () => {
+    return (dispatch) => {
+        dispatch(setToggleFetching(true));
+        usersApi.getAllUsers().then(data => {
+            dispatch(setToggleFetching(false));
+            dispatch(setUsers(data));
 
+        });
+    }
 };
 
 export default usersReducer;

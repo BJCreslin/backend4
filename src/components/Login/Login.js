@@ -3,10 +3,13 @@ import {Col, Container, Row} from "react-bootstrap";
 import css from './login.module.css';
 import {Field, reduxForm} from "redux-form";
 import {connect} from "react-redux";
-import {setCredential, setSuccessLogin, setUserEmail, setWrongCredential} from "../../redux/login-redux";
-import {doLogin} from "../../api/api";
-
-
+import {
+    loginThunkCreator,
+    setCredential,
+    setSuccessLogin,
+    setUserEmail,
+    setWrongCredential
+} from "../../redux/login-reducer";
 
 
 const LoginForm = (props) => {
@@ -38,7 +41,7 @@ const LoginReduxForm = reduxForm({
 
 const Login = (props) => {
     let onSubmit = (formData) => {
-        doLogin(formData)
+        props.loginThunkCreator(formData);
     };
     return (
         <span>
@@ -46,7 +49,7 @@ const Login = (props) => {
                  <Row xs="2">
                  <Col></Col>
                  <Col>
-                     {props.credentialStatus ? <h2>Invalid loginname or password</h2> : ""}
+                     {/*{props.credentialStatus ? <h2>Invalid loginname or password</h2> : ""}*/}
                      <h2 className={css.formHeader}>Login</h2>
                        <LoginReduxForm onSubmit={onSubmit}/>
                  </Col>
@@ -69,7 +72,8 @@ let mpDispatchToProps = {
     setCredential,
     setWrongCredential,
     setSuccessLogin,
-    setUserEmail
+    setUserEmail,
+    loginThunkCreator
 };
 
 

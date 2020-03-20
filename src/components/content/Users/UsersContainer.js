@@ -1,17 +1,20 @@
 import React from 'react';
 import {connect} from "react-redux";
-import {setCurrentPage, setToggleFetching, setTotalCount, setUsers} from "../../../redux/users-reducer";
+import {
+    getUsersThunkCreator,
+    setCurrentPage,
+    setToggleFetching,
+    setTotalUsersCount,
+    setUsers
+} from "../../../redux/users-reducer";
 import Users from "./Users";
-import {usersApi} from "../../../api/api";
 import Preloader from "../../common/preloader/Preloader";
 
 
 class UsersContainer extends React.Component {
 
     componentDidMount() {
-        this.props.setToggleFetching(true);
-        usersApi.getUsers();
-
+        this.props.getUsersThunkCreator();
     }
 
     render() {
@@ -35,9 +38,10 @@ const mapStateToProps = (state) => {
 
 let mpDispatchToProps = {
     setUsers,
-    setTotalCount,
+    setTotalCount: setTotalUsersCount,
     setCurrentPage,
-    setToggleFetching
+    setToggleFetching,
+    getUsersThunkCreator
 };
 
 
