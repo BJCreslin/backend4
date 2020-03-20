@@ -4,12 +4,14 @@ import {reducer as formReducer} from 'redux-form'
 import loginReducer from "./login-reducer";
 import authReducer from "./auth-reducer";
 import thunkMiddleware from "redux-thunk";
+import projectsReducer from "./projects-reducer";
 
 let reducers = combineReducers(
     {
         usersPage: usersReducer,
         form: formReducer,
         login: loginReducer,
+        projectsPage: projectsReducer
     });
 
 let store = createStore(reducers,

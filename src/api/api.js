@@ -9,32 +9,23 @@ const instance = axios.create({
 const loginEndPointURL = 'http://185.255.135.104:9000/api/auth/login';
 const allUsersEndPointURL = 'http://185.255.135.104:9000/api/users/users-all';
 const countEndPointURL = 'http://185.255.135.104:9000/api/users/count';
+const allprojectsEndPointURL = 'http://185.255.135.104:9000/api/projects/projects-all';
+
 
 const setSessionId = (sessionId) => {
     instance.defaults.headers.common['SessionId'] = sessionId;
 };
 
-// let sessionId = response.data.sessionId;
-// // dispatch.setUserEmail(formData.login);
-// // dispatch(setCredential(response.data));
-// // if (!sessionId) {
-// //     dispatch(setWrongCredential());
-// //
-// // } else {
-// //     dispatch(setUserEmail(formData.login));
-// //     dispatch(setSessionId(sessionId));
-// //     dispatch(setSuccessLogin());
-// // }
 
 export const loginAPI = {
     doLogin(formData) {
-            return axios.post(loginEndPointURL, {
-                "login": formData.login,
-                "password": formData.password
-            }).then(response => {
-                return response.data;
-            })
-        }
+        return axios.post(loginEndPointURL, {
+            "login": formData.login,
+            "password": formData.password
+        }).then(response => {
+            return response.data;
+        })
+    }
 };
 
 export const usersApi = {
@@ -48,6 +39,15 @@ export const usersApi = {
             return response.data;
         })
     }
+};
 
+export const ProjectsAPI = {
+
+    getAllProjects(sessionId) {
+        return axios.get(allprojectsEndPointURL, {headers: {sessionId: sessionId}}).then(response => {
+            console.log("data "+response.data);
+            return response.data;
+        });
+    }
 
 };

@@ -33,7 +33,11 @@ const Header = (props) => {
                                             <span className="sr-only">(current)</span></a>
                                     </li>
                                     <li className="nav-item">
-                                        <a className="nav-link" href="#">Projects</a>
+                                        <a className="nav-link">
+                                        <Link to="/projects" className={css.linkTo}>
+                                            Projects
+                                        </Link>
+                                    </a>
                                     </li>
                                     <li className="nav-item">
                                         <a className="nav-link" href="#">Tasks</a>
