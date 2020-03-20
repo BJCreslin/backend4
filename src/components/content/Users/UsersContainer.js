@@ -2,22 +2,21 @@ import React from 'react';
 import {connect} from "react-redux";
 import {setCurrentPage, setToggleFetching, setTotalCount, setUsers} from "../../../redux/users-reducer";
 import Users from "./Users";
-import * as axios from "axios";
-import spinner from '../../../assets/img/Spinner.svg'
-import {Col, Container, Row} from "react-bootstrap";
 import {usersApi} from "../../../api/api";
-
+import Preloader from "../../common/preloader/Preloader";
 
 
 class UsersContainer extends React.Component {
 
     componentDidMount() {
+        this.props.setToggleFetching(true);
         usersApi.getUsers();
+
     }
 
     render() {
         return (<>
-                {this.props.isFetching ? <img src={spinner}/> : null}
+                {this.props.isFetching ? <Preloader/> : null}
                 <Users users={this.props.users}/>
             </>
         )

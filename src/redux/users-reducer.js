@@ -59,4 +59,8 @@ export const setTotalCount = (totalCount) => ({type: SET_TOTAL_COUNT, totalCount
 export const setCurrentPage = (currentPage) => ({type: SET_CURRENT_PAGE, currentPage: currentPage});
 export const setToggleFetching = (isFetching) => ({type: TOGGLE_IS_FETCHING, isFetching});
 
+export const getUsers=(dispatch)=>{
+
+};
+
 export default usersReducer;

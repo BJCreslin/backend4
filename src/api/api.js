@@ -15,35 +15,38 @@ const  setSessionId=(sessionId)=>{
 };
 
 export const doLogin=(formData)=> {
-    axios.post('http://185.255.135.104:9000/api/auth/login', {
-        "login": formData.login,
-        "password": formData.password
-    }).then(response => {
-        console.log(response.data);
-        let sessionId=response.data.sessionId;
-        setCredential(response.data);
-        if (!sessionId) {setWrongCredential();
+    return function (dispatch) {
+        axios.post(loginEndPointURL, {
+            "login": formData.login,
+            "password": formData.password
+        }).then(response => {
+            let sessionId = response.data.sessionId;
+            dispatch.setUserEmail(formData.login);
+            dispatch(setCredential(response.data));
+            if (!sessionId) {
+                dispatch(setWrongCredential());
 
-        } else {
-            console.log("jjj- "+sessionId);
-            setUserEmail(formData.login);
-            setSessionId(sessionId);
-            setSuccessLogin();
-        }
-    })
-};
+            } else {
+                dispatch(setUserEmail(formData.login));
+                dispatch(setSessionId(sessionId));
+                dispatch(setSuccessLogin());
+            }
 
-export class usersApi {
+        })
+    };
+}
+
+export const usersApi= {
      getUsers(){
 
-    this.props.setToggleFetching(true);
+
     axios.get(endPointURL).then(response => {
     this.props.setUsers(response.data);
     this.props.setToggleFetching(false);
 });
 axios.get(countEndPointURL).then(response => {
     this.props.setTotalCount(response.data);
-})};
+})}
 
 
-}
+};
