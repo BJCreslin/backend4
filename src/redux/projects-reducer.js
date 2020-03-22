@@ -2,6 +2,7 @@ import {ProjectsAPI} from '../api/api';
 import React from "react";
 import {createBrowserHistory} from "history";
 import Projects from "../components/content/Projects/Project";
+import ProjectsContainer from "../components/content/Projects/ProjectsContainer";
 
 const SET_PROJECTS = "SET_PROJECTS";
 const SET_TOTAL_COUNT = "SET_TOTAL_COUNT";
@@ -73,7 +74,9 @@ export const getProjectsThunkCreator = (sessionId) => {
         ProjectsAPI.getAllProjects(sessionId).then(data => {
             dispatch(setToggleFetching(false));
             dispatch(setProjects(data));
+
         });
+
     }
 };
 
@@ -87,12 +90,8 @@ export const createProjectThunkCreator = (sessionId, project) => {
         ProjectsAPI.getAllProjects(sessionId).then(data => {
             dispatch(setToggleFetching(false));
             dispatch(setProjects(data));
-       //     s.history.push("/home")
-            const customHistory = createBrowserHistory();
-            customHistory.push('/projects');
-            return(
-                <Projects/>
-            )
+            dispatch(setCreated(true))
+
         });
     }
 };
