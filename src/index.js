@@ -7,9 +7,12 @@ import './assets/css/bootstrap.css';
 import {BrowserRouter} from "react-router-dom";
 import {Provider} from "react-redux";
 import store from "./redux/redux-store";
+import {createBrowserHistory} from "history";
+
+const customHistory = createBrowserHistory();
 
 ReactDOM.render(
-    <BrowserRouter>
+    <BrowserRouter history={customHistory}>
         <Provider store={store}>
             <App/>
         </Provider>

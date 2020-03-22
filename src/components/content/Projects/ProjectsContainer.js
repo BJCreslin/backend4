@@ -20,7 +20,7 @@ class ProjectsContainer extends React.Component {
     }
 }
 
-const updateProject=()=>{
+const updateProject=(project) =>{
     return (
         <div className="modal">
             <div className="modal-dialog" role="document">

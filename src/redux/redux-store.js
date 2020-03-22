@@ -13,7 +13,8 @@ let reducers = combineReducers(
         login: loginReducer,
         projectsPage: projectsReducer,
         tasksPage: tasksReducer,
-        taskUpdateForm: formReducer
+        taskUpdateForm: formReducer,
+        createProjectForm: formReducer
     });
 
 let store = createStore(reducers,

@@ -1,5 +1,4 @@
 import * as axios from 'axios';
-import {setCredential, setSuccessLogin, setUserEmail, setWrongCredential} from "../redux/login-reducer";
 
 
 const instance = axios.create({
@@ -9,14 +8,15 @@ const instance = axios.create({
 const loginEndPointURL = 'http://185.255.135.104:9000/api/auth/login';
 const allUsersEndPointURL = 'http://185.255.135.104:9000/api/users/users-all';
 const countEndPointURL = 'http://185.255.135.104:9000/api/users/count';
-const allprojectsEndPointURL = 'http://185.255.135.104:9000/api/projects/projects-all';
-const getTasksEndPointURL = 'http://185.255.135.104:9000/api/tasks/page/';
 
+const allprojectsEndPointURL = 'http://185.255.135.104:9000/api/projects/projects-all';
+const newProjectEndPointURL = 'http://185.255.135.104:9000/api/projects/createProject';
+
+const getTasksEndPointURL = 'http://185.255.135.104:9000/api/tasks/page/';
 
 const setSessionId = (sessionId) => {
     instance.defaults.headers.common['SessionId'] = sessionId;
 };
-
 
 export const loginAPI = {
     doLogin(formData) {
@@ -44,12 +44,29 @@ export const usersApi = {
 
 export const ProjectsAPI = {
 
-    getAllProjects(sessionId) {
-        return axios.get(allprojectsEndPointURL, {headers: {sessionId: sessionId}}).then(response => {
-            return response.data;
-        });
+        getAllProjects(sessionId) {
+            return axios.get(allprojectsEndPointURL, {headers: {sessionId: sessionId}}).then(response => {
+                return response.data;
+            });
+        },
+
+        createProject(sessionId, newProject) {
+            console.log(newProject);
+            return axios({
+                method: 'POST',
+                url: newProjectEndPointURL,
+                headers: {sessionId: sessionId},
+                data: newProject
+            }).then(function (response) {
+                console.log(response);
+            })
+                .catch(function (error) {
+                    console.log(error);
+
+                })
+        }
     }
-};
+;
 
 // /{page}/{size}
 
