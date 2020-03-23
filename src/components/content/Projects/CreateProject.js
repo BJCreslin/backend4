@@ -3,10 +3,15 @@ import css from "../../Login/login.module.css";
 import {Field, reduxForm} from "redux-form";
 import {connect} from "react-redux";
 import {createProjectThunkCreator} from "../../../redux/projects-reducer";
+import {Col, Container, Row} from "react-bootstrap";
 
 const createProjectForm = (props) => {
     return (
       <div>
+          <Container className="themed-container" fluid={true}>
+              <Row xs="2">
+                  <Col></Col>
+                  <Col>
                         <form className={css.formDesign} onSubmit={props.handleSubmit}>
                             <div>
                                 <Field type={"text"} placeholder={"Project Name"} component={"input"}
@@ -27,6 +32,10 @@ const createProjectForm = (props) => {
                                 <button> OK</button>
                             </div>
                         </form>
+                  </Col>
+                  <Col></Col>
+                  </Row>
+          </Container>
 
         </div>);
 };
