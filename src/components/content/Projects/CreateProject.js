@@ -2,41 +2,43 @@ import React from 'react';
 import css from "../../Login/login.module.css";
 import {Field, reduxForm} from "redux-form";
 import {connect} from "react-redux";
-import {createProjectThunkCreator} from "../../../redux/projects-reducer";
-import {Col, Container, Row} from "react-bootstrap";
+import {createProjectThunkCreator, setShowModal} from "../../../redux/projects-reducer";
+import {Modal} from "react-bootstrap";
 
 const createProjectForm = (props) => {
+    setShowModal(true);
+    const handleClose=() => {setShowModal(false);};
     return (
-      <div>
-          <Container className="themed-container" fluid={true}>
-              <Row xs="2">
-                  <Col></Col>
-                  <Col>
-                        <form className={css.formDesign} onSubmit={props.handleSubmit}>
-                            <div>
-                                <Field type={"text"} placeholder={"Project Name"} component={"input"}
-                                       name={"projectName"}/>
-                            </div>
+        <div>
+            <Modal show={true} onHide={handleClose}>
 
-                            <div>
-                                <Field type={"text"} placeholder={"Description"} component={"input"}
-                                       name={"description"}/>
-                            </div>
+                <Modal.Header closeButton>
+                    <Modal.Title>Create new project</Modal.Title>
+                </Modal.Header>
+                <Modal.Body>
+                    <form className={css.formDesign} onSubmit={props.handleSubmit}>
+                        <div>
+                            <Field type={"text"} placeholder={"Project Name"} component={"input"}
+                                   name={"projectName"}/>
+                        </div>
 
-                            <div>
-                                <Field type={"text"} placeholder={"Project Url"} component={"input"}
-                                       name={"projectUrl"}/>
-                            </div>
+                        <div>
+                            <Field type={"text"} placeholder={"Description"} component={"textarea"}
+                                   name={"description"}/>
+                        </div>
 
-                            <div>
-                                <button> OK</button>
-                            </div>
-                        </form>
-                  </Col>
-                  <Col></Col>
-                  </Row>
-          </Container>
+                        <div>
+                            <Field type={"text"} placeholder={"Project Url"} component={"input"}
+                                   name={"projectUrl"}/>
+                        </div>
 
+                        <div>
+                            <button> OK</button>
+                        </div>
+                    </form>
+                </Modal.Body>
+
+            </Modal>
         </div>);
 };
 
@@ -59,10 +61,13 @@ const mapStateToPros = (state) => {
     return {
         credential: state.login.credential,
         credentialStatus: state.login.credentialStatus,
+        showModal: state.login.showModal,
     }
 };
 const mapDispatchToProps = {
-    createProjectThunkCreator
+    createProjectThunkCreator,
+    setShowModal
 };
+
 
 export default connect(mapStateToPros, mapDispatchToProps)(CreateProject);

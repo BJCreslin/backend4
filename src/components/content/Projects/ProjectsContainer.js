@@ -2,25 +2,32 @@ import React from 'react';
 import {connect} from "react-redux";
 import Preloader from "../../common/preloader/Preloader";
 import Project from "./Project";
-import {getProjectsThunkCreator, setProjects, setToggleFetching} from "../../../redux/projects-reducer";
+import {
+    getPaginationProjectsThunkCreator,
+    getProjectsThunkCreator, setCurrentPage,
+    setProjects,
+    setToggleFetching
+} from "../../../redux/projects-reducer";
 
 
 class ProjectsContainer extends React.Component {
     componentDidMount() {
-        this.props.getProjectsThunkCreator(this.props.credential.sessionId);
+        this.props.setProjects(
+            this.props.getPaginationProjectsThunkCreator(
+                this.props.credential.sessionId, this.props.currentPage, this.props.numberForPage));
     }
 
     render = () => {
         return (
             <>
                 {this.props.isFetching ? <Preloader/> : null}
-                <Project projects={this.props.projects}/>
+                <Project projects={this.props} dispatch={this.props.dispatch}/>
             </>
         )
     }
 }
 
-const updateProject=(project) =>{
+const updateProject = (project) => {
     return (
         <div className="modal">
             <div className="modal-dialog" role="document">
@@ -50,15 +57,18 @@ const mapStateToProps = (state) => {
         credential: state.login.credential,
         userEmail: state.login.userEmail,
         projects: state.projectsPage.projects,
-        isFetching: state.projectsPage.isFetching
-
+        isFetching: state.projectsPage.isFetching,
+        currentPage: state.projectsPage.currentPage,
+        numberForPage: state.projectsPage.numberForPage
     }
 };
 const mapDispatchToProps = {
     getProjectsThunkCreator,
     setProjects,
     setToggleFetching,
-    updateProject
+    updateProject,
+    getPaginationProjectsThunkCreator,
+    setCurrentPage
 };
 
 export default connect(mapStateToProps, mapDispatchToProps)(ProjectsContainer);

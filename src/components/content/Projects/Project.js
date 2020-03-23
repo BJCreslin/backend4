@@ -1,11 +1,21 @@
 import React from 'react';
-import css from "../Users/users.module.css";
-import {Card} from "react-bootstrap";
+import css from "./projects.module.css";
+import {Card, Pagination} from "react-bootstrap";
 import CreateProject from "./CreateProject";
 import {Link} from "react-router-dom";
 
 
 const Projects = (props) => {
+
+    const handleFirstSelect = () => {
+        alert("first")
+    };
+
+    const handlePrevSelect = () => {
+        props.dispatch.setCurrentPage(props.currentPage - 1);
+    };
+
+
     const onclickNewProject = () => {
         return (<>
                 <CreateProject/>
@@ -21,10 +31,22 @@ const Projects = (props) => {
             </>
         )
     };
-
+debugger
     return (<div>
             <div>
                 <Link to="/newproject" onClick={onclickNewProject}>New Project</Link>
+            </div>
+            <div>
+                <Pagination className={css.pagination}>
+                    <Pagination.First onClick={handleFirstSelect}/>
+                    <Pagination.Ellipsis/>
+                    <Pagination.Prev onClick={handlePrevSelect}/>
+                    <Pagination.Item>{props.currentPage}</Pagination.Item>
+                    <Pagination.Next/>
+                    <Pagination.Ellipsis/>
+                    <Pagination.Last/>
+                </Pagination>
+
             </div>
             <div className={css.thead}>
                 {props.projects.map(project => {

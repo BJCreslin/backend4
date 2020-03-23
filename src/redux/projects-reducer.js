@@ -1,14 +1,12 @@
 import {ProjectsAPI} from '../api/api';
 import React from "react";
-import {createBrowserHistory} from "history";
-import Projects from "../components/content/Projects/Project";
-import ProjectsContainer from "../components/content/Projects/ProjectsContainer";
 
 const SET_PROJECTS = "SET_PROJECTS";
 const SET_TOTAL_COUNT = "SET_TOTAL_COUNT";
 const SET_CURRENT_PAGE = "SET_CURRENT_PAGE";
 const SET_CREATED = "SET_CREATED";
 const TOGGLE_IS_FETCHING = "TOGGLE_IS_FETCHING";
+const SET_SHOW_MODAL = "SET_SHOW_MODAL";
 
 
 const initialState = {
@@ -17,7 +15,8 @@ const initialState = {
     currentPage: 1,
     totalCount: 0,
     isFetching: false,
-    created: false
+    created: false,
+    showModal: false
 };
 
 let projectsReducer = (state = initialState, action) => {
@@ -54,8 +53,16 @@ let projectsReducer = (state = initialState, action) => {
             case
             SET_CREATED:
                 return {
-                ...state,
-                    created:action.created
+                    ...state,
+                    created: action.created
+                };
+
+            case
+            SET_SHOW_MODAL:
+                return {
+                    ...state,
+                    isShowModal: action.isShowModal
+
                 };
             default: {
                 return state;
@@ -67,6 +74,12 @@ let projectsReducer = (state = initialState, action) => {
 export const setProjects = (projects) => ({type: SET_PROJECTS, projects});
 export const setToggleFetching = (isFetching) => ({type: TOGGLE_IS_FETCHING, isFetching});
 export const setCreated = (created) => ({type: SET_CREATED, created});
+export const setShowModal = (isShowModal) => ({type: SET_SHOW_MODAL, isShowModal});
+
+export const setCurrentPage = (currentPage) => {
+    if (currentPage < 0) currentPage = 0;
+    return {type: SET_CURRENT_PAGE, currentPage}
+};
 
 export const getProjectsThunkCreator = (sessionId) => {
     return (dispatch) => {
@@ -74,11 +87,25 @@ export const getProjectsThunkCreator = (sessionId) => {
         ProjectsAPI.getAllProjects(sessionId).then(data => {
             dispatch(setToggleFetching(false));
             dispatch(setProjects(data));
-
+            dispatch(setCreated(false));
         });
 
     }
 };
+
+export const getPaginationProjectsThunkCreator = (sessionId, currentPage, numberForPage) => {
+    return (dispatch) => {
+        dispatch(setToggleFetching(true));
+        ProjectsAPI.getProjectsWithPagination(sessionId, currentPage, numberForPage).then(data => {
+            dispatch(setToggleFetching(false));
+            dispatch(setProjects(data));
+            dispatch(setCreated(false));
+        });
+    }
+
+
+};
+
 
 export const createProjectThunkCreator = (sessionId, project) => {
 
