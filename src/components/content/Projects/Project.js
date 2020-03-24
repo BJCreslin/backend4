@@ -6,7 +6,7 @@ import {Link} from "react-router-dom";
 
 
 const Projects = (props) => {
-
+debugger
     const handleFirstSelect = () => {
         alert("first")
     };
