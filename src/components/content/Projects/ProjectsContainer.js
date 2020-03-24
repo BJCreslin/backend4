@@ -11,7 +11,7 @@ import {
 
 
 class ProjectsContainer extends React.Component {
-    componentDidMount() {
+    componentDidUpdate() {
         alert("ProjectsContainer");
         let projectsss = this.props.getPaginationProjectsThunkCreator(
             this.props.credential.sessionId, this.props.currentPage, this.props.numberForPage);
