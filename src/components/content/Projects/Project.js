@@ -12,7 +12,7 @@ const Projects = (props) => {
     };
 
     const handlePrevSelect = () => {
-        props.dispatch.setCurrentPage(props.currentPage - 1);
+        props.setCurrentPage(props.currentPage - 1);
     };
 
 
@@ -31,7 +31,6 @@ const Projects = (props) => {
             </>
         )
     };
-debugger
     return (<div>
             <div>
                 <Link to="/newproject" onClick={onclickNewProject}>New Project</Link>

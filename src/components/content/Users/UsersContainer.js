@@ -14,6 +14,7 @@ import Preloader from "../../common/preloader/Preloader";
 class UsersContainer extends React.Component {
 
     componentDidMount() {
+        alert("UsersContainer");
         this.props.getUsersThunkCreator();
     }
 

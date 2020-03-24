@@ -12,7 +12,7 @@ const SET_SHOW_MODAL = "SET_SHOW_MODAL";
 const initialState = {
     projects: [],
     numberForPage: 10,
-    currentPage: 1,
+    currentPage: 0,
     totalCount: 0,
     isFetching: false,
     created: false,
