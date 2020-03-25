@@ -15,11 +15,12 @@ class UsersContainer extends React.Component {
 
     componentDidMount() {
         this.props.getUsersThunkCreator();
-        debugger
+
     }
 
     render() {
         return (<>
+                {console.log(this.props)}
                 {this.props.isFetching ? <Preloader/> : null}
                 <Users users={this.props.users}/>
             </>
