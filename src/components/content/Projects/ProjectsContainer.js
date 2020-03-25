@@ -12,9 +12,9 @@ import {
 
 class ProjectsContainer extends React.Component {
     componentDidMount() {
-        let projectsss = this.props.getPaginationProjectsThunkCreator(
+        this.props.getPaginationProjectsThunkCreator(
             this.props.credential.sessionId, this.props.currentPage, this.props.numberForPage);
-        this.props.setProjects(projectsss);
+
     };
 
     render = () => {
@@ -23,8 +23,8 @@ class ProjectsContainer extends React.Component {
                 {this.props.isFetching ? <Preloader/> : null}
                 <Project projects={this.props.projects}
                          currentPage={this.props.currentPage}
-
-                         setCurrentPage={this.props.setCurrentPage}/>
+                         setCurrentPage={this.props.setCurrentPage}
+                        isFetching={this.props.isFetching}/>
             </>
         )
     }

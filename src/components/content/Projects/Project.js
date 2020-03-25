@@ -6,7 +6,6 @@ import {Link} from "react-router-dom";
 
 
 const Projects = (props) => {
-debugger
     const handleFirstSelect = () => {
         alert("first")
     };
@@ -31,7 +30,7 @@ debugger
             </>
         )
     };
-    debugger
+
     return (<div>
             <div>
                 <Link to="/newproject" onClick={onclickNewProject}>New Project</Link>
