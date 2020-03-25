@@ -1,9 +1,6 @@
 import * as axios from 'axios';
+import store from "../redux/redux-store";
 
-
-const instance = axios.create({
-    baseUrl: 'http://185.255.135.104:9000/api/'
-});
 
 const loginEndPointURL = 'http://185.255.135.104:9000/api/auth/login';
 const allUsersEndPointURL = 'http://185.255.135.104:9000/api/users/users-all';
@@ -11,15 +8,10 @@ const countEndPointURL = 'http://185.255.135.104:9000/api/users/count';
 
 const allprojectsEndPointURL = 'http://185.255.135.104:9000/api/projects/projects-all';
 const newProjectEndPointURL = 'http://185.255.135.104:9000/api/projects/createProject';
-// "/watch/{page}/{size}"
 const paginatableProjectEndPointURL = 'http://185.255.135.104:9000/api/projects/watch/';
-
 
 const getTasksEndPointURL = 'http://185.255.135.104:9000/api/tasks/page/';
 
-const setSessionId = (sessionId) => {
-    instance.defaults.headers.common['SessionId'] = sessionId;
-};
 
 export const loginAPI = {
     doLogin(formData) {
@@ -48,7 +40,7 @@ export const usersApi = {
 export const ProjectsAPI = {
 
         getAllProjects(sessionId) {
-            return axios.get(allprojectsEndPointURL, {headers: {sessionId: sessionId}}).then(response => {
+            return axios.get(allprojectsEndPointURL, {headers: {sessionId: store.getState().login.sessionId}}).then(response => {
                 return response.data;
             });
         },
@@ -57,7 +49,7 @@ export const ProjectsAPI = {
             return axios({
                 method: 'POST',
                 url: newProjectEndPointURL,
-                headers: {sessionId: sessionId},
+                headers: {sessionId: store.getState().login.sessionId},
                 data: newProject
             }).then(function (response) {
                 console.log(response);
@@ -67,8 +59,10 @@ export const ProjectsAPI = {
                 })
         },
 
-        getProjectsWithPagination(sessionId, currentPage, numberForPage) {
-            return axios.get(paginatableProjectEndPointURL + currentPage + "/" + numberForPage, {headers: {sessionId: sessionId}}).then(response => {
+        getProjectsWithPagination() {
+            let currentPage = store.getState().projectsPage.currentPage;
+            let numberForPage = store.getState().projectsPage.numberForPage;
+            return axios.get(paginatableProjectEndPointURL + currentPage + "/" + numberForPage, {headers: {sessionId: store.getState().login.sessionId}}).then(response => {
                 return response.data;
             });
         }
