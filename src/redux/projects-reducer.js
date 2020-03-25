@@ -120,18 +120,16 @@ export const getProjectsThunkCreator = (sessionId) => {
     }
 };
 
-export const getPaginationProjectsThunkCreator = (sessionId, currentPage, numberForPage) => {
+export const getPaginationProjectsThunkCreator = () => {
     return (dispatch) => {
         dispatch(setToggleFetching(true));
-        ProjectsAPI.getProjectsWithPagination(sessionId, currentPage, numberForPage).then(data => {
+        ProjectsAPI.getProjectsWithPagination().then(data => {
             dispatch(setToggleFetching(false));
             dispatch(setProjects(data.content));
             dispatch(setTotalPages(data.totalPages));
             dispatch(setCreated(false));
         });
     }
-
-
 };
 
 

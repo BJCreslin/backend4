@@ -3,8 +3,10 @@ import store from "../redux/redux-store";
 
 
 const loginEndPointURL = 'http://185.255.135.104:9000/api/auth/login';
+
 const allUsersEndPointURL = 'http://185.255.135.104:9000/api/users/users-all';
 const countEndPointURL = 'http://185.255.135.104:9000/api/users/count';
+const paginationUsersEndPointURL = 'http://185.255.135.104:9000/api/users/page/';
 
 const allprojectsEndPointURL = 'http://185.255.135.104:9000/api/projects/projects-all';
 const newProjectEndPointURL = 'http://185.255.135.104:9000/api/projects/createProject';
@@ -24,14 +26,20 @@ export const loginAPI = {
     }
 };
 
-export const usersApi = {
+export const UsersApi = {
     getAllUsers() {
         return axios.get(allUsersEndPointURL).then(response => {
             return response.data;
         });
     },
     getNumberOfUsers() {
-        axios.get(countEndPointURL).then(response => {
+        axios.get(countEndPointURL, {headers: {sessionId: store.getState().login.sessionId}}).then(response => {
+            return response.data;
+        })
+    },
+
+    getPaginationUsers() {
+        axios.get(paginationUsersEndPointURL, {headers: {sessionId: store.getState().login.sessionId}}).then(response => {
             return response.data;
         })
     }
@@ -69,7 +77,6 @@ export const ProjectsAPI = {
     }
 ;
 
-// /{page}/{size}
 
 export const TasksAPI = {
     getTasks(sessionId, page, size) {

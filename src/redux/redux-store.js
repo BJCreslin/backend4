@@ -1,4 +1,4 @@
-import {applyMiddleware, combineReducers, compose, createStore} from "redux";
+import {applyMiddleware, combineReducers, createStore} from "redux";
 import usersReducer from "./users-reducer";
 import {reducer as formReducer} from 'redux-form'
 import loginReducer from "./login-reducer";

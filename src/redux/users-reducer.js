@@ -1,15 +1,20 @@
-import {usersApi} from '../api/api';
+import {UsersApi} from '../api/api';
+import {setCreated, setProjects} from "./projects-reducer";
 
 const SET_USERS = "SET_USERS";
 const SET_TOTAL_COUNT = "SET_TOTAL_COUNT";
 const SET_CURRENT_PAGE = "SET_CURRENT_PAGE";
 const TOGGLE_IS_FETCHING = "TOGGLE_IS_FETCHING";
+const SET_FIRST_PAGE = "SET_FIRST_PAGE";
+const SET_LAST_PAGE = " SET_LAST_PAGE";
+const SET_TOTAL_PAGES = "SET_TOTAL_PAGES";
 
 
 const initialState = {
     users: [],
     numberForPage: 10,
     currentPage: 1,
+    totalPages: 0,
     totalCount: 0,
     isFetching: false,
 };
@@ -36,7 +41,11 @@ let usersReducer = (state = initialState, action) => {
                 totalCount: action.totalCount
             }
         }
-        case SET_CURRENT_PAGE: {
+        case
+        SET_CURRENT_PAGE: {
+            if (action.currentPage > state.totalPages) action.currentPage = state.totalPages;
+            if (action.currentPage < 1) action.currentPage = 1;
+
             return {
                 ...state,
                 currentPage: action.currentPage
@@ -48,6 +57,22 @@ let usersReducer = (state = initialState, action) => {
                 isFetching: action.isFetching
             }
         }
+        case
+        SET_FIRST_PAGE:
+            return {
+                ...state,
+                currentPage: 0
+            };
+        case  SET_LAST_PAGE:
+            return {
+                ...state,
+                currentPage: state.totalPages - 1
+            };
+        case SET_TOTAL_PAGES:
+            return {
+                ...state,
+                totalPages: action.totalPages
+            };
         default: {
             return state;
         }
@@ -56,16 +81,37 @@ let usersReducer = (state = initialState, action) => {
 
 export const setUsers = (users) => ({type: SET_USERS, users: users});
 export const setTotalUsersCount = (totalCount) => ({type: SET_TOTAL_COUNT, totalCount: totalCount});
-export const setCurrentPage = (currentPage) => ({type: SET_CURRENT_PAGE, currentPage: currentPage});
 export const setToggleFetching = (isFetching) => ({type: TOGGLE_IS_FETCHING, isFetching});
+export const setTotalPages = (totalPages) => ({type: SET_TOTAL_PAGES, totalPages});
+export const setFirstPage = () => ({type: SET_FIRST_PAGE});
+export const setLastPage = () => ({type: SET_LAST_PAGE});
+
+export const setCurrentPage = (currentPage) => {
+    return {type: SET_CURRENT_PAGE, currentPage}
+};
 
 export const getUsersThunkCreator = () => {
     return (dispatch) => {
         dispatch(setToggleFetching(true));
-        usersApi.getAllUsers().then(data => {
+        UsersApi.getPaginationUsers().then(data => {
             dispatch(setToggleFetching(false));
             dispatch(setUsers(data));
+        });
+        UsersApi.getNumberOfUsers().then(data => {
+            dispatch(setTotalUsersCount(data));
+            dispatch(setTotalPages(Math.ceil(data / 10)))
+        })
+    }
+};
 
+export const getPaginationUsersThunkCreator = () => {
+    return (dispatch) => {
+        dispatch(setToggleFetching(true));
+        UsersApi.getPaginationUsers().then(data => {
+            dispatch(setToggleFetching(false));
+            dispatch(setProjects(data.content));
+            dispatch(setTotalPages(data.totalPages));
+            dispatch(setCreated(false));
         });
     }
 };

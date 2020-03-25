@@ -15,6 +15,7 @@ class UsersContainer extends React.Component {
 
     componentDidMount() {
         this.props.getUsersThunkCreator();
+        debugger
     }
 
     render() {
@@ -27,6 +28,7 @@ class UsersContainer extends React.Component {
 }
 
 const mapStateToProps = (state) => {
+    debugger
     return {
         users: state.usersPage.users,
         numberForPage: state.usersPage.numberForPage,
