@@ -57,7 +57,8 @@ const Projects = (props) => {
                 {props.projects.map(project => {
                     return (
                         <div className="card text-white bg-primary mb-3">
-                            <Card.Body>
+
+                            <Card.Body >
                                 <h4 className="card-title">{project.projectName}</h4>
                                 <Card.Subtitle class="card text-white bg-secondary mb-3" mb="2"
                                                text="muted">ID: {project.projectId}
@@ -71,6 +72,7 @@ const Projects = (props) => {
                                     Project</Link>
 
                             </Card.Body>
+
                         </div>
                     )
                 })}

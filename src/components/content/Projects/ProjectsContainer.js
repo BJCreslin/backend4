@@ -16,7 +16,7 @@ class ProjectsContainer extends React.Component {
     componentDidMount() {
         this.props.getPaginationProjectsThunkCreator(
             this.props.credential.sessionId, this.props.currentPage, this.props.numberForPage);
-
+        debugger
     };
 
     render = () => {
