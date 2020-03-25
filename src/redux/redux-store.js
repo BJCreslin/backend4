@@ -8,12 +8,13 @@ import tasksReducer from "./tasks-reducer";
 
 let reducers = combineReducers(
     {
-        usersPage: usersReducer,
+
         form: formReducer,
         login: loginReducer,
         projectsPage: projectsReducer,
         tasksPage: tasksReducer,
         taskUpdateForm: formReducer,
+            usersPage: usersReducer,
         createProjectForm: formReducer
     });
 

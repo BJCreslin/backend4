@@ -94,11 +94,11 @@ export const getUsersThunkCreator = () => {
     return (dispatch) => {
         dispatch(setToggleFetching(true));
         UsersApi.getPaginationUsers().then(data => {
-            dispatch(setToggleFetching(false));
             dispatch(setUsers(data));
         });
         UsersApi.getNumberOfUsers().then(data => {
             dispatch(setTotalUsersCount(data));
+            dispatch(setToggleFetching(false));
             dispatch(setTotalPages(Math.ceil(data / 10)))
         })
     }

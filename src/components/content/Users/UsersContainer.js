@@ -1,12 +1,6 @@
 import React from 'react';
 import {connect} from "react-redux";
-import {
-    getUsersThunkCreator,
-    setCurrentPage,
-    setToggleFetching,
-    setTotalUsersCount,
-    setUsers
-} from "../../../redux/users-reducer";
+import {getUsersThunkCreator, setCurrentPage, setToggleFetching, setUsers} from "../../../redux/users-reducer";
 import Users from "./Users";
 import Preloader from "../../common/preloader/Preloader";
 
@@ -41,7 +35,7 @@ const mapStateToProps = (state) => {
 
 let mpDispatchToProps = {
     setUsers,
-    setTotalCount: setTotalUsersCount,
+
     setCurrentPage,
     setToggleFetching,
     getUsersThunkCreator
