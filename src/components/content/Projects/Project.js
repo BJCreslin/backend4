@@ -7,11 +7,17 @@ import {Link} from "react-router-dom";
 
 const Projects = (props) => {
     const handleFirstSelect = () => {
-        alert("first")
+        props.setFirstPage();
+    };
+    const handleLastSelect = () => {
+        props.setLastPage();
     };
 
     const handlePrevSelect = () => {
         props.setCurrentPage(props.currentPage - 1);
+    };
+    const handleNextSelect = () => {
+        props.setCurrentPage(props.currentPage + 1);
     };
 
 
@@ -41,9 +47,9 @@ const Projects = (props) => {
                     <Pagination.Ellipsis/>
                     <Pagination.Prev onClick={handlePrevSelect}/>
                     <Pagination.Item>{props.currentPage}</Pagination.Item>
-                    <Pagination.Next/>
+                    <Pagination.Next onClick={handleNextSelect}/>
                     <Pagination.Ellipsis/>
-                    <Pagination.Last/>
+                    <Pagination.Last onClick={handleLastSelect}/>
                 </Pagination>
 
             </div>

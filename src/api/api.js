@@ -68,10 +68,8 @@ export const ProjectsAPI = {
         },
 
         getProjectsWithPagination(sessionId, currentPage, numberForPage) {
-            console.log(paginatableProjectEndPointURL + currentPage + "/" + numberForPage)
             return axios.get(paginatableProjectEndPointURL + currentPage + "/" + numberForPage, {headers: {sessionId: sessionId}}).then(response => {
-                console.log(response)
-                return response.data.content;
+                return response.data;
             });
         }
     }

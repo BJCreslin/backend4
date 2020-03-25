@@ -4,7 +4,9 @@ import Preloader from "../../common/preloader/Preloader";
 import Project from "./Project";
 import {
     getPaginationProjectsThunkCreator,
-    getProjectsThunkCreator, setCurrentPage,
+    getProjectsThunkCreator,
+    setCurrentPage,
+    setFirstPage, setLastPage,
     setProjects,
     setToggleFetching
 } from "../../../redux/projects-reducer";
@@ -24,7 +26,9 @@ class ProjectsContainer extends React.Component {
                 <Project projects={this.props.projects}
                          currentPage={this.props.currentPage}
                          setCurrentPage={this.props.setCurrentPage}
-                        isFetching={this.props.isFetching}/>
+                         isFetching={this.props.isFetching}
+                         setFirstPage={this.props.setFirstPage}
+                         setLastPage={this.props.setLastPage}/>
             </>
         )
     }
@@ -46,7 +50,9 @@ const mapDispatchToProps = {
     setProjects,
     setToggleFetching,
     getPaginationProjectsThunkCreator,
-    setCurrentPage
+    setCurrentPage,
+    setFirstPage,
+    setLastPage
 };
 
 export default connect(mapStateToProps, mapDispatchToProps)(ProjectsContainer);
