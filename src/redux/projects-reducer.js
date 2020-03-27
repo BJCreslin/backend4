@@ -132,7 +132,6 @@ export const getPaginationProjectsThunkCreator = () => {
     }
 };
 
-
 export const createProjectThunkCreator = (sessionId, project) => {
 
     return (dispatch) => {

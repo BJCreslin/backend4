@@ -1,5 +1,4 @@
-import {UsersApi} from '../api/api';
-import {setCreated, setProjects} from "./projects-reducer";
+import {UsersAPI} from "../api/UsersAPI";
 
 const SET_USERS = "SET_USERS";
 const SET_TOTAL_COUNT = "SET_TOTAL_COUNT";
@@ -8,7 +7,6 @@ const TOGGLE_IS_FETCHING = "TOGGLE_IS_FETCHING";
 const SET_FIRST_PAGE = "SET_FIRST_PAGE";
 const SET_LAST_PAGE = " SET_LAST_PAGE";
 const SET_TOTAL_PAGES = "SET_TOTAL_PAGES";
-
 
 const initialState = {
     users: [],
@@ -85,35 +83,19 @@ export const setToggleFetching = (isFetching) => ({type: TOGGLE_IS_FETCHING, isF
 export const setTotalPages = (totalPages) => ({type: SET_TOTAL_PAGES, totalPages});
 export const setFirstPage = () => ({type: SET_FIRST_PAGE});
 export const setLastPage = () => ({type: SET_LAST_PAGE});
+export const setCurrentPage = (currentPage) => ({type: SET_CURRENT_PAGE, currentPage});
 
-export const setCurrentPage = (currentPage) => {
-    return {type: SET_CURRENT_PAGE, currentPage}
-};
-
-export const getUsersThunkCreator = () => {
-    return (dispatch) => {
-        dispatch(setToggleFetching(true));
-        UsersApi.getPaginationUsers().then(data => {
-            dispatch(setUsers(data));
-        });
-        UsersApi.getNumberOfUsers().then(data => {
-            dispatch(setTotalUsersCount(data));
-            dispatch(setToggleFetching(false));
-            dispatch(setTotalPages(Math.ceil(data / 10)))
-        })
-    }
-};
-
-export const getPaginationUsersThunkCreator = () => {
-    return (dispatch) => {
-        dispatch(setToggleFetching(true));
-        UsersApi.getPaginationUsers().then(data => {
-            dispatch(setToggleFetching(false));
-            dispatch(setProjects(data.content));
-            dispatch(setTotalPages(data.totalPages));
-            dispatch(setCreated(false));
-        });
-    }
-};
-
+// export const getUsersThunkCreator = () => {
+//     return (dispatch) => {
+//         dispatch(setToggleFetching(true));
+//         UsersAPI.getPaginationUsers().then(data => {
+//             dispatch(setUsers(data));
+//         });
+//         UsersAPI.getNumberOfUsers().then(data => {
+//             dispatch(setTotalUsersCount(data));
+//             dispatch(setToggleFetching(false));
+//             dispatch(setTotalPages(Math.ceil(data / 10)))
+//         })
+//     }
+// };
 export default usersReducer;
