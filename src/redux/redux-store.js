@@ -6,11 +6,6 @@ import projectsReducer from "./projects-reducer";
 import tasksReducer from "./tasks-reducer";
 import usersReducer from "./users2-reducer";
 
-let reducerA = combineReducers({
-        usersContent: usersReducer
-    }
-);
-
 let reducers = combineReducers(
     {
         form: formReducer,
@@ -19,7 +14,7 @@ let reducers = combineReducers(
         tasksPage: tasksReducer,
         taskUpdateForm: formReducer,
         createProjectForm: formReducer,
-        usersContent: reducerA
+        usersContent: usersReducer
     });
 
 let store = createStore(reducers,

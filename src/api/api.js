@@ -1,6 +1,4 @@
 import * as axios from 'axios';
-import store from "../redux/redux-store";
-
 
 const loginEndPointURL = 'http://185.255.135.104:9000/api/auth/login';
 
@@ -10,6 +8,9 @@ const paginatableProjectEndPointURL = 'http://185.255.135.104:9000/api/projects/
 
 const getTasksEndPointURL = 'http://185.255.135.104:9000/api/tasks/page/';
 
+const GET_ALL_USERS_END_POINT = 'http://185.255.135.104:9000/api/users/users-all';
+const USERS_COUNT_END_POINT = 'http://185.255.135.104:9000/api/users/count';
+const GET_PAGINATION_END_POINT = 'http://185.255.135.104:9000/api/users/page/';
 
 export const loginAPI = {
     doLogin(formData) {
@@ -17,26 +18,28 @@ export const loginAPI = {
             "login": formData.login,
             "password": formData.password
         }).then(response => {
+            localStorage.setItem('sessionId', response.data.sessionId);
             return response.data;
         })
     }
 };
 
 
-
 export const ProjectsAPI = {
 
-        getAllProjects(sessionId) {
-            return axios.get(allprojectsEndPointURL, {headers: {sessionId: store.getState().login.sessionId}}).then(response => {
+        getAllProjects() {
+            let sessionId = localStorage.getItem('sessionId');
+            return axios.get(allprojectsEndPointURL, {headers: {sessionId: sessionId}}).then(response => {
                 return response.data;
             });
         },
 
-        createProject(sessionId, newProject) {
+        createProject(newProject) {
+            let sessionId = localStorage.getItem('sessionId');
             return axios({
                 method: 'POST',
                 url: newProjectEndPointURL,
-                headers: {sessionId: store.getState().login.sessionId},
+                headers: {sessionId: sessionId},
                 data: newProject
             }).then(function (response) {
                 console.log(response);
@@ -46,10 +49,9 @@ export const ProjectsAPI = {
                 })
         },
 
-        getProjectsWithPagination() {
-            let currentPage = store.getState().projectsPage.currentPage;
-            let numberForPage = store.getState().projectsPage.numberForPage;
-            return axios.get(paginatableProjectEndPointURL + currentPage + "/" + numberForPage, {headers: {sessionId: store.getState().login.sessionId}}).then(response => {
+        getProjectsWithPagination(currentPage, numberForPage) {
+            let sessionId = localStorage.getItem('sessionId');
+            return axios.get(paginatableProjectEndPointURL + currentPage + "/" + numberForPage, {headers: {sessionId: sessionId}}).then(response => {
                 return response.data;
             });
         }
@@ -58,7 +60,9 @@ export const ProjectsAPI = {
 
 
 export const TasksAPI = {
-    getTasks(sessionId, page, size) {
+
+    getTasks(page, size) {
+        let sessionId = localStorage.getItem('sessionId');
         return axios.get(getTasksEndPointURL + page + "/" + size, {headers: {sessionId: sessionId}}).then(response => {
             console.log("data " + response.data);
             return response.data;
@@ -67,4 +71,21 @@ export const TasksAPI = {
 };
 
 
+export const UsersAPI = {
+
+    getNumberOfUsers() {
+        let sessionId = localStorage.getItem('sessionId');
+        axios.get(USERS_COUNT_END_POINT, {headers: {sessionId: sessionId}}).then(response => {
+            return response.data;
+        })
+    },
+
+    getPaginationUsers(page, size) {
+        let sessionId = localStorage.getItem('sessionId');
+        axios.get(GET_PAGINATION_END_POINT + page + "/" + size, {headers: {sessionId: sessionId}}).then(response => {
+            console.log("data "+response.toString());
+            return response.data;
+        })
+    }
+};
 

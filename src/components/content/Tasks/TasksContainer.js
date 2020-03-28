@@ -6,7 +6,7 @@ import {getTasksThunkCreator, setTasks, setToggleFetching} from "../../../redux/
 
 class TasksContainer extends React.Component {
     componentDidMount() {
-        this.props.getTasksThunkCreator(this.props.credential.sessionId,1,10);
+        this.props.getTasksThunkCreator(1,10);
     }
 
     render = () => {

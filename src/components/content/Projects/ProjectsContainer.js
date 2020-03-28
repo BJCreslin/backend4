@@ -16,7 +16,7 @@ import {
 class ProjectsContainer extends React.Component {
 
     componentDidMount() {
-        this.props.getPaginationProjectsThunkCreator();
+        this.props.getPaginationProjectsThunkCreator(this.props.currentPage,this.props.numberForPage);
     };
 
 

@@ -2,14 +2,13 @@ import React from 'react';
 import {connect} from "react-redux";
 import Users from "./Users";
 import Preloader from "../../common/preloader/Preloader";
-import {setCurrentPage, setToggleFetching, setUsers} from "../../../redux/users2-reducer";
-import {getUsersThunkCreator} from "../../../redux/users-content-reducer";
+import {getUsersThunkCreator, setCurrentPage, setToggleFetching, setUsers} from "../../../redux/users2-reducer";
 
 
 class UsersContainer extends React.Component {
 
     componentDidMount() {
-        this.props.getUsersThunkCreator();
+        this.props.getUsersThunkCreator(this.props.currentPage,this.props.numberForPage);
     }
 
     render() {

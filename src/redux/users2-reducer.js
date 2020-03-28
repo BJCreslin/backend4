@@ -1,4 +1,4 @@
-import {UsersAPI} from "../api/UsersAPI";
+import {UsersAPI} from "../api/api";
 
 const SET_USERS = "SET_USERS";
 const SET_TOTAL_COUNT = "SET_TOTAL_COUNT";
@@ -85,17 +85,17 @@ export const setFirstPage = () => ({type: SET_FIRST_PAGE});
 export const setLastPage = () => ({type: SET_LAST_PAGE});
 export const setCurrentPage = (currentPage) => ({type: SET_CURRENT_PAGE, currentPage});
 
-// export const getUsersThunkCreator = () => {
-//     return (dispatch) => {
-//         dispatch(setToggleFetching(true));
-//         UsersAPI.getPaginationUsers().then(data => {
-//             dispatch(setUsers(data));
-//         });
-//         UsersAPI.getNumberOfUsers().then(data => {
-//             dispatch(setTotalUsersCount(data));
-//             dispatch(setToggleFetching(false));
-//             dispatch(setTotalPages(Math.ceil(data / 10)))
-//         })
-//     }
-// };
+export const getUsersThunkCreator = (currentPage,numberForPage) => {
+    return (dispatch) => {
+        dispatch(setToggleFetching(true));
+        UsersAPI.getPaginationUsers(currentPage,numberForPage).then(data => {
+            dispatch(setUsers(data));
+        });
+        UsersAPI.getNumberOfUsers().then(data => {
+            dispatch(setTotalUsersCount(data));
+            dispatch(setToggleFetching(false));
+            dispatch(setTotalPages(Math.ceil(data / 10)))
+        })
+    }
+};
 export default usersReducer;
