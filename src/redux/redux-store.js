@@ -4,7 +4,7 @@ import loginReducer from "./login-reducer";
 import thunkMiddleware from "redux-thunk";
 import projectsReducer from "./projects-reducer";
 import tasksReducer from "./tasks-reducer";
-import usersReducer from "./users2-reducer";
+import usersReducer from "./users-reducer";
 
 let reducers = combineReducers(
     {

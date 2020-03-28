@@ -1,4 +1,4 @@
-import {UsersAPI} from "../api/api";
+import {Usersapi} from "../api/api";
 
 const SET_USERS = "SET_USERS";
 const SET_TOTAL_COUNT = "SET_TOTAL_COUNT";
@@ -87,13 +87,11 @@ export const setCurrentPage = (currentPage) => ({type: SET_CURRENT_PAGE, current
 
 export const getUsersThunkCreator = (currentPage,numberForPage) => {
     return (dispatch) => {
-        dispatch(setToggleFetching(true));
-        UsersAPI.getPaginationUsers(currentPage,numberForPage).then(data => {
+        Usersapi.getPaginationUsers(currentPage,numberForPage).then(data => {
             dispatch(setUsers(data));
         });
-        UsersAPI.getNumberOfUsers().then(data => {
+        Usersapi.getNumberOfUsers().then(data => {
             dispatch(setTotalUsersCount(data));
-            dispatch(setToggleFetching(false));
             dispatch(setTotalPages(Math.ceil(data / 10)))
         })
     }

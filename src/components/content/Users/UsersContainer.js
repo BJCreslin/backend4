@@ -2,7 +2,7 @@ import React from 'react';
 import {connect} from "react-redux";
 import Users from "./Users";
 import Preloader from "../../common/preloader/Preloader";
-import {getUsersThunkCreator, setCurrentPage, setToggleFetching, setUsers} from "../../../redux/users2-reducer";
+import {getUsersThunkCreator, setCurrentPage, setToggleFetching, setUsers} from "../../../redux/users-reducer";
 
 
 class UsersContainer extends React.Component {

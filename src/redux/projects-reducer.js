@@ -108,21 +108,10 @@ export const setCurrentPage = (currentPage) => {
     return {type: SET_CURRENT_PAGE, currentPage}
 };
 
-export const getProjectsThunkCreator = () => {
-    return (dispatch) => {
-        dispatch(setToggleFetching(true));
-        ProjectsAPI.getAllProjects().then(data => {
-            dispatch(setToggleFetching(false));
-            dispatch(setProjects(data));
-            dispatch(setCreated(false));
-        });
-
-    }
-};
 
 export const getPaginationProjectsThunkCreator = (currentPage, totalPages) => {
     return (dispatch) => {
-        dispatch(setToggleFetching(true));
+       // dispatch(setToggleFetching(true));
         ProjectsAPI.getProjectsWithPagination(currentPage, totalPages).then(data => {
             dispatch(setToggleFetching(false));
             dispatch(setProjects(data.content));

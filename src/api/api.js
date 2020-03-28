@@ -71,7 +71,7 @@ export const TasksAPI = {
 };
 
 
-export const UsersAPI = {
+export const Usersapi = {
 
     getNumberOfUsers() {
         let sessionId = localStorage.getItem('sessionId');
@@ -83,7 +83,7 @@ export const UsersAPI = {
     getPaginationUsers(page, size) {
         let sessionId = localStorage.getItem('sessionId');
         axios.get(GET_PAGINATION_END_POINT + page + "/" + size, {headers: {sessionId: sessionId}}).then(response => {
-            console.log("data "+response.toString());
+
             return response.data;
         })
     }
