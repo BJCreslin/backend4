@@ -1,4 +1,4 @@
-import {Usersapi} from "../api/api";
+import {TasksAPI, Usersapi} from "../api/api";
 
 const SET_USERS = "SET_USERS";
 const SET_TOTAL_COUNT = "SET_TOTAL_COUNT";

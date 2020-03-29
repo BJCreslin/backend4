@@ -67,7 +67,9 @@ export const TasksAPI = {
             console.log("data " + response.data);
             return response.data;
         });
-    }
+    },
+
+
 };
 
 
@@ -75,17 +77,18 @@ export const Usersapi = {
 
     getNumberOfUsers() {
         let sessionId = localStorage.getItem('sessionId');
-        axios.get(USERS_COUNT_END_POINT, {headers: {sessionId: sessionId}}).then(response => {
+        return axios.get(USERS_COUNT_END_POINT, {headers: {sessionId: sessionId}}).then(response => {
             return response.data;
         })
     },
-
     getPaginationUsers(page, size) {
+
         let sessionId = localStorage.getItem('sessionId');
-        axios.get(GET_PAGINATION_END_POINT + page + "/" + size, {headers: {sessionId: sessionId}}).then(response => {
+        return axios.get(GET_PAGINATION_END_POINT + page + "/" + size, {headers: {sessionId: sessionId}}).then(response => {
 
             return response.data;
         })
     }
+
 };
 
