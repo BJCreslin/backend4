@@ -11,11 +11,12 @@ const SET_SHOW_MODAL = "SET_SHOW_MODAL";
 const SET_FIRST_PAGE = "SET_FIRST_PAGE";
 const SET_LAST_PAGE = " SET_LAST_PAGE";
 
+const firstPage = 0;
 
 const initialState = {
     projects: [],
     numberForPage: 10,
-    currentPage: 0,
+    currentPage: firstPage,
     totalCount: 0,
     totalPages: 0,
     isFetching: false,
@@ -27,7 +28,6 @@ let projectsReducer = (state = initialState, action) => {
 
         switch (action.type) {
             case SET_PROJECTS: {
-
                 return {
                     ...state,
                     projects: action.projects
@@ -43,6 +43,7 @@ let projectsReducer = (state = initialState, action) => {
             case
             SET_CURRENT_PAGE: {
                 if (action.currentPage > state.totalPages - 1) action.currentPage = state.totalPages - 1;
+                if (action.currentPage < 0) action.currentPage = 0
                 return {
                     ...state,
                     currentPage: action.currentPage
@@ -125,7 +126,7 @@ export const createProjectThunkCreator = (sessionId, project) => {
 
     return (dispatch) => {
         dispatch(setToggleFetching(true));
-        ProjectsAPI.createProject( project).then(data => {
+        ProjectsAPI.createProject(project).then(data => {
         });
         ProjectsAPI.getAllProjects().then(data => {
             dispatch(setProjects(data));

@@ -9,12 +9,12 @@ const SET_LAST_PAGE = " SET_LAST_PAGE";
 const SET_TOTAL_PAGES = "SET_TOTAL_PAGES";
 
 
-
+const firstPage = 1;
 
 const initialState = {
     users: [],
     numberForPage: 10,
-    currentPage: 1,
+    currentPage: firstPage,
     totalPages: 0,
     totalCount: 0,
     isFetching: false,
