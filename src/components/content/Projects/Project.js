@@ -4,7 +4,6 @@ import {Card, Pagination} from "react-bootstrap";
 import CreateProject from "./CreateProject";
 import {Link} from "react-router-dom";
 
-
 const Projects = (props) => {
     const handleFirstSelect = () => {
         props.setFirstPage();
@@ -28,15 +27,6 @@ const Projects = (props) => {
         )
     };
 
-    const onclickEdit = () => {
-        return (
-            <>
-
-
-            </>
-        )
-    };
-
     return (<div>
             <div>
                 <Link to="/newproject" onClick={onclickNewProject}>New Project</Link>
@@ -46,7 +36,7 @@ const Projects = (props) => {
                     <Pagination.First onClick={handleFirstSelect}/>
                     <Pagination.Ellipsis/>
                     <Pagination.Prev onClick={handlePrevSelect}/>
-                    <Pagination.Item>{props.currentPage+1}</Pagination.Item>
+                    <Pagination.Item>{props.currentPage + 1}</Pagination.Item>
                     <Pagination.Next onClick={handleNextSelect}/>
                     <Pagination.Ellipsis/>
                     <Pagination.Last onClick={handleLastSelect}/>
@@ -58,7 +48,7 @@ const Projects = (props) => {
                     return (
                         <div className="card text-white bg-primary mb-3">
 
-                            <Card.Body >
+                            <Card.Body>
                                 <h4 className="card-title">{project.projectName}</h4>
                                 <Card.Subtitle class="card text-white bg-secondary mb-3" mb="2"
                                                text="muted">ID: {project.projectId}
@@ -68,7 +58,7 @@ const Projects = (props) => {
                                 </Card.Text>
                                 <Card.Link class="card bg-light mb-3" href="{project.projectUrl}">Project
                                     link</Card.Link>
-                                <Link to={"/editproject/" + project.projectId} onClick={onclickEdit(project.projectId)}>New
+                                <Link to={"/editproject/" + project.projectId}>Edit
                                     Project</Link>
 
                             </Card.Body>

@@ -67,7 +67,7 @@ let usersReducer = (state = initialState, action) => {
         case  SET_LAST_PAGE:
             return {
                 ...state,
-                currentPage: state.totalPages - 1
+                currentPage: state.totalPages
             };
         case SET_TOTAL_PAGES:
             return {

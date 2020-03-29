@@ -38,7 +38,6 @@ const Users = (props) => {
                     <Pagination.Ellipsis/>
                     <Pagination.Last onClick={handleLastSelect}/>
                 </Pagination>
-
             </div>
             <table className="table table-hover table-bordered table-striped table-responsive">
                 <thead>
