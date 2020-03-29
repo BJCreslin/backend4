@@ -3,7 +3,8 @@ import Preloader from "../../common/preloader/Preloader";
 import {connect} from "react-redux";
 import Tasks from "./Tasks";
 import {
-    getTasksThunkCreator, setCurrentPage,
+    getTasksThunkCreator,
+    setCurrentPage,
     setFirstPage,
     setLastPage,
     setTasks,
@@ -12,7 +13,7 @@ import {
 
 class TasksContainer extends React.Component {
     componentDidMount() {
-        this.props.getTasksThunkCreator(1, 10);
+        this.props.getTasksThunkCreator(this.props.currentPage, this.props.numberForPage);
     }
 
     render = () => {

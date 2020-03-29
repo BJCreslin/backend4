@@ -7,7 +7,7 @@ const newProjectEndPointURL = 'http://185.255.135.104:9000/api/projects/createPr
 const paginatableProjectEndPointURL = 'http://185.255.135.104:9000/api/projects/watch/';
 
 const getTasksEndPointURL = 'http://185.255.135.104:9000/api/tasks/page/';
-const TASKS_COUNT_END_POINT='http://185.255.135.104:9000/api/tasks/count/';
+const TASKS_COUNT_END_POINT = 'http://185.255.135.104:9000/api/tasks/count/';
 
 const GET_ALL_USERS_END_POINT = 'http://185.255.135.104:9000/api/users/users-all';
 const USERS_COUNT_END_POINT = 'http://185.255.135.104:9000/api/users/count';
@@ -27,7 +27,6 @@ export const loginAPI = {
 
 
 export const ProjectsAPI = {
-
         getAllProjects() {
             let sessionId = localStorage.getItem('sessionId');
             return axios.get(allprojectsEndPointURL, {headers: {sessionId: sessionId}}).then(response => {
@@ -68,7 +67,7 @@ export const TasksAPI = {
             return response.data;
         });
     },
-    getNumberOfTasks(){
+    getNumberOfTasks() {
         let sessionId = localStorage.getItem('sessionId');
         return axios.get(TASKS_COUNT_END_POINT, {headers: {sessionId: sessionId}}).then(response => {
             return response.data;

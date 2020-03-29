@@ -20,7 +20,6 @@ const Users = (props) => {
     const handleLastSelect = () => {
         props.setLastPage();
     };
-
     const handlePrevSelect = () => {
         props.setCurrentPage(props.currentPage - 1);
     };

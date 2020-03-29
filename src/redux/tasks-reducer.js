@@ -23,6 +23,13 @@ let tasksReducer = (state = initialState, action) => {
 
         switch (action.type) {
             case SET_TASKS: {
+                action.tasks.map(task => {
+                    task.createDate = new Date(task.createDate).toLocaleDateString();
+                    task.updateDate = new Date(task.updateDate).toLocaleDateString();
+                    return {
+                        task: task
+                    }
+                });
                 return {
                     ...state,
                     tasks: action.tasks

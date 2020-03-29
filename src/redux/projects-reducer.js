@@ -79,7 +79,7 @@ let projectsReducer = (state = initialState, action) => {
             case  SET_LAST_PAGE:
                 return {
                     ...state,
-                    currentPage: state.totalPages-1
+                    currentPage: state.totalPages - 1
                 };
 
             case SET_TOTAL_PAGES:
@@ -109,14 +109,14 @@ export const setCurrentPage = (currentPage) => {
 };
 
 
-export const getPaginationProjectsThunkCreator = (currentPage, totalPages) => {
+export const getPaginationProjectsThunkCreator = (currentPage, numberForPage) => {
     return (dispatch) => {
-       // dispatch(setToggleFetching(true));
-        ProjectsAPI.getProjectsWithPagination(currentPage, totalPages).then(data => {
-            dispatch(setToggleFetching(false));
+        dispatch(setToggleFetching(true));
+        ProjectsAPI.getProjectsWithPagination(currentPage, numberForPage).then(data => {
             dispatch(setProjects(data.content));
             dispatch(setTotalPages(data.totalPages));
             dispatch(setCreated(false));
+            dispatch(setToggleFetching(false));
         });
     }
 };
@@ -125,13 +125,12 @@ export const createProjectThunkCreator = (sessionId, project) => {
 
     return (dispatch) => {
         dispatch(setToggleFetching(true));
-        ProjectsAPI.createProject(sessionId, project).then(data => {
+        ProjectsAPI.createProject( project).then(data => {
         });
-        ProjectsAPI.getAllProjects(sessionId).then(data => {
-            dispatch(setToggleFetching(false));
+        ProjectsAPI.getAllProjects().then(data => {
             dispatch(setProjects(data));
-            dispatch(setCreated(true))
-
+            dispatch(setCreated(true));
+            dispatch(setToggleFetching(false));
         });
     }
 };
