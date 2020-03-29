@@ -1,5 +1,4 @@
 import {ProjectsAPI} from '../api/api';
-import React from "react";
 
 const SET_PROJECTS = "SET_PROJECTS";
 const SET_TOTAL_COUNT = "SET_TOTAL_COUNT";
@@ -43,7 +42,7 @@ let projectsReducer = (state = initialState, action) => {
             case
             SET_CURRENT_PAGE: {
                 if (action.currentPage > state.totalPages - 1) action.currentPage = state.totalPages - 1;
-                if (action.currentPage < 0) action.currentPage = 0
+                if (action.currentPage < 0) action.currentPage = 0;
                 return {
                     ...state,
                     currentPage: action.currentPage
