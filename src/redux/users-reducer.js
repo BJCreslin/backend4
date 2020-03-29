@@ -1,4 +1,4 @@
-import {TasksAPI, Usersapi} from "../api/api";
+import {Usersapi} from "../api/api";
 
 const SET_USERS = "SET_USERS";
 const SET_TOTAL_COUNT = "SET_TOTAL_COUNT";
@@ -7,6 +7,9 @@ const TOGGLE_IS_FETCHING = "TOGGLE_IS_FETCHING";
 const SET_FIRST_PAGE = "SET_FIRST_PAGE";
 const SET_LAST_PAGE = " SET_LAST_PAGE";
 const SET_TOTAL_PAGES = "SET_TOTAL_PAGES";
+
+
+
 
 const initialState = {
     users: [],

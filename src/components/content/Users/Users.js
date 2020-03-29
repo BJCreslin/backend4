@@ -4,6 +4,7 @@ import freeLogo from '../../../assets/img/free.gif';
 import busyLogo from '../../../assets/img/busy.gif'
 import academicLeaveLogo from '../../../assets/img/academic.gif';
 import temporalyInactiveLogo from '../../../assets/img/inactive.gif';
+import {Pagination} from "react-bootstrap";
 
 let busyLogoChoice = (status) => {
     if (status.toUpperCase() === "BUSY") return busyLogo;
@@ -13,8 +14,32 @@ let busyLogoChoice = (status) => {
 };
 
 const Users = (props) => {
-    return (<div className={css.thead}>
+    const handleFirstSelect = () => {
+        props.setFirstPage();
+    };
+    const handleLastSelect = () => {
+        props.setLastPage();
+    };
 
+    const handlePrevSelect = () => {
+        props.setCurrentPage(props.currentPage - 1);
+    };
+    const handleNextSelect = () => {
+        props.setCurrentPage(props.currentPage + 1);
+    };
+    return (<div className={css.thead}>
+            <div>
+                <Pagination className={css.pagination}>
+                    <Pagination.First onClick={handleFirstSelect}/>
+                    <Pagination.Ellipsis/>
+                    <Pagination.Prev onClick={handlePrevSelect}/>
+                    <Pagination.Item>{props.currentPage}</Pagination.Item>
+                    <Pagination.Next onClick={handleNextSelect}/>
+                    <Pagination.Ellipsis/>
+                    <Pagination.Last onClick={handleLastSelect}/>
+                </Pagination>
+
+            </div>
             <table className="table table-hover table-bordered table-striped table-responsive">
                 <thead>
                 <tr>
