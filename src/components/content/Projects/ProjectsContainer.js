@@ -26,6 +26,8 @@ class ProjectsContainer extends React.Component {
                          isFetching={this.props.isFetching}
                          setFirstPage={this.props.setFirstPage}
                          setLastPage={this.props.setLastPage}
+                         numberForPage={this.props.numberForPage}
+                         getPaginationProjectsThunkCreator={ this.props.getPaginationProjectsThunkCreator}
                 />
             </>
         )
