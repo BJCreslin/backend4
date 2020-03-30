@@ -15,10 +15,10 @@ class Content extends React.Component {
 
         return (
             <>
-                <Route path="/users" render={()=> <UsersContainer/>}/>
-                <Route path="/projects" render={()=><ProjectsContainer/>}/>
-                <Route path="/newproject" render={()=><CreateProject/>}/>
-                <Route path="/tasks" render={<TasksContainer/>}/>
+                <Route path="/users" render={() => <UsersContainer/>}/>
+                <Route path="/projects" render={() => <ProjectsContainer/>}/>
+                <Route path="/newproject" render={() => <CreateProject/>}/>
+                <Route path="/tasks" render={() => <TasksContainer/>}/>
                 <Route exact path="/" render={() => <Home/>}/>
                 <Route exact path="/login" render={() => this.props.isAuthenticated ? <Home/> : <Login/>}/>
             </>
@@ -30,7 +30,7 @@ class Content extends React.Component {
 const mapStateToProps = (state) => {
     return {
         isAuthenticated: state.login.isAuthenticated,
-        projectCreated:state.projectsPage.created
+        projectCreated: state.projectsPage.created
     }
 };
 

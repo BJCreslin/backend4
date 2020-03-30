@@ -1,8 +1,9 @@
 import React from 'react';
 import css from "./projects.module.css";
-import {Card, Pagination} from "react-bootstrap";
+import {Pagination} from "react-bootstrap";
 import CreateProject from "./CreateProject";
 import {Link} from "react-router-dom";
+import ShowProjectsArray from "./showProjectsArray";
 
 const Projects = (props) => {
     const handleFirstSelect = () => {
@@ -20,7 +21,7 @@ const Projects = (props) => {
     };
     const handleNextSelect = () => {
         props.setCurrentPage(props.currentPage + 1);
-
+        props.getPaginationProjectsThunkCreator(props.currentPage,props.numberForPage)
     };
 
 
@@ -47,33 +48,9 @@ const Projects = (props) => {
                 </Pagination>
 
             </div>
-            <div className={css.thead}>
-                {props.projects.map(project => {
-                    return (
-                        <div className="card text-white bg-primary mb-3">
-
-                            <Card.Body>
-                                <h4 className="card-title">{project.projectName}</h4>
-                                <Card.Subtitle class="card text-white bg-secondary mb-3" mb="2"
-                                               text="muted">ID: {project.projectId}
-                                </Card.Subtitle>
-                                <Card.Text class="card text-white bg-dark mb-3">
-                                    {project.description}
-                                </Card.Text>
-                                <Card.Link class="card bg-light mb-3" href="{project.projectUrl}">Project
-                                    link</Card.Link>
-                                <Link to={"/editproject/" + project.projectId}>Edit
-                                    Project</Link>
-
-                            </Card.Body>
-
-                        </div>
-                    )
-                })}
-
+           <ShowProjectsArray projects={props.projects}/>
 
             </div>
-        </div>
     )
 
 };
