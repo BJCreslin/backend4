@@ -20,7 +20,7 @@ const Projects = (props) => {
     };
     const handleNextSelect = () => {
         props.setCurrentPage(props.currentPage + 1);
-        props.getPaginationProjectsThunkCreator(props.currentPage,props.numberForPage)
+
     };
 
 

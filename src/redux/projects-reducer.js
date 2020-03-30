@@ -76,6 +76,7 @@ let projectsReducer = (state = initialState, action) => {
                     ...state,
                     currentPage: 0
                 };
+
             case  SET_LAST_PAGE:
                 return {
                     ...state,
@@ -104,7 +105,6 @@ export const setLastPage = () => ({type: SET_LAST_PAGE});
 
 export const setCurrentPage = (currentPage) => {
     if (currentPage < 0) currentPage = 0;
-
     return {type: SET_CURRENT_PAGE, currentPage}
 };
 
@@ -121,7 +121,7 @@ export const getPaginationProjectsThunkCreator = (currentPage, numberForPage) =>
     }
 };
 
-export const createProjectThunkCreator = (sessionId, project) => {
+export const createProjectThunkCreator = ( project) => {
 
     return (dispatch) => {
         dispatch(setToggleFetching(true));
