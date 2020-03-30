@@ -10,6 +10,8 @@ import {
     setTasks,
     setToggleFetching
 } from "../../../redux/tasks-reducer";
+import {compose} from "redux";
+import {withAuthRedirect} from "../../../HOC/withAuthRedirect";
 
 class TasksContainer extends React.Component {
     componentDidMount() {
@@ -49,4 +51,7 @@ const mapDispatchToProps = {
     setCurrentPage
 };
 
-export default connect(mapStateToProps, mapDispatchToProps)(TasksContainer);
+export default compose(
+    withAuthRedirect,
+    connect(mapStateToProps, mapDispatchToProps))
+(TasksContainer);

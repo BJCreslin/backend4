@@ -11,7 +11,8 @@ const InitialState = {
         startTime: 0,
         validTime: 0
     },
-    credentialStatus: false,
+
+    isAuthenticated: false,
     userEmail: null
 };
 
@@ -27,12 +28,12 @@ let loginReducer = (state = InitialState, action) => {
         case SET_WRONG_CREDENTIAL:
             return {
                 ...state,
-                credentialStatus: false
+                isAuthenticated: false
             };
         case SET_SUCCESS_LOGIN:
             return {
                 ...state,
-                credentialStatus: true
+                isAuthenticated: true
             };
         case SET_USER_EMAIL:
             return {

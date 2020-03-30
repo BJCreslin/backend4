@@ -3,11 +3,8 @@ import Header from "./Header";
 import {connect} from "react-redux";
 import {setCredential, setSuccessLogin, setWrongCredential} from "../../redux/login-reducer";
 
-const authLoginEndPoint = "http://185.255.135.104:9000/api/auth/";
 
 class HeaderContainer extends React.Component {
-    componentDidMount() {
-    }
 
     render() {
         return (<div>
@@ -19,7 +16,7 @@ class HeaderContainer extends React.Component {
 
 const mapStateToProps = (state) => ({
     credential: state.login.credential,
-    credentialStatus: state.login.credentialStatus,
+    isAuthenticated: state.login.isAuthenticated,
     userEmail: state.login.userEmail
 });
 

@@ -15,15 +15,12 @@ class Content extends React.Component {
 
         return (
             <>
-                <Route path="/users" render={() => this.props.credentialStatus ? <UsersContainer/> : <Login/>}/>
-                <Route path="/projects" render={() => this.props.credentialStatus ? <ProjectsContainer/> : <Login/>}/>
-                <Route path="/newproject" render={() => this.props.credentialStatus ?
-                    (  this.props.projectCreated?<Redirect to="/projects"/>:<CreateProject/> ): <Login/>}/>
-
-
-                <Route path="/tasks" render={() => this.props.credentialStatus ? <TasksContainer/> : <Login/>}/>
+                <Route path="/users" render={()=> <UsersContainer/>}/>
+                <Route path="/projects" render={()=><ProjectsContainer/>}/>
+                <Route path="/newproject" render={()=><CreateProject/>}/>
+                <Route path="/tasks" render={<TasksContainer/>}/>
                 <Route exact path="/" render={() => <Home/>}/>
-                <Route exact path="/login" render={() => this.props.credentialStatus ? <Home/> : <Login/>}/>
+                <Route exact path="/login" render={() => this.props.isAuthenticated ? <Home/> : <Login/>}/>
             </>
 
         )
@@ -32,7 +29,7 @@ class Content extends React.Component {
 
 const mapStateToProps = (state) => {
     return {
-        credentialStatus: state.login.credentialStatus,
+        isAuthenticated: state.login.isAuthenticated,
         projectCreated:state.projectsPage.created
     }
 };
