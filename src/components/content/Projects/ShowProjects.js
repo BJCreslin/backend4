@@ -1,0 +1,62 @@
+import React from 'react';
+import css from "./projects.module.css";
+import {Pagination} from "react-bootstrap";
+import CreateProject from "./CreateProject";
+import {Link} from "react-router-dom";
+import {ShowOneProject} from "./ShowOneProject";
+
+
+class ShowProjects extends React.Component {
+    handleFirstSelect = () => {
+        this.props.setFirstPage();
+        this.props.getPaginationProjectsThunkCreator(this.props.currentPage, this.props.numberForPage)
+    };
+    handleLastSelect = () => {
+        this.props.setLastPage();
+        this.props.getPaginationProjectsThunkCreator(this.props.currentPage, this.props.numberForPage)
+    };
+
+    handlePrevSelect = () => {
+        this.props.setCurrentPage(this.props.currentPage - 1);
+        this.props.getPaginationProjectsThunkCreator(this.props.currentPage, this.props.numberForPage)
+    };
+    handleNextSelect = () => {
+        this.props.setCurrentPage(this.props.currentPage + 1);
+        this.props.getPaginationProjectsThunkCreator(this.props.currentPage, this.props.numberForPage)
+    };
+
+    onclickNewProject = () => {
+        return (<>
+                <CreateProject/>
+            </>
+        )
+    };
+
+    render() {
+        return (<div>
+                <div>
+                    <Link to="/newproject" onClick={this.onclickNewProject}>New Project</Link>
+                </div>
+                <div>
+                    <Pagination className={css.pagination}>
+                        <Pagination.First onClick={this.handleFirstSelect}/>
+                        <Pagination.Ellipsis/>
+                        <Pagination.Prev onClick={this.props.handlePrevSelect}/>
+                        <Pagination.Item>{this.props.currentPage + 1}</Pagination.Item>
+                        <Pagination.Next onClick={this.props.handleNextSelect}/>
+                        <Pagination.Ellipsis/>
+                        <Pagination.Last onClick={this.props.handleLastSelect}/>
+                    </Pagination>
+
+                </div>
+                {this.props.projects.map(project => {
+                    return (
+                        <ShowOneProject project={project}/>)
+                })}
+
+            </div>
+        )
+    }
+}
+
+export default ShowProjects;

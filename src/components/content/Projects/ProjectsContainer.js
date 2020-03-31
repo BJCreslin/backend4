@@ -1,7 +1,8 @@
 import React from 'react';
 import {connect} from "react-redux";
 import Preloader from "../../common/preloader/Preloader";
-import Project from "./Project";
+import Project from "./ShowProjects";
+
 import {
     getPaginationProjectsThunkCreator,
     setCurrentPage,

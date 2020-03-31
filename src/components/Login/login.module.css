@@ -5,6 +5,9 @@
 
 .formHeader {
     margin-top: 20px;
-    align-content: center;
+   justify-content: center;
+}
+inLine {
+    justify-content: space-around;
 }
 

@@ -4,10 +4,14 @@ import {Field, reduxForm} from "redux-form";
 import {connect} from "react-redux";
 import {createProjectThunkCreator, setShowModal} from "../../../redux/projects-reducer";
 import {Modal} from "react-bootstrap";
+import {compose} from "redux";
+import {withAuthRedirect} from "../../../HOC/withAuthRedirect";
 
 const createProjectForm = (props) => {
     setShowModal(true);
-    const handleClose=() => {setShowModal(false);};
+    const handleClose = () => {
+        setShowModal(false);
+    };
     return (
         <div>
             <Modal show={true} onHide={handleClose}>
@@ -57,7 +61,7 @@ const CreateProject = (props) => {
     )
 };
 
-const mapStateToPros = (state) => {
+const mapStateToProps = (state) => {
     return {
         credential: state.login.credential,
         credentialStatus: state.login.credentialStatus,
@@ -69,5 +73,7 @@ const mapDispatchToProps = {
     setShowModal
 };
 
-
-export default connect(mapStateToPros, mapDispatchToProps)(CreateProject);
+export default compose(
+    withAuthRedirect,
+    connect(mapStateToProps, mapDispatchToProps))
+(CreateProject);

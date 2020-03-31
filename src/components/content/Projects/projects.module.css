@@ -1,3 +1,33 @@
 .pagination {
     alignment: right;
 }
+
+.formDesign {
+    justify-content: space-between;
+}
+
+.container {
+    display: flex;
+}
+.id {
+    flex:  3 1 100px;
+}
+.description {
+    flex:  9 3 300px;
+}
+.url {
+    flex:  6 2 200px;
+}
+
+.descriptionInput{
+    width: 600px;
+}
+.urlInput{
+    width: 200px;
+}
+
+.name {
+    display: flex;
+    justify-content: center;
+}
+
