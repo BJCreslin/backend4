@@ -1,5 +1,6 @@
 import React from 'react';
 import css from "./projects.module.css";
+import {reduxForm} from "redux-form";
 
 export class ShowOneProject extends React.Component {
     state = {
@@ -48,7 +49,8 @@ export class ShowOneProject extends React.Component {
 
                 {this.state.descriptionEditMode &&
                 <input className={css.descriptionInput} autoFocus={true} onBlur={this.deActivateDescriptionEditMode}
-                       value={this.props.project.description}/>
+                        value={this.props.project.description}
+                    />
                 }
                 </span>
 
@@ -68,3 +70,7 @@ export class ShowOneProject extends React.Component {
         </div>
     }
 }
+
+const UpdateProjectReduxForm = reduxForm({
+    form: 'updateProjectForm'
+})(ShowOneProject);

@@ -14,6 +14,7 @@ let reducers = combineReducers(
         tasksPage: tasksReducer,
         taskUpdateForm: formReducer,
         createProjectForm: formReducer,
+        updateProjectForm: formReducer,
         usersContent: usersReducer
     });
 
