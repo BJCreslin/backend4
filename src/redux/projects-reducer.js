@@ -41,8 +41,8 @@ let projectsReducer = (state = initialState, action) => {
             }
             case
             SET_CURRENT_PAGE: {
-                if (action.currentPage > state.totalPages - 1) action.currentPage = state.totalPages - 1;
-                if (action.currentPage < 0) action.currentPage = 0;
+                if (action.currentPage > state.totalPages ) action.currentPage = state.totalPages ;
+                if (action.currentPage < firstPage) action.currentPage = firstPage;
                 return {
                     ...state,
                     currentPage: action.currentPage
@@ -80,7 +80,7 @@ let projectsReducer = (state = initialState, action) => {
             case  SET_LAST_PAGE:
                 return {
                     ...state,
-                    currentPage: state.totalPages - 1
+                    currentPage: state.totalPages
                 };
 
             case SET_TOTAL_PAGES:
@@ -104,7 +104,7 @@ export const setFirstPage = () => ({type: SET_FIRST_PAGE});
 export const setLastPage = () => ({type: SET_LAST_PAGE});
 
 export const setCurrentPage = (currentPage) => {
-    if (currentPage < 0) currentPage = 0;
+    if (currentPage < firstPage) currentPage = firstPage;
     return {type: SET_CURRENT_PAGE, currentPage}
 };
 
