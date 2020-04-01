@@ -9,20 +9,20 @@ import {ShowOneProject} from "./ShowOneProject";
 class ShowProjects extends React.Component {
     handleFirstSelect = () => {
         this.props.setFirstPage();
-        this.props.getPaginationProjectsThunkCreator(this.props.currentPage, this.props.numberForPage)
+        // this.props.getPaginationProjectsThunkCreator(this.props.currentPage, this.props.numberForPage)
     };
     handleLastSelect = () => {
         this.props.setLastPage();
-        this.props.getPaginationProjectsThunkCreator(this.props.currentPage, this.props.numberForPage)
+        // this.props.getPaginationProjectsThunkCreator(this.props.currentPage, this.props.numberForPage)
     };
 
     handlePrevSelect = () => {
         this.props.setCurrentPage(this.props.currentPage - 1);
-        this.props.getPaginationProjectsThunkCreator(this.props.currentPage, this.props.numberForPage)
+        // this.props.getPaginationProjectsThunkCreator(this.props.currentPage, this.props.numberForPage)
     };
     handleNextSelect = () => {
         this.props.setCurrentPage(this.props.currentPage + 1);
-        this.props.getPaginationProjectsThunkCreator(this.props.currentPage, this.props.numberForPage)
+        // this.props.getPaginationProjectsThunkCreator(this.props.currentPage, this.props.numberForPage)
     };
 
     onclickNewProject = () => {

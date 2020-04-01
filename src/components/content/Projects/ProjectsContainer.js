@@ -1,7 +1,6 @@
 import React from 'react';
 import {connect} from "react-redux";
 import Preloader from "../../common/preloader/Preloader";
-import Project from "./ShowProjects";
 
 import {
     getPaginationProjectsThunkCreator,
@@ -12,6 +11,7 @@ import {
 } from "../../../redux/projects-reducer";
 import {compose} from "redux";
 import {withAuthRedirect} from "../../../HOC/withAuthRedirect";
+import ShowProjects from "./ShowProjects";
 
 class ProjectsContainer extends React.Component {
 
@@ -23,7 +23,7 @@ class ProjectsContainer extends React.Component {
         return (
             <>
                 {this.props.isFetching ? <Preloader/> : null}
-                <Project projects={this.props.projects}
+                <ShowProjects projects={this.props.projects}
                          currentPage={this.props.currentPage}
                          setCurrentPage={this.props.setCurrentPage}
                          isFetching={this.props.isFetching}

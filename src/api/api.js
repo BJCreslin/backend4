@@ -6,6 +6,8 @@ const allprojectsEndPointURL = 'http://185.255.135.104:9000/api/projects/project
 const newProjectEndPointURL = 'http://185.255.135.104:9000/api/projects/createProject';
 const paginatableProjectEndPointURL = 'http://185.255.135.104:9000/api/projects/watch/';
 const UPDATE_PROJECT_ENDPOINT_URL = 'http://185.255.135.104:9000/api/projects/update/';
+const PROJECTS_COUNT_ENDPOINT_URL = 'http://185.255.135.104:9000/api/projects/countProjects/';
+
 
 const getTasksEndPointURL = 'http://185.255.135.104:9000/api/tasks/page/';
 const TASKS_COUNT_END_POINT = 'http://185.255.135.104:9000/api/tasks/count/';
@@ -34,6 +36,13 @@ export const ProjectsAPI = {
                 return response.data;
             });
         },
+
+    getProjectsNumber(){
+        let sessionId = localStorage.getItem('sessionId');
+        return axios.get(PROJECTS_COUNT_ENDPOINT_URL, {headers: {sessionId: sessionId}}).then(response => {
+            return response.data;
+        });
+    },
 
         createProject(newProject) {
             let sessionId = localStorage.getItem('sessionId');
