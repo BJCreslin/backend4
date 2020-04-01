@@ -8,7 +8,7 @@ import {
     setCurrentPage,
     setFirstPage,
     setLastPage,
-    setToggleFetching
+    setToggleFetching, updateProjectThunkCreator
 } from "../../../redux/projects-reducer";
 import {compose} from "redux";
 import {withAuthRedirect} from "../../../HOC/withAuthRedirect";
@@ -31,6 +31,7 @@ class ProjectsContainer extends React.Component {
                          setLastPage={this.props.setLastPage}
                          numberForPage={this.props.numberForPage}
                          getPaginationProjectsThunkCreator={this.props.getPaginationProjectsThunkCreator}
+                         updateProjectThunkCreator={this.props.updateProjectThunkCreator}
                 />
             </>
         )
@@ -49,6 +50,7 @@ const mapStateToProps = (state) => {
 const mapDispatchToProps = {
     setToggleFetching,
     getPaginationProjectsThunkCreator,
+    updateProjectThunkCreator,
     setCurrentPage,
     setFirstPage,
     setLastPage

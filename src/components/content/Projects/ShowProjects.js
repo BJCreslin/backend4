@@ -51,7 +51,8 @@ class ShowProjects extends React.Component {
                 </div>
                 {this.props.projects.map(project => {
                     return (
-                        <ShowOneProject project={project}/>)
+                        <ShowOneProject project={project}
+                                        updateProjectThunkCreator={this.props.updateProjectThunkCreator}/>)
                 })}
 
             </div>

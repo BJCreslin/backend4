@@ -6,7 +6,11 @@ export class ShowOneProject extends React.Component {
     state = {
         descriptionEditMode: false,
         nameEditMode: false,
-        urlEditMode: false
+        urlEditMode: false,
+        projectId: this.props.project.projectId,
+        projectName: this.props.project.projectName,
+        projectUrl: this.props.project.projectUrl,
+        description: this.props.project.description
     };
     activateDescriptionEditMode = () => {
         this.setState({descriptionEditMode: true})
@@ -19,12 +23,25 @@ export class ShowOneProject extends React.Component {
     };
     deActivateNameEditMode = () => {
         this.setState({nameEditMode: false})
+        this.doUpdate();
     };
     activateUrlEditMode = () => {
         this.setState({urlEditMode: true})
     };
     deActivateUrlEditMode = () => {
         this.setState({urlEditMode: false})
+    };
+doUpdate=()=>{
+    this.props.updateProjectThunkCreator({
+        projectId: this.state.projectId,
+        projectName: this.state.projectName,
+        projectUrl: this.state.projectUrl,
+        description: this.state.description
+    })
+};
+
+    nameOnChange = (e) => {
+        this.setState({projectName: e.currentTarget.value});
     };
 
     render() {
@@ -37,7 +54,7 @@ export class ShowOneProject extends React.Component {
 
                 {this.state.nameEditMode &&
                 <input autoFocus={true} onBlur={this.deActivateNameEditMode}
-                       value={this.props.project.projectName}/>
+                       onChange={this.nameOnChange} value={this.state.projectName}/>
                 }
             </h4>
             <container className={css.container}>
@@ -47,11 +64,11 @@ export class ShowOneProject extends React.Component {
                 <span onClick={this.activateDescriptionEditMode}>Description: {this.props.project.description} </span>
                 }
 
-                {this.state.descriptionEditMode &&
-                <input className={css.descriptionInput} autoFocus={true} onBlur={this.deActivateDescriptionEditMode}
-                        value={this.props.project.description}
+                    {this.state.descriptionEditMode &&
+                    <input className={css.descriptionInput} autoFocus={true} onBlur={this.deActivateDescriptionEditMode}
+                           value={this.props.project.description}
                     />
-                }
+                    }
                 </span>
 
                 <span className={css.url}>
@@ -59,10 +76,10 @@ export class ShowOneProject extends React.Component {
                 <span onClick={this.activateUrlEditMode}>URL: {this.props.project.projectUrl} </span>
                 }
 
-                {this.state.urlEditMode &&
-                <input className={css.urlInput} autoFocus={true} onBlur={this.deActivateUrlEditMode}
-                       value={this.props.project.projectUrl}/>
-                }
+                    {this.state.urlEditMode &&
+                    <input className={css.urlInput} autoFocus={true} onBlur={this.deActivateUrlEditMode}
+                           value={this.props.project.projectUrl}/>
+                    }
                 </span>
             </container>
 
