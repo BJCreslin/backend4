@@ -42,7 +42,7 @@ class ShowProjects extends React.Component {
                         <Pagination.First onClick={this.handleFirstSelect}/>
                         <Pagination.Ellipsis/>
                         <Pagination.Prev onClick={this.props.handlePrevSelect}/>
-                        <Pagination.Item>{this.props.currentPage + 1}</Pagination.Item>
+                        <Pagination.Item>{this.props.currentPage}</Pagination.Item>
                         <Pagination.Next onClick={this.props.handleNextSelect}/>
                         <Pagination.Ellipsis/>
                         <Pagination.Last onClick={this.props.handleLastSelect}/>

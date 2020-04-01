@@ -10,7 +10,7 @@ const SET_SHOW_MODAL = "SET_SHOW_MODAL";
 const SET_FIRST_PAGE = "SET_FIRST_PAGE";
 const SET_LAST_PAGE = " SET_LAST_PAGE";
 
-const firstPage = 0;
+const firstPage = 1;
 
 const initialState = {
     projects: [],
