@@ -21,7 +21,7 @@ class ShowProjects extends React.Component {
         // this.props.getPaginationProjectsThunkCreator(this.props.currentPage, this.props.numberForPage)
     };
     handleNextSelect = () => {
-        this.props.setCurrentPage(this.props.currentPage + 1);
+        this.props.setNextPage();
         // this.props.getPaginationProjectsThunkCreator(this.props.currentPage, this.props.numberForPage)
     };
 
@@ -39,13 +39,13 @@ class ShowProjects extends React.Component {
                 </div>
                 <div>
                     <Pagination className={css.pagination}>
-                        <Pagination.First onClick={this.handleFirstSelect}/>
+                        <Pagination.First onClick={this.props.setFirstPage}/>
                         <Pagination.Ellipsis/>
-                        <Pagination.Prev onClick={this.props.handlePrevSelect}/>
+                        <Pagination.Prev onClick={this.props.setPreviousPage}/>
                         <Pagination.Item>{this.props.currentPage}</Pagination.Item>
-                        <Pagination.Next onClick={this.props.handleNextSelect}/>
+                        <Pagination.Next onClick={this.props.setNextPage}/>
                         <Pagination.Ellipsis/>
-                        <Pagination.Last onClick={this.props.handleLastSelect}/>
+                        <Pagination.Last onClick={this.props.setLastPage}/>
                     </Pagination>
 
                 </div>

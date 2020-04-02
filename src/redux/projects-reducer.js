@@ -8,7 +8,9 @@ const SET_CREATED = "SET_CREATED";
 const TOGGLE_IS_FETCHING = "TOGGLE_IS_FETCHING";
 const SET_SHOW_MODAL = "SET_SHOW_MODAL";
 const SET_FIRST_PAGE = "SET_FIRST_PAGE";
-const SET_LAST_PAGE = " SET_LAST_PAGE";
+const SET_LAST_PAGE = "SET_LAST_PAGE";
+const SET_NEXT_PAGE = "SET_NEXT_PAGE";
+const SET_PREV_PAGE = "SET_PREV_PAGE";
 
 const firstPage = 1;
 
@@ -40,8 +42,26 @@ let projectsReducer = (state = initialState, action) => {
                 }
             }
             case
+            SET_NEXT_PAGE: {
+                let newCurrentPage = state.currentPage + 1;
+                if (newCurrentPage > state.totalPages) newCurrentPage = state.totalPages;
+                return {
+                    ...state,
+                    currentPage: newCurrentPage
+                }
+            }
+            case
+            SET_PREV_PAGE: {
+                let newCurrentPage = state.currentPage - 1;
+                if (newCurrentPage < firstPage) newCurrentPage = firstPage;
+                return {
+                    ...state,
+                    currentPage: newCurrentPage
+                }
+            }
+            case
             SET_CURRENT_PAGE: {
-                if (action.currentPage > state.totalPages ) action.currentPage = state.totalPages ;
+                if (action.currentPage > state.totalPages) action.currentPage = state.totalPages;
                 if (action.currentPage < firstPage) action.currentPage = firstPage;
                 return {
                     ...state,
@@ -74,7 +94,7 @@ let projectsReducer = (state = initialState, action) => {
             SET_FIRST_PAGE:
                 return {
                     ...state,
-                    currentPage: 0
+                    currentPage: firstPage
                 };
 
             case  SET_LAST_PAGE:
@@ -102,6 +122,9 @@ export const setShowModal = (isShowModal) => ({type: SET_SHOW_MODAL, isShowModal
 export const setTotalPages = (totalPages) => ({type: SET_TOTAL_PAGES, totalPages});
 export const setFirstPage = () => ({type: SET_FIRST_PAGE});
 export const setLastPage = () => ({type: SET_LAST_PAGE});
+export const setNextPage = () => ({type: SET_NEXT_PAGE});
+export const setPreviousPage = () => ({type: SET_PREV_PAGE});
+
 
 export const setCurrentPage = (currentPage) => {
     if (currentPage < firstPage) currentPage = firstPage;

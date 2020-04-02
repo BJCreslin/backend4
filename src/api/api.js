@@ -80,9 +80,9 @@ export const ProjectsAPI = {
             //             console.log(error);
             //         });
             // }
-            axios.patch(UPDATE_PROJECT_ENDPOINT_URL, {headers: {sessionId: sessionId}},
-                {data: project}).then(function (response){
+            return axios.patch(UPDATE_PROJECT_ENDPOINT_URL, {headers: {sessionId: sessionId}},{data: project}).then(response=>{
                 console.log(response);
+                return response.data;
             })
                 .catch(function (error) {
                     console.log(error);

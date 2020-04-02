@@ -7,7 +7,9 @@ import {
     setCurrentPage,
     setFirstPage,
     setLastPage,
-    setToggleFetching, updateProjectThunkCreator
+    setNextPage, setPreviousPage,
+    setToggleFetching,
+    updateProjectThunkCreator
 } from "../../../redux/projects-reducer";
 import {compose} from "redux";
 import {withAuthRedirect} from "../../../HOC/withAuthRedirect";
@@ -24,14 +26,16 @@ class ProjectsContainer extends React.Component {
             <>
                 {this.props.isFetching ? <Preloader/> : null}
                 <ShowProjects projects={this.props.projects}
-                         currentPage={this.props.currentPage}
-                         setCurrentPage={this.props.setCurrentPage}
-                         isFetching={this.props.isFetching}
-                         setFirstPage={this.props.setFirstPage}
-                         setLastPage={this.props.setLastPage}
-                         numberForPage={this.props.numberForPage}
-                         getPaginationProjectsThunkCreator={this.props.getPaginationProjectsThunkCreator}
-                         updateProjectThunkCreator={this.props.updateProjectThunkCreator}
+                              currentPage={this.props.currentPage}
+                              setCurrentPage={this.props.setCurrentPage}
+                              setNextPage={this.props.setNextPage}
+                              setPreviousPage={this.props.setPreviousPage}
+                              isFetching={this.props.isFetching}
+                              setFirstPage={this.props.setFirstPage}
+                              setLastPage={this.props.setLastPage}
+                              numberForPage={this.props.numberForPage}
+                              getPaginationProjectsThunkCreator={this.props.getPaginationProjectsThunkCreator}
+                              updateProjectThunkCreator={this.props.updateProjectThunkCreator}
                 />
             </>
         )
@@ -53,7 +57,9 @@ const mapDispatchToProps = {
     updateProjectThunkCreator,
     setCurrentPage,
     setFirstPage,
-    setLastPage
+    setLastPage,
+    setNextPage,
+    setPreviousPage
 };
 
 
