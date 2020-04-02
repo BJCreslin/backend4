@@ -1,6 +1,5 @@
 import React from 'react';
 import css from "./projects.module.css";
-import {reduxForm} from "redux-form";
 
 export class ShowOneProject extends React.Component {
     state = {
@@ -45,7 +44,12 @@ export class ShowOneProject extends React.Component {
     };
 
     componentDidUpdate(prevProps, prevState, snapshot) {
-        if (prevProps.project.projectName !== this.props.project.projectName){this.setState({projectName:this.props.project.projectName})}   }
+        if (prevProps.project.projectName !== this.props.project.projectName){this.setState({projectName:this.props.project.projectName})}
+        if (prevProps.project.projectUrl !== this.props.project.projectUrl){this.setState({projectUrl:this.props.project.projectUrl})}
+        if (prevProps.project.description !== this.props.project.description){this.setState({description:this.props.project.description})}
+
+
+    }
 
     render() {
         return <div>
@@ -62,26 +66,27 @@ export class ShowOneProject extends React.Component {
             </h4>
             <container className={css.container}>
                 <span className={css.id}>ID: {this.props.project.projectId}      </span>
+
                 <span className={css.description}>
                 {!this.state.descriptionEditMode &&
-                <span onClick={this.activateDescriptionEditMode}>Description: {this.props.project.description} </span>
+                <span onClick={this.activateDescriptionEditMode}>Description: {this.state.description} </span>
                 }
 
                     {this.state.descriptionEditMode &&
                     <input className={css.descriptionInput} autoFocus={true} onBlur={this.deActivateDescriptionEditMode}
-                           value={this.props.project.description}
+                           value={this.state.description}
                     />
                     }
                 </span>
 
                 <span className={css.url}>
                 {!this.state.urlEditMode &&
-                <span onClick={this.activateUrlEditMode}>URL: {this.props.project.projectUrl} </span>
+                <span onClick={this.activateUrlEditMode}>URL: {this.state.projectUrl} </span>
                 }
 
                     {this.state.urlEditMode &&
                     <input className={css.urlInput} autoFocus={true} onBlur={this.deActivateUrlEditMode}
-                           value={this.props.project.projectUrl}/>
+                           value={this.state.projectUrl}/>
                     }
                 </span>
             </container>
@@ -91,6 +96,4 @@ export class ShowOneProject extends React.Component {
     }
 }
 
-const UpdateProjectReduxForm = reduxForm({
-    form: 'updateProjectForm'
-})(ShowOneProject);
+
