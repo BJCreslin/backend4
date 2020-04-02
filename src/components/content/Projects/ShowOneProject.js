@@ -31,25 +31,28 @@ export class ShowOneProject extends React.Component {
     deActivateUrlEditMode = () => {
         this.setState({urlEditMode: false})
     };
-doUpdate=()=>{
-    this.props.updateProjectThunkCreator({
-        projectId: this.state.projectId,
-        projectName: this.state.projectName,
-        projectUrl: this.state.projectUrl,
-        description: this.state.description
-    })
-};
+    doUpdate = () => {
+        this.props.updateProjectThunkCreator({
+            projectId: this.state.projectId,
+            projectName: this.state.projectName,
+            projectUrl: this.state.projectUrl,
+            description: this.state.description
+        })
+    };
 
     nameOnChange = (e) => {
         this.setState({projectName: e.currentTarget.value});
     };
+
+    componentDidUpdate(prevProps, prevState, snapshot) {
+        if (prevProps.project.projectName !== this.props.project.projectName){this.setState({projectName:this.props.project.projectName})}   }
 
     render() {
         return <div>
 
             <h4 className={css.name}>
                 {!this.state.nameEditMode &&
-                <span onClick={this.activateNameEditMode}>Name: {this.props.project.projectName} </span>
+                <span onClick={this.activateNameEditMode}>Name: {this.state.projectName} </span>
                 }
 
                 {this.state.nameEditMode &&

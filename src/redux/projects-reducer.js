@@ -162,10 +162,7 @@ export const updateProjectThunkCreator = (project) => {
     return (dispatch) => {
         dispatch(setToggleFetching(true));
         ProjectsAPI.updateProject(project).then(data => {
-            ProjectsAPI.getAllProjects().then(data => {
-                dispatch(setProjects(data));
-                dispatch(setToggleFetching(false));
-            });
+            dispatch(setToggleFetching(false));
         });
 
     }
