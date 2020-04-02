@@ -6,8 +6,6 @@ import {createProjectThunkCreator, setCreated, setShowModal} from "../../../redu
 import {compose} from "redux";
 import {withAuthRedirect} from "../../../HOC/withAuthRedirect";
 import {Modal} from "react-bootstrap";
-import ProjectsContainer from "./ProjectsContainer";
-import {Redirect} from "react-router-dom";
 
 class createProjectForm extends React.Component {
     state = {
@@ -20,10 +18,7 @@ class createProjectForm extends React.Component {
 
     componentDidUpdate(prevProps, prevState, snapshot) {
         if (this.props.created) {
-            this.props.setCreated(true);
-            return (<>
-                <Redirect to= "/projects"/>
-            </>)
+            this.props.setCreated(false);
         }
     }
 
@@ -75,9 +70,7 @@ const CreateProjectReduxForm = reduxForm({
 const CreateProject = (props) => {
     let onSubmit = (formData) => {
         props.createProjectThunkCreator(formData);
-        return (<>
-                <Redirect to= "/projects"/>
-            </>)
+        props.history.push('/projects');
     };
     return (
         <CreateProjectReduxForm onSubmit={onSubmit}/>
