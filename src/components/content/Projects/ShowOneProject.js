@@ -16,6 +16,7 @@ export class ShowOneProject extends React.Component {
     };
     deActivateDescriptionEditMode = () => {
         this.setState({descriptionEditMode: false})
+        this.doUpdate();
     };
     activateNameEditMode = () => {
         this.setState({nameEditMode: true})
@@ -29,6 +30,7 @@ export class ShowOneProject extends React.Component {
     };
     deActivateUrlEditMode = () => {
         this.setState({urlEditMode: false})
+        this.doUpdate();
     };
     doUpdate = () => {
         this.props.updateProjectThunkCreator({
@@ -42,11 +44,23 @@ export class ShowOneProject extends React.Component {
     nameOnChange = (e) => {
         this.setState({projectName: e.currentTarget.value});
     };
+    urlOnChange = (e) => {
+        this.setState({projectUrl: e.currentTarget.value});
+    };
+    descriptionOnChange = (e) => {
+        this.setState({description: e.currentTarget.value});
+    };
 
     componentDidUpdate(prevProps, prevState, snapshot) {
-        if (prevProps.project.projectName !== this.props.project.projectName){this.setState({projectName:this.props.project.projectName})}
-        if (prevProps.project.projectUrl !== this.props.project.projectUrl){this.setState({projectUrl:this.props.project.projectUrl})}
-        if (prevProps.project.description !== this.props.project.description){this.setState({description:this.props.project.description})}
+        if (prevProps.project.projectName !== this.props.project.projectName) {
+            this.setState({projectName: this.props.project.projectName})
+        }
+        if (prevProps.project.projectUrl !== this.props.project.projectUrl) {
+            this.setState({projectUrl: this.props.project.projectUrl})
+        }
+        if (prevProps.project.description !== this.props.project.description) {
+            this.setState({description: this.props.project.description})
+        }
 
 
     }
@@ -74,7 +88,7 @@ export class ShowOneProject extends React.Component {
 
                     {this.state.descriptionEditMode &&
                     <input className={css.descriptionInput} autoFocus={true} onBlur={this.deActivateDescriptionEditMode}
-                           value={this.state.description}
+                           onChange={this.descriptionOnChange} value={this.state.description}
                     />
                     }
                 </span>
@@ -86,7 +100,7 @@ export class ShowOneProject extends React.Component {
 
                     {this.state.urlEditMode &&
                     <input className={css.urlInput} autoFocus={true} onBlur={this.deActivateUrlEditMode}
-                           value={this.state.projectUrl}/>
+                           onChange={this.urlOnChange} value={this.state.projectUrl}/>
                     }
                 </span>
             </container>
