@@ -1,21 +1,34 @@
-import React, {useState} from 'react';
+import React from 'react';
 import css from "../../Login/login.module.css";
 import {Field, reduxForm} from "redux-form";
 import {connect} from "react-redux";
-import {createProjectThunkCreator, setShowModal} from "../../../redux/projects-reducer";
+import {createProjectThunkCreator, setCreated, setShowModal} from "../../../redux/projects-reducer";
 import {compose} from "redux";
 import {withAuthRedirect} from "../../../HOC/withAuthRedirect";
 import {Modal} from "react-bootstrap";
+import ProjectsContainer from "./ProjectsContainer";
+import {Redirect} from "react-router-dom";
 
 class createProjectForm extends React.Component {
-    state={
-        show:false
+    state = {
+        show: false
     };
+
     componentDidMount() {
         this.handleShow();
     }
-     handleClose = () => this.setState({show:false});
-     handleShow = () => this.setState({show:true});
+
+    componentDidUpdate(prevProps, prevState, snapshot) {
+        if (this.props.created) {
+            this.props.setCreated(true);
+            return (<>
+                <Redirect to= "/projects"/>
+            </>)
+        }
+    }
+
+    handleClose = () => this.setState({show: false});
+    handleShow = () => this.setState({show: true});
 
     render() {
         return (
@@ -62,6 +75,9 @@ const CreateProjectReduxForm = reduxForm({
 const CreateProject = (props) => {
     let onSubmit = (formData) => {
         props.createProjectThunkCreator(formData);
+        return (<>
+                <Redirect to= "/projects"/>
+            </>)
     };
     return (
         <CreateProjectReduxForm onSubmit={onSubmit}/>
@@ -71,11 +87,14 @@ const CreateProject = (props) => {
 const mapStateToProps = (state) => {
     return {
         showModal: state.login.showModal,
+        created: state.projectsPage.created
     }
 };
 const mapDispatchToProps = {
     createProjectThunkCreator,
-    setShowModal
+    setShowModal,
+    setCreated
+
 };
 
 export default compose(

@@ -145,13 +145,13 @@ export const getPaginationProjectsThunkCreator = (currentPage, numberForPage) =>
 };
 
 export const createProjectThunkCreator = (project) => {
-
     return (dispatch) => {
         dispatch(setToggleFetching(true));
         ProjectsAPI.createProject(project).then(data => {
             dispatch(setCreated(true));
             dispatch(setToggleFetching(false));
         });
+
     }
 };
 
