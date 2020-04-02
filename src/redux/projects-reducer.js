@@ -1,4 +1,6 @@
 import {ProjectsAPI} from '../api/api';
+import {Redirect} from "react-router-dom";
+import React from "react";
 
 const SET_PROJECTS = "SET_PROJECTS";
 const SET_TOTAL_COUNT = "SET_TOTAL_COUNT";
@@ -150,6 +152,9 @@ export const createProjectThunkCreator = (project) => {
         ProjectsAPI.createProject(project).then(data => {
             dispatch(setCreated(true));
             dispatch(setToggleFetching(false));
+            return (
+                <Redirect to="/projects/"/>
+            )
         });
 
     }
@@ -160,6 +165,7 @@ export const updateProjectThunkCreator = (project) => {
         dispatch(setToggleFetching(true));
         ProjectsAPI.updateProject(project).then(data => {
             dispatch(setToggleFetching(false));
+
         });
 
     }

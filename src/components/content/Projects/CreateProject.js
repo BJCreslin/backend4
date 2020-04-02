@@ -12,14 +12,23 @@ class createProjectForm extends React.Component {
         show: false
     };
 
+    constructor(props, context) {
+        super(props, context);
+        window.progressModal = this;
+    }
+
     componentDidMount() {
         this.handleShow();
     }
 
     componentDidUpdate(prevProps, prevState, snapshot) {
+        console.log("update")
         if (this.props.created) {
+            this.handleClose();
             this.props.setCreated(false);
+
         }
+
     }
 
     handleClose = () => this.setState({show: false});
@@ -70,7 +79,7 @@ const CreateProjectReduxForm = reduxForm({
 const CreateProject = (props) => {
     let onSubmit = (formData) => {
         props.createProjectThunkCreator(formData);
-        props.history.push('/projects');
+        window.progressModal.handleClose();
     };
     return (
         <CreateProjectReduxForm onSubmit={onSubmit}/>
