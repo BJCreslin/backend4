@@ -54,7 +54,7 @@ export class ShowOneTask extends React.Component {
         this.doUpdate();
     };
     doUpdate = () => {
-        this.props.updateProjectThunkCreator({
+        this.props.updateTaskThunkCreator({
             id: this.state.id,
             author: this.state.author,
             name: this.state.name,
@@ -64,7 +64,7 @@ export class ShowOneTask extends React.Component {
         })
     };
 
-    doDeleteProject = () => {
+    doDeleteTask = () => {
         this.props.deleteTaskThunkCreator(this.state.id);
     };
 
@@ -164,7 +164,7 @@ export class ShowOneTask extends React.Component {
                     }
                 </span>
 
-                <span className={css.delete} onClick={this.doDeleteProject}>
+                <span className={css.delete} onClick={this.doDeleteTask}>
                     Delete
                 </span>
             </container>
