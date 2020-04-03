@@ -2,19 +2,19 @@ import React from 'react';
 import css from "../../Login/login.module.css";
 import {Field, reduxForm} from "redux-form";
 import {connect} from "react-redux";
-import {createProjectThunkCreator, setCreated, setShowModal} from "../../../redux/projects-reducer";
 import {compose} from "redux";
 import {withAuthRedirect} from "../../../HOC/withAuthRedirect";
 import {Modal} from "react-bootstrap";
+import {createTaskThunkCreator, setCreated, setShowModal} from "../../../redux/tasks-reducer";
 
-class createProjectForm extends React.Component {
+class createTaskForm extends React.Component {
     state = {
         show: false
     };
 
     constructor(props, context) {
         super(props, context);
-        window.progressModal = this;
+        window.progressTaskModal = this;
     }
 
     componentDidMount() {
@@ -22,7 +22,7 @@ class createProjectForm extends React.Component {
     }
 
     componentDidUpdate(prevProps, prevState, snapshot) {
-        console.log("update")
+
         if (this.props.created) {
             this.handleClose();
             this.props.setCreated(false);
@@ -40,18 +40,18 @@ class createProjectForm extends React.Component {
                 <Modal show={this.state.show} onHide={this.handleClose}>
 
                     <Modal.Header closeButton>
-                        <Modal.Title>Create new project</Modal.Title>
+                        <Modal.Title>Create new task</Modal.Title>
                     </Modal.Header>
                     <Modal.Body>
                         <form className={css.formDesign} onSubmit={this.props.handleSubmit}>
                             <div>Project name:
-                                <Field type={"text"} placeholder={"Project Name"} component={"input"}
-                                       name={"projectName"}/>
+                                <Field type={"text"} placeholder={"Task Name"} component={"input"}
+                                       name={"name"}/>
                             </div>
 
-                            <div>Description:
-                                <Field type={"text"} placeholder={"Description"} component={"textarea"}
-                                       name={"description"}/>
+                            <div>Text:
+                                <Field type={"text"} placeholder={"text"} component={"textarea"}
+                                       name={"text"}/>
                             </div>
 
                             <div>
@@ -71,29 +71,29 @@ class createProjectForm extends React.Component {
     };
 }
 
-const CreateProjectReduxForm = reduxForm({
-    form: 'createProjectForm'
-})(createProjectForm);
+const CreateTaskReduxForm = reduxForm({
+    form: 'createTaskForm'
+})(createTaskForm);
 
 
 const CreateTask = (props) => {
     let onSubmit = (formData) => {
-        props.createProjectThunkCreator(formData);
-        window.progressModal.handleClose();
+        props.createTaskThunkCreator(formData);
+        window.progressTaskModal.handleClose();
     };
     return (
-        <CreateProjectReduxForm onSubmit={onSubmit}/>
+        <CreateTaskReduxForm onSubmit={onSubmit}/>
     )
 };
 
 const mapStateToProps = (state) => {
     return {
         showModal: state.login.showModal,
-        created: state.projectsPage.created
+        created: state.tasksPage.created
     }
 };
 const mapDispatchToProps = {
-    createProjectThunkCreator,
+    createTaskThunkCreator,
     setShowModal,
     setCreated
 

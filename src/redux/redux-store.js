@@ -13,6 +13,7 @@ let reducers = combineReducers(
         projectsPage: projectsReducer,
         tasksPage: tasksReducer,
         taskUpdateForm: formReducer,
+        createTaskForm: formReducer,
         createProjectForm: formReducer,
         updateProjectForm: formReducer,
         usersContent: usersReducer

@@ -1,5 +1,4 @@
-import {ProjectsAPI, TasksAPI} from "../api/api";
-import {setCreated, setProjects} from "./projects-reducer";
+import {TasksAPI} from "../api/api";
 import React from "react";
 import {Redirect} from "react-router-dom";
 
@@ -143,6 +142,8 @@ export const setPreviousPage = () => ({type: SET_PREV_PAGE});
 export const setTotalPages = (totalPages) => ({type: SET_TOTAL_PAGES, totalPages});
 export const setTotalCount = (totalCount) => ({type: SET_TOTAL_COUNT, totalCount});
 export const setToggleFetching = (isFetching) => ({type: TOGGLE_IS_FETCHING, isFetching});
+export const setCreated = (created) => ({type: SET_CREATED, created});
+export const setShowModal = (isShowModal) => ({type: SET_SHOW_MODAL, isShowModal});
 
 export const getPaginationTasksThunkCreator = (currentPage, numberForPage) => {
     return (dispatch) => {
