@@ -19,7 +19,11 @@ class ShowProjects extends React.Component {
         if (this.props.currentPage !== prevProps.currentPage) {
             this.props.getPaginationProjectsThunkCreator(this.props.currentPage, this.props.numberForPage)
         }
+        if (this.props.projects !== prevProps.projects) {
+            this.props.getPaginationProjectsThunkCreator(this.props.currentPage, this.props.numberForPage)
+        }
     }
+
 
     render() {
         return (<div>
@@ -41,7 +45,8 @@ class ShowProjects extends React.Component {
                 {this.props.projects.map(project => {
                     return (
                         <ShowOneProject project={project}
-                                        updateProjectThunkCreator={this.props.updateProjectThunkCreator}/>)
+                                        updateProjectThunkCreator={this.props.updateProjectThunkCreator}
+                                        deleteProjectThunkCreator={this.props.deleteProjectThunkCreator}/>)
                 })}
 
             </div>

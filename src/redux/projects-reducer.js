@@ -13,6 +13,7 @@ const SET_FIRST_PAGE = "SET_FIRST_PAGE";
 const SET_LAST_PAGE = "SET_LAST_PAGE";
 const SET_NEXT_PAGE = "SET_NEXT_PAGE";
 const SET_PREV_PAGE = "SET_PREV_PAGE";
+const DELETE_PROJECT = "DELETE_PROJECT";
 
 const firstPage = 1;
 
@@ -110,6 +111,12 @@ let projectsReducer = (state = initialState, action) => {
                     ...state,
                     totalPages: action.totalPages
                 };
+            case DELETE_PROJECT:
+                let newProjects = state.projects.filter(project => project.projectId !== action.projectId);
+                return {
+                    ...state,
+                    projects: newProjects
+                };
             default: {
                 return state;
             }
@@ -126,13 +133,12 @@ export const setFirstPage = () => ({type: SET_FIRST_PAGE});
 export const setLastPage = () => ({type: SET_LAST_PAGE});
 export const setNextPage = () => ({type: SET_NEXT_PAGE});
 export const setPreviousPage = () => ({type: SET_PREV_PAGE});
-
+export const deleteProject = (projectId) => ({type: DELETE_PROJECT, projectId});
 
 export const setCurrentPage = (currentPage) => {
     if (currentPage < firstPage) currentPage = firstPage;
     return {type: SET_CURRENT_PAGE, currentPage}
 };
-
 
 export const getPaginationProjectsThunkCreator = (currentPage, numberForPage) => {
     return (dispatch) => {
@@ -168,6 +174,15 @@ export const updateProjectThunkCreator = (project) => {
 
         });
 
+    }
+};
+
+export const deleteProjectThunkCreator = (id) => {
+    return (dispatch) => {
+        dispatch(setToggleFetching(true));
+        ProjectsAPI.deleteProject(id).then(data => {
+            dispatch(setToggleFetching(false));
+        })
     }
 };
 

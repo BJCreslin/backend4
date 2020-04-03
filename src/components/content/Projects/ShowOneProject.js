@@ -41,6 +41,10 @@ export class ShowOneProject extends React.Component {
         })
     };
 
+    doDeleteProject=()=>{
+        this.props.deleteProjectThunkCreator(this.state.projectId);
+    };
+
     nameOnChange = (e) => {
         this.setState({projectName: e.currentTarget.value});
     };
@@ -102,6 +106,10 @@ export class ShowOneProject extends React.Component {
                     <input className={css.urlInput} autoFocus={true} onBlur={this.deActivateUrlEditMode}
                            onChange={this.urlOnChange} value={this.state.projectUrl}/>
                     }
+                </span>
+
+                <span className={css.delete} onClick={this.doDeleteProject}>
+                    Delete
                 </span>
             </container>
 

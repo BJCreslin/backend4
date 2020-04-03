@@ -7,6 +7,7 @@ const newProjectEndPointURL = 'http://185.255.135.104:9000/api/projects/createPr
 const paginatableProjectEndPointURL = 'http://185.255.135.104:9000/api/projects/watch/';
 const UPDATE_PROJECT_ENDPOINT_URL = 'http://185.255.135.104:9000/api/projects/update/';
 const PROJECTS_COUNT_ENDPOINT_URL = 'http://185.255.135.104:9000/api/projects/countProjects/';
+const DELETE_PROJECT_ENDPOINT_URL = 'http://185.255.135.104:9000/api/projects/delete/'             //'/delete/{projectId}'
 
 
 const getTasksEndPointURL = 'http://185.255.135.104:9000/api/tasks/page/';
@@ -68,18 +69,6 @@ export const ProjectsAPI = {
 
         updateProject(project) {
             let sessionId = localStorage.getItem('sessionId');
-            //     return axios({
-            //         method: 'patch',
-            //         url: UPDATE_PROJECT_ENDPOINT_URL,
-            //         headers: {sessionId: sessionId},
-            //         data: project
-            //     }).then(function (response) {
-            //         console.log(response);
-            //     })
-            //         .catch(function (error) {
-            //             console.log(error);
-            //         });
-            // }
             return axios.patch(UPDATE_PROJECT_ENDPOINT_URL, {headers: {sessionId: sessionId}},{data: project}).then(response=>{
                 console.log(response);
                 return response.data;
@@ -87,10 +76,18 @@ export const ProjectsAPI = {
                 .catch(function (error) {
                     console.log(error);
                 });
-
-        }
+        },
+    deleteProject(idProject) {
+        let sessionId = localStorage.getItem('sessionId');
+        return axios.delete(DELETE_PROJECT_ENDPOINT_URL+idProject, {headers: {sessionId: sessionId}}).then(response=>{
+            console.log(response);
+            return response.data;
+        })
+            .catch(function (error) {
+                console.log(error);
+            });
     }
-;
+    };
 
 
 export const TasksAPI = {

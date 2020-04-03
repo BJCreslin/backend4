@@ -3,11 +3,13 @@ import {connect} from "react-redux";
 import Preloader from "../../common/preloader/Preloader";
 
 import {
+    deleteProjectThunkCreator,
     getPaginationProjectsThunkCreator,
     setCurrentPage,
     setFirstPage,
     setLastPage,
-    setNextPage, setPreviousPage,
+    setNextPage,
+    setPreviousPage,
     setToggleFetching,
     updateProjectThunkCreator
 } from "../../../redux/projects-reducer";
@@ -36,6 +38,7 @@ class ProjectsContainer extends React.Component {
                               numberForPage={this.props.numberForPage}
                               getPaginationProjectsThunkCreator={this.props.getPaginationProjectsThunkCreator}
                               updateProjectThunkCreator={this.props.updateProjectThunkCreator}
+                              deleteProjectThunkCreator={this.props.deleteProjectThunkCreator}
                 />
             </>
         )
@@ -59,7 +62,8 @@ const mapDispatchToProps = {
     setFirstPage,
     setLastPage,
     setNextPage,
-    setPreviousPage
+    setPreviousPage,
+    deleteProjectThunkCreator
 };
 
 
