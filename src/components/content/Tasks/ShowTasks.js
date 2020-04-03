@@ -26,7 +26,7 @@ class ShowTasks extends React.Component {
     render() {
         return (<div>
                 <div>
-                    <Link to="/newtask" onClick={this.onclickNewTask}>New Project</Link>
+                    <Link to="/newtask" onClick={this.onclickNewTask}>New Task</Link>
                 </div>
                 <div>
                     <Pagination className={css.pagination}>
