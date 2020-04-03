@@ -76,7 +76,7 @@ const CreateProjectReduxForm = reduxForm({
 })(createProjectForm);
 
 
-const CreateProject = (props) => {
+const CreateTask = (props) => {
     let onSubmit = (formData) => {
         props.createProjectThunkCreator(formData);
         window.progressModal.handleClose();
@@ -102,4 +102,4 @@ const mapDispatchToProps = {
 export default compose(
     withAuthRedirect,
     connect(mapStateToProps, mapDispatchToProps))
-(CreateProject);
+(CreateTask);

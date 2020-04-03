@@ -7,6 +7,7 @@ import {connect} from "react-redux";
 import ProjectsContainer from "./Projects/ProjectsContainer";
 import CreateProject from "./Projects/CreateProject";
 import TasksContainer from "./Tasks/TasksContainer";
+import CreateTask from "./Tasks/CreateTask";
 
 
 class Content extends React.Component {

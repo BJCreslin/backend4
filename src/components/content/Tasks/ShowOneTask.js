@@ -1,20 +1,13 @@
 import React from 'react';
-import css from "./projects.module.css";
-//
-// <td>{task.id}</td>
-// <td>{task.project}</td>
-// <td>{task.author}</td>
-// <td>{task.implementer}</td>
-// <td>{task.name}</td>
-// <td>{task.text}</td>
-// <td>{task.createDate}</td>
-// <td>{task.updateDate}</td>
+import css from "./task.module.css";
 
 export class ShowOneTask extends React.Component {
     state = {
-        descriptionEditMode: false,
+        textEditMode: false,
         nameEditMode: false,
-        urlEditMode: false,
+        projectEditMode: false,
+        authorEditMode: false,
+        implementerEditMode: false,
         id: this.props.task.id,
         author: this.props.task.author,
         implementer: this.props.task.implementer,
@@ -24,11 +17,11 @@ export class ShowOneTask extends React.Component {
         createDate: this.props.task.createDate,
         updateDate: this.props.task.updateDate,
     };
-    activateDescriptionEditMode = () => {
-        this.setState({descriptionEditMode: true})
+    activateTextEditMode = () => {
+        this.setState({textEditMode: true})
     };
-    deActivateDescriptionEditMode = () => {
-        this.setState({descriptionEditMode: false})
+    deActivateTextEditMode = () => {
+        this.setState({textEditMode: false})
         this.doUpdate();
     };
     activateNameEditMode = () => {
@@ -38,11 +31,26 @@ export class ShowOneTask extends React.Component {
         this.setState({nameEditMode: false})
         this.doUpdate();
     };
-    activateUrlEditMode = () => {
-        this.setState({urlEditMode: true})
+    activateProjectEditMode = () => {
+        this.setState({projectEditMode: true})
     };
-    deActivateUrlEditMode = () => {
-        this.setState({urlEditMode: false})
+    deActivateProjectEditMode = () => {
+        this.setState({projectEditMode: false})
+        this.doUpdate();
+    };
+    activateAuthorEditMode = () => {
+        this.setState({authorEditMode: true})
+    };
+    deActivateAuthorEditMode = () => {
+        this.setState({authorEditMode: false})
+        this.doUpdate();
+    };
+
+    activateImplementerEditMode = () => {
+        this.setState({implementerEditMode: true})
+    };
+    deActivateImplementerEditMode = () => {
+        this.setState({implementerEditMode: false})
         this.doUpdate();
     };
     doUpdate = () => {
@@ -57,7 +65,7 @@ export class ShowOneTask extends React.Component {
     };
 
     doDeleteProject = () => {
-        this.props.deleteTaskThunkCreator(this.state.Id);
+        this.props.deleteTaskThunkCreator(this.state.id);
     };
 
     nameOnChange = (e) => {
@@ -78,17 +86,21 @@ export class ShowOneTask extends React.Component {
 
 
     componentDidUpdate(prevProps, prevState, snapshot) {
-        if (prevProps.project.projectName !== this.props.project.projectName) {
-            this.setState({projectName: this.props.project.projectName})
+        if (prevProps.task.name !== this.props.task.name) {
+            this.setState({name: this.props.task.name})
         }
-        if (prevProps.project.projectUrl !== this.props.project.projectUrl) {
-            this.setState({projectUrl: this.props.project.projectUrl})
+        if (prevProps.task.author !== this.props.task.author) {
+            this.setState({author: this.props.task.author})
         }
-        if (prevProps.project.description !== this.props.project.description) {
-            this.setState({description: this.props.project.description})
+        if (prevProps.task.text !== this.props.task.text) {
+            this.setState({text: this.props.task.text})
         }
-
-
+        if (prevProps.task.implementer !== this.props.task.implementer) {
+            this.setState({implementer: this.props.task.implementer})
+        }
+        if (prevProps.task.project !== this.props.task.project) {
+            this.setState({project: this.props.task.project})
+        }
     }
 
     render() {
@@ -96,37 +108,59 @@ export class ShowOneTask extends React.Component {
 
             <h4 className={css.name}>
                 {!this.state.nameEditMode &&
-                <span onClick={this.activateNameEditMode}>Name: {this.state.projectName} </span>
+                <span onClick={this.activateNameEditMode}>Name: {this.state.name} </span>
                 }
 
                 {this.state.nameEditMode &&
                 <input autoFocus={true} onBlur={this.deActivateNameEditMode}
-                       onChange={this.nameOnChange} value={this.state.projectName}/>
+                       onChange={this.nameOnChange} value={this.state.name}/>
                 }
             </h4>
             <container className={css.container}>
-                <span className={css.id}>ID: {this.props.project.projectId}      </span>
+                <span className={css.id}>ID: {this.props.task.id}      </span>
 
-                <span className={css.description}>
-                {!this.state.descriptionEditMode &&
-                <span onClick={this.activateDescriptionEditMode}>Description: {this.state.description} </span>
+                <span className={css.text}>
+                {!this.state.textEditMode &&
+                <span onClick={this.activateTextEditMode}>Text: {this.state.text} </span>
                 }
 
-                    {this.state.descriptionEditMode &&
-                    <input className={css.descriptionInput} autoFocus={true} onBlur={this.deActivateDescriptionEditMode}
-                           onChange={this.textOnChange} value={this.state.description}
+                    {this.state.textEditMode &&
+                    <input className={css.textInput} autoFocus={true} onBlur={this.deActivateTextEditMode}
+                           onChange={this.textOnChange} value={this.state.text}
                     />
                     }
                 </span>
 
-                <span className={css.url}>
-                {!this.state.urlEditMode &&
-                <span onClick={this.activateUrlEditMode}>URL: {this.state.projectUrl} </span>
+                <span className={css.project}>
+                {!this.state.projectEditMode &&
+                <span onClick={this.activateProjectEditMode}>Project: {this.state.project} </span>
                 }
 
-                    {this.state.urlEditMode &&
-                    <input className={css.urlInput} autoFocus={true} onBlur={this.deActivateUrlEditMode}
-                           onChange={this.authorOnChange} value={this.state.projectUrl}/>
+                    {this.state.projectEditMode &&
+                    <input className={css.projectInput} autoFocus={true} onBlur={this.deActivateProjectEditMode}
+                           onChange={this.projectOnChange} value={this.state.project}/>
+                    }
+                </span>
+
+                <span className={css.author}>
+                {!this.state.authorEditMode &&
+                <span onClick={this.activateAuthorEditMode}>Author: {this.state.author} </span>
+                }
+
+                    {this.state.authorEditMode &&
+                    <input className={css.authorInput} autoFocus={true} onBlur={this.deActivateAuthorEditMode}
+                           onChange={this.authorOnChange} value={this.state.author}/>
+                    }
+                </span>
+
+                <span className={css.implementer}>
+                {!this.state.implementerEditMode &&
+                <span onClick={this.activateImplementerEditMode}>Implementer: {this.state.implementer} </span>
+                }
+
+                    {this.state.implementerEditMode &&
+                    <input className={css.implementerInput} autoFocus={true} onBlur={this.deActivateImplementerEditMode}
+                           onChange={this.implementerOnChange} value={this.state.implementer}/>
                     }
                 </span>
 

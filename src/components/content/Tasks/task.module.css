@@ -12,19 +12,36 @@
 .id {
     flex:  3 1 100px;
 }
-.description {
+.text {
     flex:  9 3 300px;
 }
-.url {
+.author{
+    flex:6 1 200px
+}
+.implementer{
+    flex:6 1 200px
+}
+
+.project {
     flex:  6 2 200px;
 }
 
-.descriptionInput{
+.textInput{
     width: 600px;
 }
-.urlInput{
+.projectInput{
     width: 200px;
 }
+
+.authorInput{
+    width: 200px;
+}
+
+.implementerInput{
+    width: 200px;
+}
+
+
 
 .delete{
     width: 50px;

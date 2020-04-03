@@ -1,13 +1,13 @@
 import React from 'react';
-import css from "./projects.module.css";
+import css from "./task.module.css";
 import {Pagination} from "react-bootstrap";
-import CreateProject from "./CreateProject";
 import {Link} from "react-router-dom";
-import {ShowOneTask} from "./ShowOneProject";
+import CreateTask from "./CreateTask";
+import {ShowOneTask} from "./ShowOneTask";
 
 class ShowTasks extends React.Component {
 
-    onclickNewProject = () => {
+    onclickNewTask = () => {
         return (<>
                 <CreateTask/>
             </>
@@ -18,7 +18,7 @@ class ShowTasks extends React.Component {
         if (this.props.currentPage !== prevProps.currentPage) {
             this.props.getPaginationTasksThunkCreator(this.props.currentPage, this.props.numberForPage)
         }
-        if (this.props.projects !== prevProps.projects) {
+        if (this.props.tasks !== prevProps.tasks) {
             this.props.getPaginationTasksThunkCreator(this.props.currentPage, this.props.numberForPage)
         }
     }
@@ -26,7 +26,7 @@ class ShowTasks extends React.Component {
     render() {
         return (<div>
                 <div>
-                    <Link to="/newtask" onClick={this.onclickNewProject}>New Project</Link>
+                    <Link to="/newtask" onClick={this.onclickNewTask}>New Project</Link>
                 </div>
                 <div>
                     <Pagination className={css.pagination}>
