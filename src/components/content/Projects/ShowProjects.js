@@ -5,7 +5,6 @@ import CreateProject from "./CreateProject";
 import {Link} from "react-router-dom";
 import {ShowOneProject} from "./ShowOneProject";
 
-
 class ShowProjects extends React.Component {
 
     onclickNewProject = () => {
@@ -23,7 +22,6 @@ class ShowProjects extends React.Component {
             this.props.getPaginationProjectsThunkCreator(this.props.currentPage, this.props.numberForPage)
         }
     }
-
 
     render() {
         return (<div>
