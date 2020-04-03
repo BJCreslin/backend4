@@ -14,14 +14,7 @@ class ShowTasks extends React.Component {
         )
     };
 
-    componentDidUpdate(prevProps, prevState, snapshot) {
-        if (this.props.currentPage !== prevProps.currentPage) {
-            this.props.getPaginationTasksThunkCreator(this.props.currentPage, this.props.numberForPage)
-        }
-        if (this.props.tasks !== prevProps.tasks) {
-            this.props.getPaginationTasksThunkCreator(this.props.currentPage, this.props.numberForPage)
-        }
-    }
+
 
     render() {
         return (<div>

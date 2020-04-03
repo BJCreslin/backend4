@@ -23,6 +23,21 @@ class TasksContainer extends React.Component {
     componentDidMount() {
         this.props.getPaginationTasksThunkCreator(this.props.currentPage, this.props.numberForPage);
     };
+    componentDidUpdate(prevProps, prevState, snapshot) {
+        debugger
+        console.log('pre '+prevProps.currentPage)
+        console.log('fff '+this.props.currentPage)
+
+        console.log('pretasks '+prevProps.tasks)
+        console.log('ffftasks '+this.props.tasks)
+
+        if (this.props.currentPage !== prevProps.currentPage) {
+            this.props.getPaginationTasksThunkCreator(this.props.currentPage, this.props.numberForPage)
+        }
+        if (this.props.tasks.length !== prevProps.tasks.length) {
+            this.props.getPaginationTasksThunkCreator(this.props.currentPage, this.props.numberForPage)
+        }
+    }
 
     render = () => {
         return (
@@ -41,6 +56,7 @@ class TasksContainer extends React.Component {
                            createTaskThunkCreator={this.props.createTaskThunkCreator}
                            updateTaskThunkCreator={this.props.updateTaskThunkCreator}
                            deleteTaskThunkCreator={this.props.deleteTaskThunkCreator}
+
                 />
             </>
         )

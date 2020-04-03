@@ -21,28 +21,28 @@ export class ShowOneTask extends React.Component {
         this.setState({textEditMode: true})
     };
     deActivateTextEditMode = () => {
-        this.setState({textEditMode: false})
+        this.setState({textEditMode: false});
         this.doUpdate();
     };
     activateNameEditMode = () => {
         this.setState({nameEditMode: true})
     };
     deActivateNameEditMode = () => {
-        this.setState({nameEditMode: false})
+        this.setState({nameEditMode: false});
         this.doUpdate();
     };
     activateProjectEditMode = () => {
         this.setState({projectEditMode: true})
     };
     deActivateProjectEditMode = () => {
-        this.setState({projectEditMode: false})
+        this.setState({projectEditMode: false});
         this.doUpdate();
     };
     activateAuthorEditMode = () => {
         this.setState({authorEditMode: true})
     };
     deActivateAuthorEditMode = () => {
-        this.setState({authorEditMode: false})
+        this.setState({authorEditMode: false});
         this.doUpdate();
     };
 
@@ -50,7 +50,7 @@ export class ShowOneTask extends React.Component {
         this.setState({implementerEditMode: true})
     };
     deActivateImplementerEditMode = () => {
-        this.setState({implementerEditMode: false})
+        this.setState({implementerEditMode: false});
         this.doUpdate();
     };
     doUpdate = () => {

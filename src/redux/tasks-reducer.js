@@ -120,10 +120,10 @@ let tasksReducer = (state = initialState, action) => {
                 };
             case
             DELETE_ITEM:
-                let newProjects = state.projects.filter(project => project.projectId !== action.projectId);
+                let newTasks = state.tasks.filter(task => task.id !== action.id);
                 return {
                     ...state,
-                    projects: newProjects
+                    projects: newTasks
                 };
 
             default: {
@@ -134,6 +134,7 @@ let tasksReducer = (state = initialState, action) => {
 ;
 
 export const setTasks = (tasks) => ({type: SET_TASKS, tasks});
+export const deleteTask = (id) => ({type: DELETE_ITEM, id});
 export const setFirstPage = () => ({type: SET_FIRST_PAGE});
 export const setLastPage = () => ({type: SET_LAST_PAGE});
 export const setCurrentPage = (currentPage) => ({type: SET_CURRENT_PAGE, currentPage});
@@ -176,7 +177,6 @@ export const updateTaskThunkCreator = (task) => {
         TasksAPI.updateTask(task).then(data => {
             dispatch(setToggleFetching(false));
         });
-
     }
 };
 
@@ -184,7 +184,7 @@ export const deleteTaskThunkCreator = (id) => {
     return (dispatch) => {
         dispatch(setToggleFetching(true));
         TasksAPI.deleteTask(id).then(data => {
-            // dispatch(deleteProject(id));
+             dispatch(deleteTask(id));
             dispatch(setToggleFetching(false));
         })
     }
