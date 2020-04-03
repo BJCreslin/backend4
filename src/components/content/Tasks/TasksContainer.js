@@ -1,37 +1,50 @@
-import React from "react";
-import Preloader from "../../common/preloader/Preloader";
+import React from 'react';
 import {connect} from "react-redux";
-import Tasks from "./Tasks";
+import Preloader from "../../common/preloader/Preloader";
+
+import {compose} from "redux";
+import {withAuthRedirect} from "../../../HOC/withAuthRedirect";
 import {
-    getTasksThunkCreator,
+    createTaskThunkCreator,
+    deleteTaskThunkCreator,
+    getPaginationTasksThunkCreator,
     setCurrentPage,
     setFirstPage,
     setLastPage,
-    setTasks,
-    setToggleFetching
+    setNextPage,
+    setPreviousPage,
+    setToggleFetching,
+    updateTaskThunkCreator
 } from "../../../redux/tasks-reducer";
-import {compose} from "redux";
-import {withAuthRedirect} from "../../../HOC/withAuthRedirect";
+import ShowTasks from "./ShowTasks";
 
 class TasksContainer extends React.Component {
+
     componentDidMount() {
-        this.props.getTasksThunkCreator(this.props.currentPage, this.props.numberForPage);
-    }
+        this.props.getPaginationTasksThunkCreator(this.props.currentPage, this.props.numberForPage);
+    };
 
     render = () => {
         return (
             <>
                 {this.props.isFetching ? <Preloader/> : null}
-                <Tasks tasks={this.props.tasks}
-                       currentPage={this.props.currentPage}
-                       setCurrentPage={this.props.setCurrentPage}
-                       isFetching={this.props.isFetching}
-                       setFirstPage={this.props.setFirstPage}
-                       setLastPage={this.props.setLastPage}
+                <ShowTasks tasks={this.props.tasks}
+                           currentPage={this.props.currentPage}
+                           setCurrentPage={this.props.setCurrentPage}
+                           setNextPage={this.props.setNextPage}
+                           setPreviousPage={this.props.setPreviousPage}
+                           isFetching={this.props.isFetching}
+                           setFirstPage={this.props.setFirstPage}
+                           setLastPage={this.props.setLastPage}
+                           numberForPage={this.props.numberForPage}
+                           getPaginationTasksThunkCreator={this.props.getPaginationTasksThunkCreator}
+                           createTaskThunkCreator={this.props.createTaskThunkCreator}
+                           updateTaskThunkCreator={this.props.updateTaskThunkCreator}
+                           deleteTaskThunkCreator={this.props.deleteTaskThunkCreator}
                 />
             </>
         )
-    }
+    };
 }
 
 const mapStateToProps = (state) => {
@@ -42,14 +55,20 @@ const mapStateToProps = (state) => {
         numberForPage: state.tasksPage.numberForPage
     }
 };
+
 const mapDispatchToProps = {
-    getTasksThunkCreator,
-    setTasks,
     setToggleFetching,
+    getPaginationTasksThunkCreator,
+    createTaskThunkCreator,
+    updateTaskThunkCreator,
+    setCurrentPage,
     setFirstPage,
     setLastPage,
-    setCurrentPage
+    setNextPage,
+    setPreviousPage,
+    deleteTaskThunkCreator
 };
+
 
 export default compose(
     withAuthRedirect,

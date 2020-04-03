@@ -26,6 +26,6 @@ export const initialSuccess = ()=> ({type :INITIALZED_SUCCESS});
 export const initializeApp=(dispatch)=>{
 // let result=dispatch(getAuthUserData());
 
-}
+};
 
 

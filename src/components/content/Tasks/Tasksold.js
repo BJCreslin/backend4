@@ -1,8 +1,8 @@
 import React from 'react';
-import css from "./task.module.css";
+import css from "./task.moduleold.css";
 import {Pagination} from "react-bootstrap";
 
-const Tasks = (props) => {
+const Tasksold = (props) => {
     const handleFirstSelect = () => {
         props.setFirstPage();
     };
@@ -64,4 +64,4 @@ const Tasks = (props) => {
 
 };
 
-export default Tasks;
+export default Tasksold;
