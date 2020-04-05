@@ -12,6 +12,13 @@ class createTaskForm extends React.Component {
         show: false
     };
 
+     options = [
+        { value: 'blues', label: 'Blues' },
+        { value: 'rock', label: 'Rock' },
+        { value: 'jazz', label: 'Jazz' },
+        { value: 'orchestra', label: 'Orchestra' }
+    ];
+
     constructor(props, context) {
         super(props, context);
         window.progressTaskModal = this;
@@ -35,6 +42,7 @@ class createTaskForm extends React.Component {
     handleShow = () => this.setState({show: true});
 
     render() {
+
         return (
             <div>
                 <Modal show={this.state.show} onHide={this.handleClose}>
@@ -59,7 +67,15 @@ class createTaskForm extends React.Component {
                                 <Field type={"text"} placeholder={"Project Url"} component={"input"}
                                        name={"projectUrl"}/>
                             </div>
-
+                            <div>
+                                <Field name="project" component="select" options={this.options}>
+                                    {this.options.map((option, index) => {
+                                        return (
+                                            <option>{option.label}</option>
+                                        )
+                                    })}
+                                </Field>
+                            </div>
                             <div>
                                 <button> OK</button>
                             </div>

@@ -154,13 +154,20 @@ export const Usersapi = {
         })
     },
     getPaginationUsers(page, size) {
-
         let sessionId = localStorage.getItem('sessionId');
         return axios.get(GET_PAGINATION_END_POINT + page + "/" + size, {headers: {sessionId: sessionId}}).then(response => {
 
             return response.data;
         })
-    }
+    },
+
+    getAllUsers() {
+        let sessionId = localStorage.getItem('sessionId');
+        return axios.get(GET_ALL_USERS_END_POINT, {headers: {sessionId: sessionId}}).then(response => {
+            return response.data;
+        })
+    },
+
 
 };
 

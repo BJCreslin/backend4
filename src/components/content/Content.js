@@ -20,7 +20,7 @@ class Content extends React.Component {
                 <Route path="/projects" render={() => <ProjectsContainer/>}/>
                 <Route path="/newproject" render={() => <CreateProject/>}/>
                 <Route path="/tasks" render={() => <TasksContainer/>}/>
-                <Route path="/newptask" render={() => <CreateTask/>}/>
+                <Route path="/newtask" render={() => <CreateTask/>}/>
                 <Route exact path="/" render={() => <Home/>}/>
                 <Route exact path="/login" render={() => this.props.isAuthenticated ? <Home/> : <Login/>}/>
             </>

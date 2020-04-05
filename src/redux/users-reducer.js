@@ -1,6 +1,7 @@
 import {Usersapi} from "../api/api";
 
 const SET_USERS = "SET_USERS";
+const SET_ALL_USERS = "SET_ALL_USERS";
 const SET_TOTAL_COUNT = "SET_TOTAL_COUNT";
 const SET_CURRENT_PAGE = "SET_CURRENT_PAGE";
 const TOGGLE_IS_FETCHING = "TOGGLE_IS_FETCHING";
@@ -12,6 +13,7 @@ const SET_TOTAL_PAGES = "SET_TOTAL_PAGES";
 const firstPage = 1;
 
 const initialState = {
+    allUsers: [],
     users: [],
     numberForPage: 10,
     currentPage: firstPage,
@@ -36,6 +38,22 @@ let usersReducer = (state = initialState, action) => {
                 users: action.users
             }
         }
+
+        case SET_ALL_USERS: {
+            action.allUsers.map(user => {
+                user.createDate = new Date(user.createDate).toLocaleDateString();
+                user.updateDate = new Date(user.updateDate).toLocaleDateString();
+                return {
+                    user
+                }
+            });
+            return {
+                ...state,
+                allUsers: action.allUsers
+            }
+        }
+
+
         case SET_TOTAL_COUNT: {
             return {
                 ...state,
@@ -81,6 +99,7 @@ let usersReducer = (state = initialState, action) => {
 };
 
 export const setUsers = (users) => ({type: SET_USERS, users: users});
+export const setAllUsers = (allUsers) => ({type: SET_ALL_USERS, users: allUsers});
 export const setTotalUsersCount = (totalCount) => ({type: SET_TOTAL_COUNT, totalCount: totalCount});
 export const setToggleFetching = (isFetching) => ({type: TOGGLE_IS_FETCHING, isFetching});
 export const setTotalPages = (totalPages) => ({type: SET_TOTAL_PAGES, totalPages});
@@ -88,9 +107,9 @@ export const setFirstPage = () => ({type: SET_FIRST_PAGE});
 export const setLastPage = () => ({type: SET_LAST_PAGE});
 export const setCurrentPage = (currentPage) => ({type: SET_CURRENT_PAGE, currentPage});
 
-export const getUsersThunkCreator = (currentPage,numberForPage) => {
+export const getUsersThunkCreator = (currentPage, numberForPage) => {
     return (dispatch) => {
-        Usersapi.getPaginationUsers(currentPage,numberForPage).then(data => {
+        Usersapi.getPaginationUsers(currentPage, numberForPage).then(data => {
             dispatch(setUsers(data));
         });
         Usersapi.getNumberOfUsers().then(data => {
@@ -99,4 +118,13 @@ export const getUsersThunkCreator = (currentPage,numberForPage) => {
         })
     }
 };
+
+export const getAllUsersThunkCreator = () => {
+    return (dispatch) => {
+        Usersapi.getAllUsers().then(data => {
+            dispatch(setAllUsers(data));
+        });
+    }
+};
+
 export default usersReducer;
