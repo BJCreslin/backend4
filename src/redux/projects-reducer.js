@@ -3,6 +3,7 @@ import {Redirect} from "react-router-dom";
 import React from "react";
 
 const SET_PROJECTS = "SET_PROJECTS";
+const SET_ALL_PROJECTS = "SET_ALL_PROJECTS";
 const SET_TOTAL_COUNT = "SET_TOTAL_COUNT";
 const SET_TOTAL_PAGES = "SET_TOTAL_PAGES";
 const SET_CURRENT_PAGE = "SET_CURRENT_PAGE";
@@ -18,6 +19,7 @@ const DELETE_ITEM = "DELETE_ITEM";
 const firstPage = 1;
 
 const initialState = {
+    allProjects: [],
     projects: [],
     numberForPage: 10,
     currentPage: firstPage,
@@ -35,6 +37,12 @@ let projectsReducer = (state = initialState, action) => {
                 return {
                     ...state,
                     projects: action.projects
+                }
+            }
+            case SET_ALL_PROJECTS: {
+                return {
+                    ...state,
+                    allProjects: action.allProjects
                 }
             }
             case
@@ -125,6 +133,7 @@ let projectsReducer = (state = initialState, action) => {
 ;
 
 export const setProjects = (projects) => ({type: SET_PROJECTS, projects});
+export const setAllProjects = (allProjects) => ({type: SET_ALL_PROJECTS, allProjects});
 export const setToggleFetching = (isFetching) => ({type: TOGGLE_IS_FETCHING, isFetching});
 export const setCreated = (created) => ({type: SET_CREATED, created});
 export const setShowModal = (isShowModal) => ({type: SET_SHOW_MODAL, isShowModal});
@@ -145,6 +154,14 @@ export const getPaginationProjectsThunkCreator = (currentPage, numberForPage) =>
             dispatch(setCreated(false));
             dispatch(setToggleFetching(false));
         });
+    }
+};
+
+export const setAllProjectsThunkCreator = () => {
+    return (dispatch) => {
+        ProjectsAPI.getAllProjects().then(data => {
+            dispatch(setAllProjects(data));
+        })
     }
 };
 
@@ -175,7 +192,7 @@ export const deleteProjectThunkCreator = (id) => {
     return (dispatch) => {
         dispatch(setToggleFetching(true));
         ProjectsAPI.deleteProject(id).then(data => {
-           // dispatch(deleteProject(id));
+            dispatch(deleteProject(id));
             dispatch(setToggleFetching(false));
         })
     }

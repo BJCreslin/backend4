@@ -7,6 +7,7 @@ import {withAuthRedirect} from "../../../HOC/withAuthRedirect";
 import {Modal} from "react-bootstrap";
 import {createTaskThunkCreator, setCreated, setShowModal} from "../../../redux/tasks-reducer";
 import {getAllUsersThunkCreator} from "../../../redux/users-reducer";
+import {setAllProjectsThunkCreator} from "../../../redux/projects-reducer";
 
 class createTaskForm extends React.Component {
     state = {
@@ -22,6 +23,7 @@ class createTaskForm extends React.Component {
     componentDidMount() {
         this.handleShow();
         this.props.getAllUsersThunkCreator();
+        this.props.setAllProjectsThunkCreator();
     }
 
     componentDidUpdate(prevProps, prevState, snapshot) {
@@ -45,7 +47,7 @@ class createTaskForm extends React.Component {
                     </Modal.Header>
                     <Modal.Body>
                         <form className={css.formDesign} onSubmit={this.props.handleSubmit}>
-                            <div>Project name:
+                            <div>Task name:
                                 <Field type={"text"} placeholder={"Task Name"} component={"input"}
                                        name={"name"}/>
                             </div>
@@ -56,19 +58,28 @@ class createTaskForm extends React.Component {
                             </div>
 
                             <div>
-                                Url:
-                                <Field type={"text"} placeholder={"Project Url"} component={"input"}
-                                       name={"projectUrl"}/>
-                            </div>
-                            <div>
-
-                                <Field name="project" component="select" options={this.options}>
-                                    {this.props.allUsers && this.props.allUsers.map((user, index) => {
+                                Project:
+                                <Field component={"select"} name={"project"}>
+                                    {this.props.allProjects && this.props.allProjects.map((project, index) => {
                                         return (
-                                            <option>{user.name}</option>
+                                            <option value={project.projectId}>{project.projectName}</option>
                                         )
                                     })}
                                 </Field>
+                            </div>
+                            <div>
+                                Implementer:
+                                <Field name="implementer" component="select"  >
+                                    {this.props.allUsers && this.props.allUsers.map((user, index) => {
+                                        return (
+                                            <option value={user.email}>{user.name} ({user.email})</option>
+                                        )
+                                    })}
+                                </Field>
+
+                                <div>Author:
+                                    <label>   {this.props.userEmail}</label>
+                                </div>
                             </div>
                             <div>
                                 <button> OK</button>
@@ -88,14 +99,24 @@ const CreateTaskReduxForm = reduxForm({
 
 const CreateTask = (props) => {
     let onSubmit = (formData) => {
-        props.createTaskThunkCreator(formData);
+        let task={
+            author: props.userEmail,
+            implementer: formData.implementer,
+            project: formData.project,
+            name: formData.name,
+            text: formData.text,
+        };
+        props.createTaskThunkCreator(task);
         window.progressTaskModal.handleClose();
     };
     return (
         <CreateTaskReduxForm
             allUsers={props.allUsers}
+            userEmail={props.userEmail}
+            allProjects={props.allProjects}
             onSubmit={onSubmit}
-            getAllUsersThunkCreator={props.getAllUsersThunkCreator}/>
+            getAllUsersThunkCreator={props.getAllUsersThunkCreator}
+            setAllProjectsThunkCreator={props.setAllProjectsThunkCreator}/>
     )
 };
 
@@ -103,14 +124,17 @@ const mapStateToProps = (state) => {
     return {
         showModal: state.login.showModal,
         created: state.tasksPage.created,
-        allUsers: state.usersContent.allUsers
+        allUsers: state.usersContent.allUsers,
+        userEmail: state.login.userEmail,
+        allProjects:state.projectsPage.allProjects
     }
 };
 const mapDispatchToProps = {
     createTaskThunkCreator,
     setShowModal,
     setCreated,
-    getAllUsersThunkCreator
+    getAllUsersThunkCreator,
+    setAllProjectsThunkCreator
 
 };
 
