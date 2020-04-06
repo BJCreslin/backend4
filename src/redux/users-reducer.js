@@ -99,7 +99,7 @@ let usersReducer = (state = initialState, action) => {
 };
 
 export const setUsers = (users) => ({type: SET_USERS, users: users});
-export const setAllUsers = (allUsers) => ({type: SET_ALL_USERS, users: allUsers});
+export const setAllUsers = (allUsers) => ({type: SET_ALL_USERS, allUsers: allUsers});
 export const setTotalUsersCount = (totalCount) => ({type: SET_TOTAL_COUNT, totalCount: totalCount});
 export const setToggleFetching = (isFetching) => ({type: TOGGLE_IS_FETCHING, isFetching});
 export const setTotalPages = (totalPages) => ({type: SET_TOTAL_PAGES, totalPages});

@@ -6,18 +6,13 @@ import {compose} from "redux";
 import {withAuthRedirect} from "../../../HOC/withAuthRedirect";
 import {Modal} from "react-bootstrap";
 import {createTaskThunkCreator, setCreated, setShowModal} from "../../../redux/tasks-reducer";
+import {getAllUsersThunkCreator} from "../../../redux/users-reducer";
 
 class createTaskForm extends React.Component {
     state = {
         show: false
     };
 
-     options = [
-        { value: 'blues', label: 'Blues' },
-        { value: 'rock', label: 'Rock' },
-        { value: 'jazz', label: 'Jazz' },
-        { value: 'orchestra', label: 'Orchestra' }
-    ];
 
     constructor(props, context) {
         super(props, context);
@@ -26,6 +21,7 @@ class createTaskForm extends React.Component {
 
     componentDidMount() {
         this.handleShow();
+        this.props.getAllUsersThunkCreator();
     }
 
     componentDidUpdate(prevProps, prevState, snapshot) {
@@ -33,16 +29,13 @@ class createTaskForm extends React.Component {
         if (this.props.created) {
             this.handleClose();
             this.props.setCreated(false);
-
         }
-
     }
 
     handleClose = () => this.setState({show: false});
     handleShow = () => this.setState({show: true});
 
     render() {
-
         return (
             <div>
                 <Modal show={this.state.show} onHide={this.handleClose}>
@@ -68,10 +61,11 @@ class createTaskForm extends React.Component {
                                        name={"projectUrl"}/>
                             </div>
                             <div>
+
                                 <Field name="project" component="select" options={this.options}>
-                                    {this.options.map((option, index) => {
+                                    {this.props.allUsers && this.props.allUsers.map((user, index) => {
                                         return (
-                                            <option>{option.label}</option>
+                                            <option>{user.name}</option>
                                         )
                                     })}
                                 </Field>
@@ -98,20 +92,25 @@ const CreateTask = (props) => {
         window.progressTaskModal.handleClose();
     };
     return (
-        <CreateTaskReduxForm onSubmit={onSubmit}/>
+        <CreateTaskReduxForm
+            allUsers={props.allUsers}
+            onSubmit={onSubmit}
+            getAllUsersThunkCreator={props.getAllUsersThunkCreator}/>
     )
 };
 
 const mapStateToProps = (state) => {
     return {
         showModal: state.login.showModal,
-        created: state.tasksPage.created
+        created: state.tasksPage.created,
+        allUsers: state.usersContent.allUsers
     }
 };
 const mapDispatchToProps = {
     createTaskThunkCreator,
     setShowModal,
-    setCreated
+    setCreated,
+    getAllUsersThunkCreator
 
 };
 
