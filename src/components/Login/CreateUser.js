@@ -4,7 +4,7 @@ import React from "react";
 import {Field, reduxForm} from "redux-form";
 import {connect} from "react-redux";
 import {createNewUserThunkCreator} from "../../redux/users-reducer";
-import {createNewCredentialThunkCreator} from "../../redux/login-reducer";
+import {createNewCredentialThunkCreator, createNewUser} from "../../redux/login-reducer";
 
 const CreateUserForm = (props) => {
     return (
@@ -52,6 +52,7 @@ const CreateUser = (props) => {
             password: formData.password
         };
         props.createNewCredentialThunkCreator(newCredentials);
+        props.createNewUser();
     };
     return (
         <span>
@@ -62,7 +63,8 @@ const CreateUser = (props) => {
                      <h2 className={css.formHeader}>Create new User</h2>
                        <CreateUserReduxForm onSubmit={onSubmit}
                                             createNewUserThunkCreator={props.createNewUserThunkCreator}
-                                            createNewCredentialThunkCreator={props.createNewCredentialThunkCreator}/>
+                                            createNewCredentialThunkCreator={props.createNewCredentialThunkCreator}
+                                            createNewUser={props.createNewUser}/>
                  </Col>
                  <Col></Col>
                  </Row>
@@ -73,11 +75,13 @@ const CreateUser = (props) => {
 
 };
 const mapStateToProps = (state) => {
-    return {}
+    return {
+    }
 };
 let mpDispatchToProps = {
     createNewUserThunkCreator,
-    createNewCredentialThunkCreator
+    createNewCredentialThunkCreator,
+    createNewUser
 };
 
 

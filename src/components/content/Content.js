@@ -22,9 +22,9 @@ class Content extends React.Component {
                 <Route path="/newproject" render={() => <CreateProject/>}/>
                 <Route path="/tasks" render={() => <TasksContainer/>}/>
                 <Route path="/newtask" render={() => <CreateTask/>}/>
-                <Route path="/create_user" render={() => this.props.isAuthenticated ? <Home/> : <CreateUser/>}/>
+                <Route path="/create_user" render={() => this.props.isUserCreated ? <Home/> : <CreateUser/>}/>
                 <Route exact path="/" render={() => <Home/>}/>
-                <Route exact path="/login" render={() => this.props.isAuthenticated ? <Home/> : <Login/>}/>
+                <Route exact path="/loginPage" render={() => this.props.isAuthenticated ? <Home/> : <Login/>}/>
             </>
 
         )
@@ -34,6 +34,7 @@ class Content extends React.Component {
 const mapStateToProps = (state) => {
     return {
         isAuthenticated: state.login.isAuthenticated,
+        isUserCreated: state.login.isUserCreated,
         projectCreated: state.projectsPage.created
     }
 };

@@ -11,7 +11,7 @@ export const withAuthRedirect = (Component) => {
 
     class RedirectComponent extends React.Component {
         render() {
-            if (!this.props.isAuthenticated) return <Redirect to='/login'/>;
+            if (!this.props.isAuthenticated) return <Redirect to='/loginPage'/>;
 
             return <Component {...this.props}/>
         }
