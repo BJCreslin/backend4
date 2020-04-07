@@ -8,6 +8,7 @@ import ProjectsContainer from "./Projects/ProjectsContainer";
 import CreateProject from "./Projects/CreateProject";
 import TasksContainer from "./Tasks/TasksContainer";
 import CreateTask from "./Tasks/CreateTask";
+import CreateUser from "../Login/CreateUser";
 
 
 class Content extends React.Component {
@@ -21,6 +22,7 @@ class Content extends React.Component {
                 <Route path="/newproject" render={() => <CreateProject/>}/>
                 <Route path="/tasks" render={() => <TasksContainer/>}/>
                 <Route path="/newtask" render={() => <CreateTask/>}/>
+                <Route path="/create_user" render={() => this.props.isAuthenticated ? <Home/> : <CreateUser/>}/>
                 <Route exact path="/" render={() => <Home/>}/>
                 <Route exact path="/login" render={() => this.props.isAuthenticated ? <Home/> : <Login/>}/>
             </>

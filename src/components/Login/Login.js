@@ -10,6 +10,7 @@ import {
     setUserEmail,
     setWrongCredential
 } from "../../redux/login-reducer";
+import {Link} from "react-router-dom";
 
 
 const LoginForm = (props) => {
@@ -30,6 +31,10 @@ const LoginForm = (props) => {
             <div>
                 <button> OK</button>
             </div>
+
+            <div>
+                <Link to="create_user">Create new user</Link>
+            </div>
         </form>
     )
 };
@@ -45,11 +50,10 @@ const Login = (props) => {
     };
     return (
         <span>
-             <Container className="themed-container" fluid={true} className={css.formDesign}>
+             <Container fluid={true} className={css.formDesign}>
                  <Row xs="2">
                  <Col></Col>
                  <Col>
-                     {/*{props.credentialStatus ? <h2>Invalid loginname or password</h2> : ""}*/}
                      <h2 className={css.formHeader}>Login</h2>
                        <LoginReduxForm onSubmit={onSubmit}/>
                  </Col>

@@ -1,4 +1,4 @@
-import {Usersapi} from "../api/api";
+import {CreateNewUser, Usersapi} from "../api/api";
 
 const SET_USERS = "SET_USERS";
 const SET_ALL_USERS = "SET_ALL_USERS";
@@ -8,6 +8,7 @@ const TOGGLE_IS_FETCHING = "TOGGLE_IS_FETCHING";
 const SET_FIRST_PAGE = "SET_FIRST_PAGE";
 const SET_LAST_PAGE = " SET_LAST_PAGE";
 const SET_TOTAL_PAGES = "SET_TOTAL_PAGES";
+const CREATE_NEW_USER = "CREATE_NEW_USER";
 
 
 const firstPage = 1;
@@ -92,6 +93,10 @@ let usersReducer = (state = initialState, action) => {
                 ...state,
                 totalPages: action.totalPages
             };
+        case CREATE_NEW_USER:
+            return {
+                ...state
+            };
         default: {
             return state;
         }
@@ -106,6 +111,17 @@ export const setTotalPages = (totalPages) => ({type: SET_TOTAL_PAGES, totalPages
 export const setFirstPage = () => ({type: SET_FIRST_PAGE});
 export const setLastPage = () => ({type: SET_LAST_PAGE});
 export const setCurrentPage = (currentPage) => ({type: SET_CURRENT_PAGE, currentPage});
+export const createNewUser = (user) => ({type: CREATE_NEW_USER});
+
+export const createNewUserThunkCreator = (newUser) => {
+    return (dispatch) => {
+        CreateNewUser.createNewUser(newUser).then(data => {
+                dispatch(createNewUser(data));
+            }
+        )
+    }
+};
+
 
 export const getUsersThunkCreator = (currentPage, numberForPage) => {
     return (dispatch) => {

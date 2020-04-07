@@ -2,6 +2,10 @@ import * as axios from 'axios';
 
 const loginEndPointURL = 'http://185.255.135.104:9000/api/auth/login';
 
+const CREATE_NEW_USER_ENDPOINT = 'http://185.255.135.104:9000/api/users/create';
+const CREATE_NEW_USER_CREDENTIALS_ENDPOINT = 'http://185.255.135.104:9000/api/credentials/create';
+
+
 const allprojectsEndPointURL = 'http://185.255.135.104:9000/api/projects/projects-all';
 const newProjectEndPointURL = 'http://185.255.135.104:9000/api/projects/createProject';
 const paginatableProjectEndPointURL = 'http://185.255.135.104:9000/api/projects/watch/';
@@ -31,6 +35,34 @@ export const loginAPI = {
             return response.data;
         })
     }
+};
+
+export const CreateNewUser = {
+    createNewUser(newUser) {
+        return axios({
+            method: 'POST',
+            url: CREATE_NEW_USER_ENDPOINT,
+            data: newUser
+        }).then(function (response) {
+            console.log(response);
+        })
+            .catch(function (error) {
+                console.log(error);
+            })
+    },
+    createNewCredentials(newCredentials) {
+        return axios({
+            method: 'POST',
+            url: CREATE_NEW_USER_CREDENTIALS_ENDPOINT,
+            data: newCredentials
+        }).then(function (response) {
+            console.log(response);
+        })
+            .catch(function (error) {
+                console.log(error);
+            })
+    },
+
 };
 
 

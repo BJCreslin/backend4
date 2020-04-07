@@ -16,6 +16,7 @@ let reducers = combineReducers(
         createTaskForm: formReducer,
         createProjectForm: formReducer,
         updateProjectForm: formReducer,
+            createUser:formReducer,
         usersContent: usersReducer
     });
 

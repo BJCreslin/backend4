@@ -1,7 +1,8 @@
-import {loginAPI} from "../api/api";
+import {CreateNewUser, loginAPI} from "../api/api";
 
 const SET_SUBMIT_SUCCEEDED = "SET_SUBMIT_SUCCEEDED";
 const SET_WRONG_CREDENTIAL = "SET_WRONG_CREDENTIAL";
+const CREATE_NEW_CREDENTIALS = "CREATE_NEW_CREDENTIALS";
 const SET_SUCCESS_LOGIN = "SET_SUCCESS_LOGIN";
 const SET_USER_EMAIL = "SET_USER_EMAIL";
 
@@ -40,7 +41,10 @@ let loginReducer = (state = InitialState, action) => {
                 ...state,
                 userEmail: action.email
             };
-
+        case CREATE_NEW_CREDENTIALS:
+            return {
+                ...state
+            };
         default: {
             return state;
         }
@@ -51,6 +55,15 @@ export const setCredential = (credential) => ({type: SET_SUBMIT_SUCCEEDED, crede
 export const setWrongCredential = () => ({type: SET_WRONG_CREDENTIAL});
 export const setSuccessLogin = () => ({type: SET_SUCCESS_LOGIN});
 export const setUserEmail = (email) => ({type: SET_USER_EMAIL, email: email});
+export const createNewCredential = ()  => ({type: CREATE_NEW_CREDENTIALS});
+
+export const createNewCredentialThunkCreator=(newCredentials)=>{
+return (dispatch)   =>{
+    CreateNewUser.createNewCredentials(newCredentials).then(data=>{
+        dispatch(createNewCredential());
+    })
+}
+};
 
 export const loginThunkCreator = (formData) => {
     return (dispatch) => {

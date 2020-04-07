@@ -60,6 +60,7 @@ class createTaskForm extends React.Component {
                             <div>
                                 Project:
                                 <Field component={"select"} name={"project"}>
+                                    <option/>
                                     {this.props.allProjects && this.props.allProjects.map((project, index) => {
                                         return (
                                             <option value={project.projectId}>{project.projectName}</option>
@@ -69,7 +70,8 @@ class createTaskForm extends React.Component {
                             </div>
                             <div>
                                 Implementer:
-                                <Field name="implementer" component="select"  >
+                                <Field name="implementer" component="select">
+                                    <option/>
                                     {this.props.allUsers && this.props.allUsers.map((user, index) => {
                                         return (
                                             <option value={user.email}>{user.name} ({user.email})</option>
@@ -99,7 +101,7 @@ const CreateTaskReduxForm = reduxForm({
 
 const CreateTask = (props) => {
     let onSubmit = (formData) => {
-        let task={
+        let task = {
             author: props.userEmail,
             implementer: formData.implementer,
             project: formData.project,
@@ -126,7 +128,7 @@ const mapStateToProps = (state) => {
         created: state.tasksPage.created,
         allUsers: state.usersContent.allUsers,
         userEmail: state.login.userEmail,
-        allProjects:state.projectsPage.allProjects
+        allProjects: state.projectsPage.allProjects
     }
 };
 const mapDispatchToProps = {
