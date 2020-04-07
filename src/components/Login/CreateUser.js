@@ -6,7 +6,6 @@ import {connect} from "react-redux";
 import {createNewUserThunkCreator} from "../../redux/users-reducer";
 import {createNewCredentialThunkCreator} from "../../redux/login-reducer";
 
-
 const CreateUserForm = (props) => {
     return (
         <form className={css.formDesign} onSubmit={props.handleSubmit}>
@@ -40,18 +39,19 @@ const CreateUserReduxForm = reduxForm({
 
 const CreateUser = (props) => {
     let onSubmit = (formData) => {
+        debugger
         let newUser = {
             name: formData.name,
             email: formData.email,
             gitHubId: formData.gitHubId,
             hours: formData.hours
         };
-        createNewUserThunkCreator(newUser);
+        props.createNewUserThunkCreator(newUser);
         let newCredentials = {
             login: formData.email,
             password: formData.password
         };
-        createNewCredentialThunkCreator(newCredentials);
+        props.createNewCredentialThunkCreator(newCredentials);
     };
     return (
         <span>
