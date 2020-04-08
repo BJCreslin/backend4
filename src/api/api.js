@@ -1,29 +1,33 @@
 import * as axios from 'axios';
 
-const loginEndPointURL = 'http://185.255.135.104:9000/api/auth/login';
+const API_LOCALHOST='http://localhost:9000/api';
+const API_SERVER='http://185.255.135.104:9000/api/';
+const API_URL=API_SERVER;
 
-const CREATE_NEW_USER_ENDPOINT = 'http://185.255.135.104:9000/api/users/create';
-const CREATE_NEW_USER_CREDENTIALS_ENDPOINT = 'http://185.255.135.104:9000/api/credentials/create';
+const loginEndPointURL = API_URL+'auth/login';
 
-
-const allprojectsEndPointURL = 'http://185.255.135.104:9000/api/projects/projects-all';
-const newProjectEndPointURL = 'http://185.255.135.104:9000/api/projects/createProject';
-const paginatableProjectEndPointURL = 'http://185.255.135.104:9000/api/projects/watch/';
-const UPDATE_PROJECT_ENDPOINT_URL = 'http://185.255.135.104:9000/api/projects/update/';
-const PROJECTS_COUNT_ENDPOINT_URL = 'http://185.255.135.104:9000/api/projects/countProjects/';
-const DELETE_PROJECT_ENDPOINT_URL = 'http://185.255.135.104:9000/api/projects/delete/'             //'/delete/{projectId}'
+const CREATE_NEW_USER_ENDPOINT = API_URL+'users/create';
+const CREATE_NEW_USER_CREDENTIALS_ENDPOINT = API_URL+'credentials/create';
 
 
-const getTasksEndPointURL = 'http://185.255.135.104:9000/api/tasks/page/';
-const TASKS_COUNT_END_POINT = 'http://185.255.135.104:9000/api/tasks/count/';
-const NEW_TASK_END_POINT = 'http://185.255.135.104:9000/api/tasks/create/';
-const UPDATE_TASK_END_POINT = 'http://185.255.135.104:9000/api/tasks/update/';
-const DELETE_TASK_END_POINT = 'http://185.255.135.104:9000/api/tasks/delete/';
+const allprojectsEndPointURL = API_URL+'projects/projects-all';
+const newProjectEndPointURL = API_URL+'projects/createProject';
+const paginatableProjectEndPointURL = API_URL+'projects/watch/';
+const UPDATE_PROJECT_ENDPOINT_URL = API_URL+'projects/update/';
+const PROJECTS_COUNT_ENDPOINT_URL = API_URL+'projects/countProjects/';
+const DELETE_PROJECT_ENDPOINT_URL = API_URL+'projects/delete/';             //'/delete/{projectId}'
 
 
-const GET_ALL_USERS_END_POINT = 'http://185.255.135.104:9000/api/users/users-all';
-const USERS_COUNT_END_POINT = 'http://185.255.135.104:9000/api/users/count';
-const GET_PAGINATION_END_POINT = 'http://185.255.135.104:9000/api/users/page/';
+const getTasksEndPointURL = API_URL+'tasks/page/';
+const TASKS_COUNT_END_POINT = API_URL+'tasks/count/';
+const NEW_TASK_END_POINT = API_URL+'tasks/create/';
+const UPDATE_TASK_END_POINT = API_URL+'tasks/update/';
+const DELETE_TASK_END_POINT = API_URL+'tasks/delete/';
+
+
+const GET_ALL_USERS_END_POINT = API_URL+'users/users-all';
+const USERS_COUNT_END_POINT = API_URL+'users/count';
+const GET_PAGINATION_END_POINT = API_URL+'users/page/';
 
 export const loginAPI = {
     doLogin(formData) {
