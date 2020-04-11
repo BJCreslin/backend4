@@ -38,16 +38,17 @@ const Users = (props) => {
                     <Pagination.Last onClick={handleLastSelect}/>
                 </Pagination>
             </div>
+            <container className={css.container}>
             <table className="table table-hover table-bordered table-striped table-responsive">
                 <thead>
                 <tr>
-                    <th scope="col ">Name</th>
-                    <th scope="col ">E-mail</th>
-                    <th scope="col ">GitHubId</th>
-                    <th scope="col ">Hours in week</th>
-                    <th scope="col ">Create Date</th>
-                    <th scope="col ">Update Date</th>
-                    <th scope="col ">Status</th>
+                    <th scope="col " className={css.name}>Name</th>
+                    <th scope="col " className={css.email}>E-mail</th>
+                    <th scope="col " className={css.github}>GitHubId</th>
+                    <th scope="col " className={css.hours}>Hours in week</th>
+                    <th scope="col " className={css.createDate}>Create Date</th>
+                    <th scope="col " className={css.updateDate}>Update Date</th>
+                    <th scope="col " className={css.status}>Status</th>
                 </tr>
                 </thead>
                 <tbody>
@@ -66,6 +67,7 @@ const Users = (props) => {
                 })}
                 </tbody>
             </table>
+            </container>
         </div>
     )
 };

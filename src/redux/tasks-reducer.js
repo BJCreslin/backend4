@@ -60,6 +60,7 @@ let tasksReducer = (state = initialState, action) => {
             SET_NEXT_PAGE: {
                 let newCurrentPage = state.currentPage + 1;
                 if (newCurrentPage > state.totalPages) newCurrentPage = state.totalPages;
+                if (newCurrentPage < firstPage) newCurrentPage = firstPage;
                 return {
                     ...state,
                     currentPage: newCurrentPage
